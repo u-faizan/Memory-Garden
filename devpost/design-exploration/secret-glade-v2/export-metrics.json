@@ -1,0 +1,26 @@
+[
+  {
+    "name": "desktop-empty",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 674236
+  },
+  {
+    "name": "desktop-planted",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 607762
+  },
+  {
+    "name": "mobile-empty",
+    "width": 852,
+    "height": 1846,
+    "bytes": 640702
+  },
+  {
+    "name": "mobile-planted",
+    "width": 852,
+    "height": 1846,
+    "bytes": 627410
+  }
+]

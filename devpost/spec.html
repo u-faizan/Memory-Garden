@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>MemoryGarden · Technical blueprint</title>
+  <style>
+    :root{--paper:#faf8f1;--ink:#293d34;--muted:#536358;--line:#d5ddcc;--green:#e9efdf;--purple:#eee9f5;--accent:#72558d}
+    *{box-sizing:border-box}html{scroll-padding-top:1.5rem}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,sans-serif}
+    a{color:#584174;text-underline-offset:4px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    .skip{position:absolute;top:-100px;left:1rem;padding:.5rem;background:white}.skip:focus{top:1rem}
+    main,footer{max-width:1080px;margin:auto;padding:0 28px}header{padding:48px 0 24px;border-bottom:1px solid var(--line)}
+    .eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+    .badge{display:inline-block;padding:3px 10px;margin-left:8px;border-radius:20px;background:var(--purple);color:#584174;letter-spacing:0}
+    h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.2}h1{font-size:clamp(2.5rem,7vw,4.3rem);margin:12px 0 4px;letter-spacing:-.04em}
+    h2{font-size:1.9rem;margin:8px 0 18px}h3{font-size:1.3rem;margin:0 0 12px}p{margin:0 0 14px}.intro{max-width:740px;margin-top:16px}.note{font-size:.875rem;color:var(--muted)}
+    nav{display:flex;flex-wrap:wrap;gap:9px 22px;padding-top:18px;font-size:.9rem}section{margin:36px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{padding:23px;border:1px solid var(--line);border-radius:16px;background:#fffdf8}.green{background:var(--green)}.purple{background:var(--purple)}
+    .callout{padding:18px 22px;border-left:4px solid var(--accent);background:var(--purple);border-radius:0 12px 12px 0}
+    .diagram{overflow-x:auto;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fffdf8}.diagram svg{display:block;width:100%;min-width:760px;height:auto}.diagram text{font-family:system-ui,sans-serif;fill:var(--ink)}
+    details{border:1px solid var(--line);background:#fffdf8;border-radius:14px;margin:12px 0}summary{cursor:pointer;padding:18px 22px;font-weight:650}summary span{font-weight:400;color:var(--muted)}details>div{padding:0 22px 14px}
+    ul,ol{padding-left:22px;margin:12px 0}li{padding-left:3px;margin-bottom:8px}.checks{list-style:none;padding:0}.checks li{padding-left:24px;position:relative}.checks li::before{content:'✓';position:absolute;left:0;color:#527043;font-weight:700}
+    .table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:.95rem}caption{text-align:left;padding-bottom:12px;color:var(--muted)}th,td{padding:10px 12px;border-bottom:1px solid var(--line)}th{background:var(--green)}
+    blockquote{margin:16px 0;padding:15px 20px;border-left:3px solid #baa7cf;background:var(--purple);border-radius:0 10px 10px 0}blockquote p:last-child{margin-bottom:0}
+    footer{padding-top:20px;padding-bottom:30px;border-top:1px solid var(--line);font-size:.875rem;color:var(--muted)}
+    @media(max-width:700px){main,footer{padding-left:20px;padding-right:20px}header{padding-top:28px}.grid{grid-template-columns:1fr}.panel{padding:19px}summary span{display:block;margin-top:3px}th,td{padding:8px}}
+    @media print{body{background:white;font-size:11pt}nav,.skip{display:none}.diagram svg{min-width:0}.diagram{overflow:visible}.panel{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#architecture">Skip to architecture</a>
+  <main>
+    <header>
+      <div class="eyebrow">Technical blueprint <span class="badge">Approved · proceeding to 5-build</span></div>
+      <h1>A little world.<br>A small architecture.</h1>
+      <p class="intro">Illustrated scenery and real interactive flowers, a botanical HTML journal, browser-local memories, and one optional AI proxy. Visual quality guides the first working slices.</p>
+      <p class="note"><a href="spec.md">Canonical specification</a> · <a href="prd.md">Approved PRD</a> · <a href="scope.md">Approved scope</a>. This is an offline planning companion, not application code, an art mockup, or a completed build checklist.</p>
+      <nav aria-label="Blueprint sections"><a href="#changes">Reconciliation</a><a href="#architecture">Architecture</a><a href="#journey">Data journey</a><a href="#assets">Asset pilot</a><a href="#components">Components</a><a href="#data">Local records</a><a href="#ai">AI contract</a><a href="#delivery">Build &amp; deploy</a><a href="#review">Review decisions</a></nav>
+    </header>
+
+    <section id="changes" aria-labelledby="changes-title">
+      <div class="eyebrow">Carry the product forward</div><h2 id="changes-title">Explicit changes. Preserved experience.</h2>
+      <div class="grid">
+        <article class="panel green"><h3>Final learner choices</h3><p>React, Vite, TypeScript, custom CSS, browser IndexedDB, Cloudflare Pages, and one Pages Function. OpenAI returns title, theme, and one predefined flower. No auth, remote memory database, or runtime flower generation.</p><p>All six flowers and a public working deployment are now committed. Local development comes first; public/account changes still require approval.</p></article>
+        <article class="panel"><h3>Superseded proposals</h3><p>Next.js, Vercel, and Vercel rate limiting are removed from the technical plan. The earlier four-flower fallback cannot silently reduce the final six-flower collection.</p><p>The approved garden/journal journey, consent, emotional nuance, original stories, draft protection, safe deletion, and reduced motion are preserved. The scope and PRD were not rewritten.</p></article>
+      </div>
+      <p class="note" style="margin-top:14px">The curriculum's 2–4-hour target is not a promise that custom artwork, protected drafts, pagination, AI safeguards, testing, and public deployment will fit that time. Surface tradeoffs without quietly removing requirements.</p>
+    </section>
+
+    <section id="architecture" aria-labelledby="architecture-title">
+      <div class="eyebrow">Where the pieces live</div><h2 id="architecture-title">The garden belongs to this browser.</h2>
+      <p id="diagram-help" class="note">Scroll the diagram on narrow screens. Only the explicitly requested current story crosses the AI boundary; photos and the stored garden remain local. The same flow is described in the journey below.</p>
+      <div class="diagram" role="region" aria-label="Architecture and privacy boundaries" aria-describedby="diagram-help" tabindex="0">
+        <svg viewBox="0 0 1080 425" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="arch-title arch-desc">
+          <title id="arch-title">MemoryGarden: a local garden with one optional Cloudflare AI route.</title>
+          <desc id="arch-desc">Cloudflare Pages serves static Vite assets to React in the visitor's browser. React stores memories, photo blobs, pages, preferences, and a draft in local IndexedDB. Only after consent and an explicit request does current memory text go to a Pages Function. The Function verifies a Turnstile token, then sends text to OpenAI and returns validated title, theme, and flower suggestions. Secrets live only in the Function environment.</desc>
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#7c8b71"/></marker></defs>
+          <rect x="10" y="20" width="405" height="385" rx="18" fill="#e9efdf" stroke="#c4cfae"/>
+          <g text-anchor="middle" font-size="17">
+            <text x="212" y="52" font-weight="650">Visitor's own browser</text>
+            <rect x="40" y="100" width="345" height="95" rx="12" fill="#fffdf8" stroke="#d5ddcc"/>
+            <text x="212" y="133" font-weight="650">React + TypeScript + custom CSS</text><text x="212" y="163" font-size="15">Garden · flowers · real HTML journal</text>
+            <rect x="40" y="280" width="345" height="95" rx="12" fill="#fffdf8" stroke="#d5ddcc"/>
+            <text x="212" y="310" font-weight="650">IndexedDB through idb</text><text x="212" y="338" font-size="14">Memories · photo blobs · pages · one draft</text><text x="212" y="359" font-size="14">Preferences · stable flower positions</text>
+          </g>
+          <g fill="none" stroke="#7c8b71" stroke-width="2" marker-end="url(#arrow)">
+            <path d="M212 195V278"/><path d="M500 62H417"/><path d="M385 148H535"/><path d="M755 149H833"/><path d="M645 205V283"/>
+          </g>
+          <g text-anchor="middle" font-size="14">
+            <text x="284" y="232">Local transactions</text><text x="284" y="252">Save before bloom</text>
+            <text x="458" y="130">Explicit request</text><text x="458" y="172">Current text only</text>
+            <text x="797" y="130">Text</text><text x="645" y="245">Validate fresh bot token first</text>
+          </g>
+          <g stroke="#d5ddcc">
+            <rect x="500" y="20" width="345" height="65" rx="12" fill="#fff8e7"/>
+            <rect x="535" y="102" width="220" height="103" rx="12" fill="#eee9f5"/>
+            <rect x="835" y="102" width="230" height="103" rx="12" fill="#fff8e7"/>
+            <rect x="535" y="285" width="250" height="85" rx="12" fill="#fffdf8"/>
+          </g>
+          <g text-anchor="middle" font-size="16">
+            <text x="672" y="48" font-weight="650">Cloudflare Pages static hosting</text><text x="672" y="70" font-size="14">Vite build → dist → pages.dev</text>
+            <text x="645" y="132" font-weight="650">One Pages Function</text><text x="645" y="158" font-size="14">Validate · guard · proxy</text><text x="645" y="184" font-size="14">Server-only API secret</text>
+            <text x="950" y="132" font-weight="650">OpenAI Responses API</text><text x="950" y="158" font-size="14">Title · theme · flower enum</text><text x="950" y="184" font-size="14">Validated editable suggestions</text>
+            <text x="660" y="318" font-weight="650">Cloudflare Turnstile</text><text x="660" y="344" font-size="14">No story or photo in bot verification</text>
+            <text x="754" y="397" font-size="14">No account · no cloud garden · manual planting independent of AI</text>
+          </g>
+        </svg>
+      </div>
+      <div class="grid" style="margin-top:16px">
+        <article class="panel"><h3>Small dependency footprint</h3><p>React/Vite/TypeScript, custom CSS, idb, Wrangler, and typed Web APIs. CSS first; Motion only for a clear need. Native fetch handles the small API call without a Node-specific SDK.</p><p>Slice 1 now locks React/React DOM 19.3.1, Vite 8.3.4, React plugin 6.1.2 and TypeScript 5.9.3. Node 22.14.0 satisfies their engines; frontend typecheck, lint and production build pass. Later idb/Function dependencies, real OpenAI access and public deployment remain unverified.</p></article>
+        <article class="panel purple"><h3>Privacy boundaries</h3><p>No automatic analysis, remote garden storage, content logs, analytics, or secret in frontend variables. The photo remains local.</p><p>Local browser storage is not encryption or backup. Different origins/profiles/devices have separate gardens. Provider processing/retention is explained; disabling response storage does not mean zero retention.</p></article>
+      </div>
+    </section>
+
+    <section id="journey" aria-labelledby="journey-title">
+      <div class="eyebrow">Follow one memory</div><h2 id="journey-title">From protected draft to lasting bloom.</h2>
+      <details open><summary>1 · Enter and write <span>App, journal, and draft controller</span></summary><div><p>Load the illustrated scene, open IndexedDB, and restore saved pages/memories. Offer any draft with Continue Writing / Not Now. Journal input updates memory immediately and queues a serialized 500 ms local save; photos are processed locally.</p><p><strong>Files:</strong> <code>src/app/App.tsx</code>, <code>src/journal/MemoryEditor.tsx</code>, <code>src/hooks/useDraft.ts</code>. <strong>PRD:</strong> The Core Journey; Protect One Active Draft.</p></div></details>
+      <details><summary>2 · Discover or choose manually <span>Optional external AI, explicit consent</span></summary><div><p>Manual selection sends nothing for AI. Find My Flower explains external processing and obtains a fresh bot token after explicit action. Only current text goes through the Function. Suggestions are validated and editable; never rewrite the story or restrict flower choice by emotion.</p><p><strong>Files:</strong> <code>src/lib/ai.ts</code>, <code>functions/api/suggest-flower.ts</code>, <code>shared/contracts.ts</code>. <strong>PRD:</strong> Discover and Review a Flower.</p></div></details>
+      <details><summary>3 · Review and choose a spot <span>Simple, protected placement</span></summary><div><p>Suggest an empty spot automatically. Proposed layout: Choose another spot temporarily reveals the garden with an understated Confirm / Back strip and highlighted empty targets. Preserve all draft fields; occupied spots cannot be overwritten. Ten stable logical IDs map to desktop/mobile coordinates.</p><p><strong>Files:</strong> <code>src/garden/scene.ts</code>, <code>src/storage/placement.ts</code>. <strong>PRD:</strong> Planting Spots and Garden Pages.</p></div></details>
+      <details><summary>4 · Save, then bloom <span>One local transaction before celebration</span></summary><div><p>Flush the draft and commit memory insertion, placement/page update, and matching-draft removal together. Only then close the journal and show seed → sprout → young plant → chosen bloom. Stable IDs, a unique placement index, and operation locking prevent duplicate planting. Failure retains the draft and shows retry.</p><p><strong>Files:</strong> <code>src/storage/repository.ts</code>, <code>src/garden/Bloom.tsx</code>. <strong>PRD:</strong> Plant and Bloom. Reload restores the final saved flower even if animation was interrupted.</p></div></details>
+      <details><summary>5 · Read, return, or delete <span>The same intimate journal</span></summary><div><p>Open original text/date/title/theme/flower/photo without AI. Desktop is a two-page botanical book; mobile is a comfortable scrollable page. Back to Garden / Escape restore the same page context and focus.</p><blockquote><p><strong>Let this memory go?</strong></p><p>This will remove the memory and its flower from your garden. This action cannot be undone.</p></blockquote><p>Keep My Memory is primary; Delete Forever explicitly confirms. Transactional success frees the original spot, preserves other flowers, removes only empty trailing pages, then peacefully fades/removes the flower. A failed deletion never appears successful.</p><p><strong>Files:</strong> <code>src/journal/MemoryReader.tsx</code>, <code>src/components/ConfirmDialog.tsx</code>, <code>src/storage/repository.ts</code>. <strong>PRD:</strong> Revisit, Persist, and Delete; Delete With Confirmation.</p></div></details>
+    </section>
+
+    <section id="assets" aria-labelledby="assets-title">
+      <div class="eyebrow">Prove the visual foundation early</div><h2 id="assets-title">One garden. One sunflower. Then the collection.</h2>
+      <p class="callout"><strong>Slice 1 remains unapproved.</strong> The learner prefers Secret Glade A, pending review of the <a href="design-proposal.html">refined A2 empty/planted desktop/mobile previews</a>. Application implementation is stopped. The MVP has one garden; future atmosphere changes must preserve its geometry and page/spot placements. Existing code/art are preserved; no production flower collection or theme system is generated. Technical checks are not visual acceptance.</p>
+      <ol><li>Create one master art brief and garden illustration; inspect it before using it as a reference.</li><li>Generate a transparent sunflower, normalize its canvas/soil anchor, and inspect it on light, dark, and checkerboard backgrounds.</li><li>Prepare matching seed/sprout/young-plant SVGs and test the bloom in the scene. Try aligned stem/head layers only if clean preparation is feasible.</li><li>Show a fictional replayable pilot at desktop/mobile sizes and under reduced motion. Record style, alpha, alignment, actual bytes/loading, and motion quality.</li><li>Obtain learner visual feedback before producing the other five. If inconsistent, refine or use supplied/edited assets rather than forcing poor results.</li></ol>
+      <div class="panel table-wrap"><h3>Production inventory</h3><table><caption>Proposed source dimensions; runtime exports are optimized. Final pipeline is pilot-dependent.</caption><thead><tr><th scope="col">Asset</th><th scope="col">Format / size</th><th scope="col">Use</th></tr></thead><tbody>
+        <tr><th scope="row"><code>garden/base.webp</code></th><td>Pilot 1536×1024 native opaque WebP, 500,076 bytes</td><td>Custom clearing/path/fence/light; no UI text or memory flowers. Native output is used without upscaling to the original 2400×1600 target.</td></tr>
+        <tr><th scope="row"><code>garden/foreground.webp</code></th><td>Optional aligned transparent 2400×1600</td><td>Sparse matching depth without target occlusion.</td></tr>
+        <tr><th scope="row"><code>flowers/&lt;type&gt;/bloom.webp</code></th><td>Transparent 768×1024 source canvas</td><td>Six silhouettes, common bottom-center anchor, light and scale.</td></tr>
+        <tr><th scope="row"><code>flowers/&lt;type&gt;/{stem,head}.webp</code></th><td>Optional aligned layers</td><td>Only if pilot proves clean layer preparation; not assumed.</td></tr>
+        <tr><th scope="row"><code>growth/{seed,sprout,young-plant}.svg</code></th><td>Code-authored, e.g. 256×256 viewBox</td><td>Reusable early stages matched to artwork.</td></tr>
+        <tr><th scope="row"><code>journal/{paper,botanical-corner}.webp</code></th><td>512×512 texture / transparent accents</td><td>Under and around real HTML content.</td></tr>
+        <tr><th scope="row">Controls and atmospheric motifs</th><td>HTML/CSS/simple SVG</td><td>Real inputs/buttons/focus, spot rings, glow, particles, optional butterfly.</td></tr>
+      </tbody></table></div>
+      <div class="grid" style="margin-top:16px"><article class="panel green"><h3>Pilot evidence</h3><p>Same palette/paint/light/scale; real alpha with no halos; stages hold the soil anchor; distinct seed/sprout/young/bloom; learner sees the moving composite, not just screenshots.</p><p>Inspect 390×844 and 1440×900, keyboard/touch targets, foreground depth, and minimal-motion rendering. Proposed normal bloom: 2.4–3.0 seconds, refined through review.</p></article><article class="panel"><h3>Performance and fallback</h3><p>Proposed targets: base ≤700 KB, each bloom ≤150 KB, optional foreground ≤200 KB, texture ≤60 KB, initial scene art roughly ≤1.5 MB. Record actual sizes and cold requests; do not present targets as measurements.</p><p>If layered exports fail, test shared code stages with an art-directed final reveal. If that fails quality review, request refined/supplied layers. No silent reduction to four flowers.</p></article></div>
+      <p class="note" style="margin-top:16px">Sunflower, lavender, rose, daisy, forget-me-not, and iris remain symbolically associated with emotions but freely selectable. Preserve source art, prompts/references and rights evidence separately from optimized runtime files. Do not use mismatched stock art.</p>
+    </section>
+
+    <section id="components" aria-labelledby="components-title">
+      <div class="eyebrow">Implementation map</div><h2 id="components-title">Every behavior has a home.</h2>
+      <details><summary>App and dialogs <span>One screen, explicit modes</span></summary><div><p><code>src/app/</code> controls garden/write/review/choose-spot/read/confirmation. <code>src/components/</code> handles consent, recovery and confirmations. Accessible labels, focus trap/return, keyboard and Escape behavior belong here; no router or large state library.</p><p><strong>PRD:</strong> Screens and Layout; The Core Journey.</p></div></details>
+      <details><summary>Garden and growth <span>Layered scene, separate flower buttons</span></summary><div><p><code>src/garden/</code> owns scene/catalog data, flower hit targets, bloom and page controls. Ten stable spot IDs have deliberate desktop/mobile maps; decorations never capture clicks. Placement, growth and sway use separate transform wrappers.</p><p><strong>PRD:</strong> Arrive and Explore; Planting Spots and Garden Pages; Plant and Bloom.</p></div></details>
+      <details><summary>Journal and photos <span>Real HTML, shared botanical shell</span></summary><div><p><code>src/journal/</code> provides editor/review/reader. <code>shared/validation.ts</code> checks 10–2,000-code-point stories without rewriting original whitespace, title/theme bounds, and dates. <code>src/lib/photos.ts</code> accepts one JPEG/PNG/WebP ≤5,000,000 original bytes; orientation-aware resizing to 1600 px and roughly 0.82 WebP quality are reviewed defaults. Guard corrupt/extreme images; preserve valid draft content.</p><p><strong>PRD:</strong> Write a Memory; Revisited Memory; Protect One Active Draft.</p></div></details>
+      <details><summary>Drafts and storage <span>Serialized writes and atomic outcomes</span></summary><div><p><code>src/hooks/useDraft.ts</code> owns one draft, 500 ms autosave, controlled-exit flushing and revision conflicts. <code>src/storage/</code> owns schema, transactions, idempotency and allocation. Only completed transactions show success; incomplete drafts need not pass planting validation.</p><p><strong>PRD:</strong> Protect One Active Draft; Plant and Bloom; Revisit, Persist, and Delete.</p></div></details>
+      <details><summary>AI boundary <span>One Pages Function, strict contract</span></summary><div><p><code>functions/api/suggest-flower.ts</code> and <code>server/</code> validate input, bot result, provider answer and errors. Helpers stay outside the file-routed <code>functions/</code> directory to prevent unintended routes. <code>shared/</code> stays pure browser/Function-safe. The Function has no browser DB, photo, filesystem or chat history.</p><p><strong>PRD:</strong> Discover and Review a Flower; States and Boundaries.</p></div></details>
+      <p class="note">The complete annotated file tree is in <a href="spec.md">spec.md</a>. Files are created only when slices need them; no empty scaffolding for its own sake.</p>
+    </section>
+
+    <section id="data" aria-labelledby="data-title">
+      <div class="eyebrow">Four local stores</div><h2 id="data-title">Simple records. Reliable transactions.</h2>
+      <div class="panel table-wrap"><table><thead><tr><th scope="col">Store</th><th scope="col">Contents / lifetime</th></tr></thead><tbody>
+        <tr><th scope="row">memories</th><td>Original story, title, theme, flower enum, date, created timestamp, page/spot, optional photo blob, stable variation seed. Created once, read, explicitly deleted. Unique placement index.</td></tr>
+        <tr><th scope="row">drafts</th><td>One active draft ID/revision, fields/selections/photo and updated timestamp. Draft ID becomes memory ID on successful planting.</td></tr>
+        <tr><th scope="row">pages</th><td>Stable ID/order. Reuse one scene; no renumbering or moving populated flowers. Preserve internal gaps; remove only empty trailing records.</td></tr>
+        <tr><th scope="row">preferences</th><td>Local consent acknowledgment/version and last viewed page. An acknowledgment never automatically triggers analysis.</td></tr>
+      </tbody></table></div>
+      <p style="margin-top:16px">Photos live in their owning record; no remote media system. Planting inserts memory, updates page allocation, and removes the matching draft in one transaction. Failure rolls everything back. Automatic placement prefers the current page, then existing free space, then a new page.</p>
+      <p class="callout"><strong>Honest draft protection:</strong> flush on controlled exits and show “Draft saved” only after success. A forced crash/reload can lose the last unsaved debounce-window keystrokes; storage clearing or unavailability cannot be made loss-proof by IndexedDB.</p>
+    </section>
+
+    <section id="ai" aria-labelledby="ai-title">
+      <div class="eyebrow">Optional and bounded</div><h2 id="ai-title">One request. Three editable suggestions.</h2>
+      <div class="grid"><article class="panel"><h3>API contract</h3><p><code>POST /api/suggest-flower</code>, same-origin JSON, bounded at 12 KiB while reading. Request contains only <code>memoryText</code>, <code>consentVersion</code>, and fresh <code>turnstileToken</code>.</p><p>Response contains only <code>title</code> (1–100), <code>emotionalTheme</code> (1–120), and <code>flowerType</code> (one of six IDs). Strict schema, required keys, no extras; validate on server and browser. Errors are friendly JSON without upstream content or memory echoes.</p></article><article class="panel green"><h3>Initial OpenAI integration</h3><p>Responses API with <code>gpt-6-luna</code> for initial testing, configurable only through server-side <code>OPENAI_MODEL</code>; reasoning none, at most 320 output tokens, <code>store:false</code>, no tools, no automatic retry. Handle refusal, incomplete output, invalid fields, quota and timeout safely.</p><p>Official standard text prices checked: $0.10/million input and $0.50/million output tokens, with separate cache charges. Availability and quality for the learner's account still require one fictional live call. <a href="https://developers.openai.com/api/docs/models/gpt-6-luna">Model documentation</a>.</p></article></div>
+      <details open><summary>Public endpoint safeguards <span>Risk reduction, not an abuse-proof promise</span></summary><div><p>Fresh server-verified Turnstile token with expected hostname/action; bounded input/output/timeouts; exact Origin checks; one browser request at a time; proposed 20 s browser cooldown and transient per-isolate burst checks; AI disable switch. No story/raw-IP persistence or application content logs. Manual mode remains available.</p><p>Pages does not document the Workers Rate Limiting binding as supported. Do not assume a zone WAF rule is available for a free <code>pages.dev</code> hostname. Enable stronger rate controls only if supported and tested on the actual project; do not silently add another storage service/Worker.</p><p>Project alerts notify; they do not stop requests. A suggested $1 demo alert requires learner approval. No hard global spend cap or durable visitor quota is claimed. Solved challenges/distributed clients can still incur cost; public AI stays off until configuration and residual-risk review.</p></div></details>
+      <p class="note">Provider retention and the bot-check service are explained before AI use. No photos are uploaded. Check <a href="https://developers.openai.com/api/docs/guides/your-data">OpenAI data controls</a>, <a href="https://developers.cloudflare.com/pages/functions/bindings/">Pages bindings</a>, and <a href="https://developers.openai.com/api/docs/guides/terraform/rate-limits-and-spend">spend-alert semantics</a>.</p>
+    </section>
+
+    <section id="delivery" aria-labelledby="delivery-title">
+      <div class="eyebrow">Verified slices after approval</div><h2 id="delivery-title">Visual foundation early. Evidence throughout.</h2>
+      <p>This is the specification's implementation overview, not a build-progress checklist. <code>5-build</code> creates the canonical Markdown checklist, offers pacing, verifies/commits slices, and includes hands-on learner review and the final learning wrap-up.</p>
+      <div class="panel table-wrap"><table><thead><tr><th scope="col">Slice</th><th scope="col">Working result</th><th scope="col">Evidence</th></tr></thead><tbody>
+        <tr><th scope="row">A · Foundation</th><td>React/Vite/TS, dependency lock, tooling/ignore rules</td><td>Actual versions/engines, typecheck/lint/build/local run, privacy before commit</td></tr>
+        <tr><th scope="row">B · Visual pilot</th><td>Scene, sunflower, shared stages and bloom</td><td>Alpha/alignment/style/motion/mobile/loading and learner visual review</td></tr>
+        <tr><th scope="row">C · Memory</th><td>Editor, photos, IndexedDB, active draft</td><td>Reload/recovery/discard/rollback and validation boundaries</td></tr>
+        <tr><th scope="row">D · Planting</th><td>Six flowers, stable spots, save-before-bloom</td><td>Double-submit/stale target/refresh mid-bloom and keyboard/touch</td></tr>
+        <tr><th scope="row">E · Revisit</th><td>Reader, deletion, repeated pages</td><td>Same context, no AI reading, cancel/failure, internal gaps versus empty tails</td></tr>
+        <tr><th scope="row">F · AI</th><td>Function, consent, structured output, safeguards</td><td>Controlled errors, emulator, one fictional real call; label live versus mock</td></tr>
+        <tr><th scope="row">G · Polish</th><td>Cohesive art, priority motion, accessibility</td><td>Desktop/mobile/320/768, keyboard/focus/reduced motion, production-shaped run</td></tr>
+        <tr><th scope="row">H · Deployment</th><td>Approved Pages app and secrets</td><td>Public core journey, independent visitor gardens, history/bundle/privacy checks</td></tr>
+      </tbody></table></div>
+      <details><summary>How to run and deploy <span>Frontend runs; Function/deployment commands remain planned</span></summary><div><p><code>npm run dev</code> serves Vite on 5173; <code>npm run build</code> and <code>npm run preview</code> provide the current static pilot on 4173. In the AI slice, <code>npm run dev:functions</code> will run <code>wrangler pages dev dist --port 8788</code>; Vite already reserves an <code>/api</code> proxy. The Function and Wrangler preview are not implemented yet.</p><p>Secrets live in ignored <code>.dev.vars</code> and encrypted Pages settings, never <code>VITE_</code>. After external/public approval, deploy from the root with <code>npx wrangler pages deploy dist --project-name &lt;chosen-name&gt;</code> and <code>functions/</code> present. Dashboard drag-and-drop alone does not compile that directory. API routes are no-store; static assets avoid Function invocation.</p><p>Different ports/preview/production URLs have separate browser storage. Name availability, account/secret settings and bot controls remain actual deployment checks.</p></div></details>
+      <details><summary>Shipping and rights <span>Technical evidence, human submission</span></summary><div><p>Prepare a technical README with screenshots/setup/architecture, required public repository and short video, and the requested working site. Verify the current submission form for exact video constraints; the one-minute product scenario is not a rule invented for the form.</p><p>Inspect files/history for secrets, learner profile and private planning context before publishing. Code-license recommendation: MIT if the learner wants permissive reuse. Artwork needs separate explicit redistribution terms and verified generation/reference rights; do not claim automatic exclusive copyright or blanket reuse. Account changes, public publishing and submitting still require approval.</p><p>The learner writes Devpost answers/reflections under <code>6-ship</code>; technical help and evidence do not substitute for their own submission writing.</p></div></details>
+    </section>
+
+    <section id="review" aria-labelledby="review-title">
+      <div class="eyebrow">Technical plan approved</div><h2 id="review-title">Agreed implementation direction—and what remains to prove.</h2>
+      <div class="grid"><article class="panel purple"><h3>Accepted implementation defaults</h3><p>The approved specification includes idb, native fetch, GPT-6 Luna with reasoning none, Turnstile on AI actions, 500 ms autosave, ten stable spots, the temporary selection strip, image/input defaults, asset targets, and bounded but non-global endpoint checks.</p><p>These were identified recommendations accepted through specification approval. The learner explicitly confirmed the initial AI model and server-side configuration. Artwork and motion still receive the planned pilot review.</p></article><article class="panel"><h3>Evidence still required</h3><ul><li>Frontend versions/build are now verified; storage/Function dependencies await their slices.</li><li>Learner review of art integration, native garden resolution and actual motion; the 176,992-byte sunflower exceeds its proposed 150 KB target.</li><li>Actual OpenAI account/model access, quality and limits.</li><li>Bot configuration, supported rate controls, alert amount and residual public cost risk.</li><li>Rights, privacy/history review, public approvals and current submission rules.</li></ul></article></div>
+      <p class="callout" style="margin-top:16px"><strong>Specification approved.</strong> The learner authorized <code>5-build</code>, with the illustrated pilot first, verified working slices, learner visual checkpoints, and required learning activities. GPT-6 Luna is the initial AI testing model, configurable through server-side <code>OPENAI_MODEL</code>. The Markdown build checklist carries build-order review and progress; external account changes and public publishing still require approval.</p>
+    </section>
+  </main>
+  <footer><p><strong>Specification status: approved.</strong> Read <a href="spec.md">spec.md</a> for the full blueprint, exact API/data model, failure handling and file tree. Essential content and diagrams work offline; external links are optional source references.</p><p>This companion makes no remote font/image/script requests, processes no memories, and performs no external account changes.</p></footer>
+</body>
+</html>

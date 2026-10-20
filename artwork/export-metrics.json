@@ -1,0 +1,24 @@
+{
+  "garden": {
+    "width": 1536,
+    "height": 1024,
+    "bytes": 500076
+  },
+  "sunflower": {
+    "width": 768,
+    "height": 1024,
+    "bytes": 176992,
+    "hasAlpha": true,
+    "alphaPixels": {
+      "transparent": 500274,
+      "translucent": 284866,
+      "opaque": 1292
+    },
+    "totalPixels": 786432,
+    "soilAnchor": [
+      0.5,
+      1
+    ],
+    "sourceLastPaintedRow": 1415
+  }
+}

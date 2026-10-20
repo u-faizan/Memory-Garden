@@ -1,0 +1,57 @@
+@import url('./styles/garden.css');
+:root {
+  font-family:Inter,'Segoe UI',Arial,sans-serif;
+  color:#293d34;
+  background:#e9e5c7;
+  font-synthesis:none;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  font-weight:400;
+  --ink:#293d34;
+  --paper:#faf2de;
+  --moss:#415840
+}
+* {
+  box-sizing:border-box
+}
+body {
+  margin:0
+}
+button,a,summary {
+  -webkit-tap-highlight-color:transparent
+}
+button {
+  font:inherit;
+  cursor:pointer
+}
+button:disabled {
+  cursor:default
+}
+button:focus-visible,a:focus-visible,summary:focus-visible {
+  outline:3px solid #293d34;
+  outline-offset:5px
+}
+button {
+  touch-action:manipulation
+}
+button,a,summary {
+  color:inherit
+}
+button:disabled {
+  opacity:.8
+}
+button {
+  border:0
+}
+a {
+  text-decoration:none
+}
+p,h1,h2 {
+  margin:0
+}
+::selection {
+  background:#e5d79e
+}
+svg {
+  display:block
+}

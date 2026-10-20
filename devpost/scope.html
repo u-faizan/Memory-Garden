@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>MemoryGarden · Scope review</title>
+  <style>
+    :root { --paper:#faf8f1; --ink:#293d34; --muted:#536358; --line:#d5ddcc; --green:#e9efdf; --purple:#eee9f5; --accent:#72558d; }
+    * { box-sizing:border-box; }
+    html { scroll-padding-top:1.5rem; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.65 system-ui,sans-serif; }
+    a { color:#584174; text-underline-offset:4px; }
+    a:hover { text-decoration-thickness:2px; }
+    :focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
+    .skip { position:absolute; top:-100px; left:1rem; padding:.5rem; background:white; }
+    .skip:focus { top:1rem; }
+    main, footer { max-width:1040px; margin:auto; padding:0 28px; }
+    header { position:relative; padding:56px 0 24px; border-bottom:1px solid var(--line); }
+    .eyebrow { font-size:.75rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); }
+    .badge { display:inline-block; padding:3px 10px; margin-left:8px; border-radius:20px; background:var(--purple); color:#584174; letter-spacing:0; }
+    h1,h2,h3 { font-family:Georgia,serif; font-weight:400; line-height:1.15; }
+    h1 { font-size:clamp(2.7rem,7vw,4.8rem); margin:12px 0 4px; letter-spacing:-.045em; }
+    h2 { font-size:2rem; margin:8px 0 18px; }
+    h3 { font-size:1.3rem; margin:0 0 10px; }
+    p { margin:0 0 14px; }
+    .tagline { font-family:Georgia,serif; color:var(--accent); font-style:italic; font-size:1.35rem; }
+    .intro { max-width:650px; margin-top:20px; }
+    .note { font-size:.875rem; color:var(--muted); }
+    nav { display:flex; flex-wrap:wrap; gap:10px 24px; padding:20px 0 0; font-size:.9rem; }
+    section { margin:38px 0; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .panel { padding:24px; border:1px solid var(--line); border-radius:18px; background:#fffdf8; }
+    .green { background:var(--green); }
+    .purple { background:var(--purple); }
+    .diagram { overflow-x:auto; border:1px solid var(--line); border-radius:18px; padding:12px; background:#fffdf8; }
+    .diagram svg { display:block; width:100%; min-width:650px; height:auto; }
+    .diagram text { font-family:system-ui,sans-serif; fill:var(--ink); }
+    .timeline { list-style:none; padding:0; margin:20px 0; display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .timeline li { border-top:3px solid #c4cfae; padding:16px 12px 0 0; }
+    .timeline .time { display:block; font-size:.8rem; color:var(--accent); margin-bottom:8px; font-weight:700; }
+    .timeline h3 { font-size:1.15rem; }
+    .timeline p { font-size:.9rem; }
+    .signature { border-left:4px solid var(--accent); padding:16px 20px; background:var(--purple); border-radius:0 12px 12px 0; }
+    details { border:1px solid var(--line); background:#fffdf8; border-radius:14px; margin:12px 0; }
+    summary { cursor:pointer; padding:18px 22px; font-weight:650; }
+    summary span { font-weight:400; color:var(--muted); }
+    details > div { padding:0 22px 12px; }
+    li { padding-left:3px; margin-bottom:9px; }
+    ul { padding-left:21px; margin:12px 0; }
+    .checks { list-style:none; padding:0; }
+    .checks li { padding-left:24px; position:relative; }
+    .checks li::before { content:'✓'; position:absolute; left:0; color:#527043; font-weight:700; }
+    footer { padding-top:18px; padding-bottom:36px; border-top:1px solid var(--line); font-size:.875rem; color:var(--muted); }
+    @media(max-width:700px) { main,footer { padding-left:20px; padding-right:20px; } header { padding-top:32px; } .grid { grid-template-columns:1fr; } .timeline { grid-template-columns:1fr; gap:0; } .timeline li { border-top:0; border-left:3px solid #c4cfae; padding:0 0 18px 20px; } .panel { padding:20px; } summary span { display:block; margin-top:3px; } }
+    @media print { body { background:white; font-size:11pt; } nav,.skip { display:none; } section { break-inside:avoid; } .diagram { overflow:visible; } .diagram svg { min-width:0; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#journey">Skip to the journey</a>
+  <main>
+    <header>
+      <div class="eyebrow">Scope review <span class="badge">Approved · ready for PRD</span></div>
+      <h1>MemoryGarden</h1>
+      <p class="tagline">Where Memories Bloom.</p>
+      <p class="intro">A personal, illustrated garden where meaningful memories become flowers—and revisiting your stories feels like exploring a peaceful little world.</p>
+      <p class="note">A lightweight planning companion. <a href="scope.md">scope.md is the primary document</a>. This page does not settle the application's visual design; those decisions belong in the PRD.</p>
+      <nav aria-label="Scope sections">
+        <a href="#heart">The idea</a><a href="#journey">User journey</a><a href="#boundary">Now / later / cut</a><a href="#privacy">Privacy &amp; control</a><a href="#success">Success criteria</a>
+      </nav>
+    </header>
+
+    <section id="heart" class="grid" aria-label="Audience and identity">
+      <article class="panel green">
+        <div class="eyebrow">Who it's for</div>
+        <h2>A moment worth keeping.</h2>
+        <p>A university student saves an evening with friends, a first day, or a personal achievement—moments that otherwise get buried in galleries or scattered notes.</p>
+        <p>The distinctive idea: the memory blooms into a lasting flower, and exploring the garden brings its story back.</p>
+      </article>
+      <article class="panel">
+        <div class="eyebrow">What it should feel like</div>
+        <h2>A personal sanctuary.</h2>
+        <p>A cozy 2D storybook garden. Soft pastels, warm sunlight, gentle movement, consistent illustrations, and an inviting journal.</p>
+        <p>Happy, bittersweet, and difficult memories all belong. Suggestions must never force a positive interpretation.</p>
+        <p>The interactive garden and seed-to-flower animation are required product experiences. Garden, flowers, journal, typography, motion, and controls must feel like parts of the same illustrated world. Polish and reliability take priority over more features.</p>
+      </article>
+    </section>
+
+    <section id="journey" aria-labelledby="journey-title">
+      <div class="eyebrow">One complete experience</div>
+      <h2 id="journey-title">From a story to a growing garden.</h2>
+      <p class="note" id="diagram-help">Follow the main path below. AI is optional; both routes return to review. On narrow screens, scroll the diagram horizontally.</p>
+      <div class="diagram" role="region" aria-label="Memory journey diagram" aria-describedby="diagram-help" tabindex="0">
+        <svg viewBox="0 0 960 320" role="img" aria-labelledby="flow-title flow-desc" xmlns="http://www.w3.org/2000/svg">
+          <title id="flow-title">A student turns a story into a flower they can revisit.</title>
+          <desc id="flow-desc">A student enters the garden and writes a memory. They can request AI suggestions with consent or choose details manually. They review their choices, plant and watch the flower bloom, then reopen its story. The flower persists in the same browser, inviting another visit.</desc>
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#7c8b71"/></marker></defs>
+          <g fill="none" stroke="#7c8b71" stroke-width="2" marker-end="url(#arrow)">
+            <path d="M164 72H203"/><path d="M359 72H398"/><path d="M554 72H593"/><path d="M749 72H788"/>
+            <path d="M281 112V142H208V169"/><path d="M281 142H403V169"/>
+            <path d="M208 231V253H476V114"/><path d="M403 231V253"/>
+            <path d="M866 112V291H86V114" stroke-dasharray="6 5"/>
+          </g>
+          <g stroke="#d5ddcc" stroke-width="1.5">
+            <rect x="8" y="30" width="156" height="82" rx="14" fill="#e9efdf"/>
+            <rect x="203" y="30" width="156" height="82" rx="14" fill="#fff8e7"/>
+            <rect x="398" y="30" width="156" height="82" rx="14" fill="#fff8e7"/>
+            <rect x="593" y="30" width="156" height="82" rx="14" fill="#eee9f5"/>
+            <rect x="788" y="30" width="156" height="82" rx="14" fill="#e9efdf"/>
+            <rect x="106" y="169" width="204" height="62" rx="12" fill="#eee9f5"/>
+            <rect x="329" y="169" width="148" height="62" rx="12" fill="#e9efdf"/>
+          </g>
+          <g text-anchor="middle" font-size="17">
+            <text x="86" y="63" font-weight="650">Enter the garden</text><text x="86" y="88" font-size="14">A student's sanctuary</text>
+            <text x="281" y="63" font-weight="650">Write a memory</text><text x="281" y="88" font-size="14">Story + optional photo</text>
+            <text x="476" y="63" font-weight="650">Review &amp; choose</text><text x="476" y="88" font-size="14">Title · theme · flower</text>
+            <text x="671" y="63" font-weight="650">Plant &amp; bloom</text><text x="671" y="88" font-size="14">The signature moment</text>
+            <text x="866" y="63" font-weight="650">Revisit the story</text><text x="866" y="88" font-size="14">Click a lasting flower</text>
+            <text x="208" y="194" font-size="15">Request AI suggestions</text><text x="208" y="215" font-size="13">Consent before first analysis</text>
+            <text x="403" y="194" font-size="15">Choose manually</text><text x="403" y="215" font-size="13">No AI required</text>
+            <text x="640" y="279" font-size="14">Same-browser persistence → return, explore, and plant again</text>
+          </g>
+        </svg>
+      </div>
+      <ol class="timeline" aria-label="The one-minute demo">
+        <li><span class="time">0–10 seconds</span><h3>Enter</h3><p>Sunlight, gentle swaying plants, subtle butterflies, and a clear “Plant a Memory” invitation.</p></li>
+        <li><span class="time">10–25 seconds</span><h3>Write</h3><p>A journal-style space for a fictional evening with university friends. Optionally add a photo.</p></li>
+        <li><span class="time">25–35 seconds</span><h3>Review</h3><p>Explicitly request AI suggestions. Change the title, theme, and flower before confirming.</p></li>
+        <li><span class="time">35–45 seconds</span><h3>Bloom</h3><p>The journal closes gently. A seed settles, sprouts, and becomes the chosen flower.</p></li>
+        <li><span class="time">45–60 seconds</span><h3>Revisit</h3><p>Click the flower to read its story, date, theme, and optional photo. Close it; the flower remains.</p></li>
+      </ol>
+      <p class="signature"><strong>The signature moment:</strong> a real memory becomes a beautiful flower in a garden that feels personal. “An Evening to Remember” and lavender illustrate a suggestion; exact AI wording is not fixed.</p>
+    </section>
+
+    <section id="boundary" aria-labelledby="boundary-title">
+      <div class="eyebrow">Protect the core experience</div>
+      <h2 id="boundary-title">Small in scope. Carefully finished.</h2>
+      <p>Expand the sections to review what belongs in this version and why other ideas wait.</p>
+      <details open>
+        <summary>Now <span>One complete memory-to-flower journey</span></summary>
+        <div><ul>
+          <li>A responsive illustrated 2D garden and a small, carefully designed flower library.</li>
+          <li>Journal-style memory capture and reading, with an optional photo.</li>
+          <li>Optional AI suggestions; manual selection of title, emotional theme, and flower.</li>
+          <li>Editable planting details, a satisfying seed-to-bloom animation, and click-to-revisit flowers.</li>
+          <li>Same-browser persistence and individual memory deletion.</li>
+          <li>Consistent assets, thoughtful typography, ambient movement, and reliable interactions across desktop and mobile.</li>
+        </ul></div>
+      </details>
+      <details>
+        <summary>Later <span>Surprise rediscovery</span></summary>
+        <div><p>Let the garden reveal an older memory after the core journey is complete and polished. For this version, users rediscover memories by clicking flowers.</p></div>
+      </details>
+      <details>
+        <summary>Explicitly cut <span>Keep the build focused and personal</span></summary>
+        <div><ul>
+          <li><strong>Accounts, authentication, cloud memory storage, and cross-device sync:</strong> same-browser persistence proves the concept with less infrastructure.</li>
+          <li><strong>Public profiles, sharing, followers, and community:</strong> the focus is personal reflection.</li>
+          <li><strong>Analytics tracking and unnecessary collection:</strong> these do not support the core journey.</li>
+          <li><strong>3D and per-memory image generation:</strong> curated 2D assets protect visual consistency and build simplicity.</li>
+          <li><strong>Complex encryption or backend infrastructure beyond secure AI access:</strong> outside this browser-local proof of concept.</li>
+        </ul></div>
+      </details>
+    </section>
+
+    <section id="privacy" aria-labelledby="privacy-title">
+      <div class="eyebrow">Personal memories, explicit choices</div>
+      <h2 id="privacy-title">Privacy &amp; user control.</h2>
+      <div class="grid">
+        <article class="panel green"><h3>Saved in this browser</h3>
+          <p>Memories remain after refresh and reopening in the same browser, provided site data has not been cleared. There are no accounts or cloud memory database.</p>
+          <p>Use storage appropriate for photos, such as IndexedDB. Users can delete individual memories; cross-device access and recovery are outside this version.</p>
+        </article>
+        <article class="panel purple"><h3>AI only when invited</h3>
+          <p>Before the first analysis, clearly explain that requesting suggestions sends the memory text to an external AI service. Never send text automatically while typing.</p>
+          <p>Users can choose details without AI, edit every suggestion, and keep their original story unchanged unless they edit it. API keys stay out of frontend code; secure integration is chosen in the technical spec.</p>
+        </article>
+      </div>
+      <p class="note" style="margin-top:16px">Browser-local storage does not mean all processing happens on-device. No analytics tracking or public profiles. Demonstrations use fictional memories.</p>
+    </section>
+
+    <section id="success" aria-labelledby="success-title">
+      <div class="eyebrow">The finish line</div>
+      <h2 id="success-title">What proves it works?</h2>
+      <div class="grid">
+        <article class="panel"><h3>A complete, reliable journey</h3>
+          <ul class="checks">
+            <li>Write → request suggestions → review → plant → bloom → revisit works end to end.</li>
+            <li>Manual planting and individual deletion work.</li>
+            <li>The saved garden survives refresh and reopening while site data remains available.</li>
+            <li>The memory card shows the original story, title, date, theme, and photo when provided.</li>
+            <li>Desktop and mobile feel cohesive; difficult memories are treated with the same care as happy ones.</li>
+          </ul>
+        </article>
+        <article class="panel"><h3>A demonstrable passion project</h3>
+          <p>Prepare a short demo video and a public GitHub repository with fictional sample content and secret-free configuration. Deployment is optional.</p>
+          <p><strong>Main schedule risk:</strong> illustration and animation polish within the curriculum's 2–4 hours of active work. The technical plan must assess feasibility against this quality bar before implementation.</p>
+          <p>Personal learning goals are maintained in the private, Git-ignored learner profile.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p><strong>Review state: approved.</strong> <a href="scope.md">Read the canonical Markdown scope</a>. Next, the PRD will define the visual identity, garden environment, journal design, animations, and interactions with your participation.</p>
+    <p>This companion works offline with no external fonts, scripts, libraries, or image requests.</p>
+  </footer>
+</body>
+</html>

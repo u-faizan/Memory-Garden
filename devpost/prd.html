@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>MemoryGarden · Product review</title>
+  <style>
+    :root{--paper:#faf8f1;--ink:#293d34;--muted:#536358;--line:#d5ddcc;--green:#e9efdf;--purple:#eee9f5;--accent:#72558d}
+    *{box-sizing:border-box}html{scroll-padding-top:1.5rem}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,sans-serif}
+    a{color:#584174;text-underline-offset:4px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    .skip{position:absolute;top:-100px;left:1rem;padding:.5rem;background:white}.skip:focus{top:1rem}
+    main,footer{max-width:1080px;margin:auto;padding:0 28px}header{padding:48px 0 24px;border-bottom:1px solid var(--line)}
+    .eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+    .badge{display:inline-block;padding:3px 10px;margin-left:8px;border-radius:20px;background:var(--purple);color:#584174;letter-spacing:0}
+    h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.2}h1{font-size:clamp(2.5rem,7vw,4.3rem);margin:12px 0 4px;letter-spacing:-.04em}
+    h2{font-size:1.9rem;margin:8px 0 18px}h3{font-size:1.3rem;margin:0 0 12px}p{margin:0 0 14px}.intro{max-width:740px;margin-top:16px}.note{font-size:.875rem;color:var(--muted)}
+    nav{display:flex;flex-wrap:wrap;gap:9px 22px;padding-top:18px;font-size:.9rem}section{margin:36px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{padding:23px;border:1px solid var(--line);border-radius:16px;background:#fffdf8}.green{background:var(--green)}.purple{background:var(--purple)}
+    .callout{padding:18px 22px;border-left:4px solid var(--accent);background:var(--purple);border-radius:0 12px 12px 0}
+    .diagram{overflow-x:auto;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fffdf8}.diagram svg{display:block;width:100%;min-width:760px;height:auto}.diagram text{font-family:system-ui,sans-serif;fill:var(--ink)}
+    details{border:1px solid var(--line);background:#fffdf8;border-radius:14px;margin:12px 0}summary{cursor:pointer;padding:18px 22px;font-weight:650}summary span{font-weight:400;color:var(--muted)}details>div{padding:0 22px 14px}
+    ul,ol{padding-left:22px;margin:12px 0}li{padding-left:3px;margin-bottom:8px}.checks{list-style:none;padding:0}.checks li{padding-left:24px;position:relative}.checks li::before{content:'✓';position:absolute;left:0;color:#527043;font-weight:700}
+    .table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:.95rem}caption{text-align:left;padding-bottom:12px;color:var(--muted)}th,td{padding:10px 12px;border-bottom:1px solid var(--line)}th{background:var(--green)}
+    blockquote{margin:16px 0;padding:15px 20px;border-left:3px solid #baa7cf;background:var(--purple);border-radius:0 10px 10px 0}blockquote p:last-child{margin-bottom:0}
+    footer{padding-top:20px;padding-bottom:30px;border-top:1px solid var(--line);font-size:.875rem;color:var(--muted)}
+    @media(max-width:700px){main,footer{padding-left:20px;padding-right:20px}header{padding-top:28px}.grid{grid-template-columns:1fr}.panel{padding:19px}summary span{display:block;margin-top:3px}th,td{padding:8px}}
+    @media print{body{background:white;font-size:11pt}nav,.skip{display:none}.diagram svg{min-width:0}.diagram{overflow:visible}.panel{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#journey">Skip to the journey</a>
+  <main>
+    <header>
+      <div class="eyebrow">Product requirements <span class="badge">Approved · ready for technical planning</span></div>
+      <h1>A story. A flower. Your garden.</h1>
+      <p class="intro">MemoryGarden turns meaningful moments into flowers in a personal, illustrated world. This review defines what people see, do, and get back—from a protected first draft to a memory they can revisit.</p>
+      <p class="note"><a href="prd.md">Canonical PRD: prd.md</a> · <a href="scope.md">Approved scope</a>. This lightweight companion is a planning aid, not an approved application mockup. No application code or technical stack has been chosen.</p>
+      <nav aria-label="Product review sections"><a href="#journey">Journey</a><a href="#world">World &amp; flowers</a><a href="#surfaces">Surfaces &amp; states</a><a href="#protection">Draft protection</a><a href="#criteria">Acceptance criteria</a><a href="#boundary">Boundaries</a><a href="#questions">Final decisions</a></nav>
+    </header>
+
+    <section id="journey" aria-labelledby="journey-title">
+      <div class="eyebrow">The complete experience</div><h2 id="journey-title">Save first. Then let it bloom.</h2>
+      <p>The scope said a memory becomes a flower. We now know the choices before planting, the save that protects it, the bloom that celebrates it, and the reading experience that brings it back.</p>
+      <p class="note" id="diagram-help">The alternate manual route sends no story for AI processing. On narrow screens, scroll the diagram horizontally; its sequence is also written below.</p>
+      <div class="diagram" role="region" aria-label="Memory journey diagram" aria-describedby="diagram-help" tabindex="0">
+        <svg viewBox="0 0 1060 355" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flow-title flow-desc">
+          <title id="flow-title">A protected draft becomes a lasting memory flower.</title>
+          <desc id="flow-desc">Enter the garden and write with local draft autosave. Choose AI suggestions with consent and an explicit request, or choose details manually. Review, select a spot, then save. A failed save returns to the intact draft and shows retry; only a successful save clears the draft and starts the bloom. Revisit the saved story without AI. Confirmed deletion frees the spot.</desc>
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#7c8b71"/></marker></defs>
+          <g fill="none" stroke="#7c8b71" stroke-width="2" marker-end="url(#arrow)">
+            <path d="M150 60H180"/><path d="M330 60H360"/><path d="M510 60H540"/><path d="M690 60H720"/><path d="M870 60H900"/>
+            <path d="M255 100V127H183V153"/><path d="M255 127H380V153"/>
+            <path d="M183 217V246H435V102"/><path d="M380 217V246"/>
+            <path d="M615 100V154"/><path d="M540 187H500V292H255V102"/>
+          </g>
+          <g stroke="#d5ddcc" stroke-width="1.5">
+            <rect x="0" y="20" width="150" height="80" rx="13" fill="#e9efdf"/><rect x="180" y="20" width="150" height="80" rx="13" fill="#fff8e7"/>
+            <rect x="360" y="20" width="150" height="80" rx="13" fill="#fff8e7"/><rect x="540" y="20" width="150" height="80" rx="13" fill="#e9efdf"/>
+            <rect x="720" y="20" width="150" height="80" rx="13" fill="#eee9f5"/><rect x="900" y="20" width="150" height="80" rx="13" fill="#e9efdf"/>
+            <rect x="85" y="153" width="196" height="64" rx="12" fill="#eee9f5"/><rect x="298" y="153" width="164" height="64" rx="12" fill="#e9efdf"/>
+            <rect x="540" y="154" width="150" height="64" rx="12" fill="#fff0e4"/>
+          </g>
+          <g text-anchor="middle" font-size="17">
+            <text x="75" y="53" font-weight="650">Enter garden</text><text x="75" y="79" font-size="14">A living storybook</text>
+            <text x="255" y="53" font-weight="650">Write</text><text x="255" y="79" font-size="14">Draft autosaves</text>
+            <text x="435" y="53" font-weight="650">Review &amp; place</text><text x="435" y="79" font-size="14">Editable choices</text>
+            <text x="615" y="53" font-weight="650">Save memory</text><text x="615" y="79" font-size="14">Success required</text>
+            <text x="795" y="53" font-weight="650">Bloom</text><text x="795" y="79" font-size="14">Clear associated draft</text>
+            <text x="975" y="53" font-weight="650">Revisit</text><text x="975" y="79" font-size="14">No AI needed</text>
+            <text x="183" y="180" font-size="15">Request AI suggestions</text><text x="183" y="201" font-size="13">Consent before first analysis</text>
+            <text x="380" y="180" font-size="15">Choose manually</text><text x="380" y="201" font-size="13">Any available flower</text>
+            <text x="615" y="180" font-size="15">Saving failed?</text><text x="615" y="201" font-size="13">Keep draft · offer retry</text>
+            <text x="350" y="316" font-size="14">No lost draft. No completed bloom. No duplicate planting.</text>
+            <text x="820" y="256" font-size="14">Read → return to the same page and spot</text>
+            <text x="820" y="281" font-size="14">Confirm deletion → peaceful fade → free spot</text>
+            <text x="820" y="321" font-size="14">Full page → another copy of the same scene</text>
+          </g>
+        </svg>
+      </div>
+      <ol>
+        <li><strong>Enter:</strong> a living clearing welcomes the first memory; an existing draft offers resume or defer.</li>
+        <li><strong>Write:</strong> story, optional photo, and adjustable date in a spacious journal; one draft autosaves locally.</li>
+        <li><strong>Discover:</strong> explicitly request AI suggestions after consent, or choose details manually.</li>
+        <li><strong>Review:</strong> edit title, emotional theme, and flower; accept the automatic spot or select another available spot.</li>
+        <li><strong>Save and plant:</strong> save successfully, clear the associated draft, close the journal, then show seed → sprout → stem → chosen bloom and a subtle glow.</li>
+        <li><strong>Return:</strong> select a flower to read its original story; close to the same garden page and position, or explicitly confirm deletion.</li>
+      </ol>
+    </section>
+
+    <section id="world" aria-labelledby="world-title">
+      <div class="eyebrow">One cohesive illustrated world</div><h2 id="world-title">Soft, personal, and quietly alive.</h2>
+      <div class="grid">
+        <article class="panel green"><h3>The garden</h3><p>A slightly elevated three-quarter 2D clearing with soft grass, edge wildflowers, a winding stone path, a wooden fence, decorative plants, golden light, and subtle shadows.</p><p>Approximately 8–12 natural planting spots per page. Gentle swaying, occasional butterflies, and floating sunlight particles make even the empty garden inviting.</p><p>Desktop shows a wider scene. Mobile recomposes the view around an accessible planting area.</p></article>
+        <article class="panel"><h3>The shared art direction</h3><p>Hand-painted storybook warmth, natural greens, warm pastels, delicate flowers, and mature whimsy. Garden, controls, journal, typography, illustrations, and motion must feel like parts of the same world.</p><p>Cream paper, soft shadows, delicate botanical decorations, and elegant lettering carry that identity into the journal.</p><p>No pixel art, realistic 3D, corporate panels, SaaS sidebars, or analytics cards. Exact artwork and fonts are still to be refined.</p></article>
+      </div>
+      <div class="panel table-wrap" style="margin-top:16px">
+        <h3>The six-flower collection</h3>
+        <table><caption>Symbolic associations guide suggestions; they never restrict a user's choice.</caption><thead><tr><th scope="col">Flower</th><th scope="col">Associations</th></tr></thead><tbody>
+          <tr><th scope="row">Sunflower</th><td>Joy, achievement, celebration</td></tr><tr><th scope="row">Lavender</th><td>Peace, comfort, friendship</td></tr><tr><th scope="row">Rose</th><td>Love, affection, meaningful relationships</td></tr><tr><th scope="row">Daisy</th><td>Simple happiness, everyday moments</td></tr><tr><th scope="row">Forget-me-not</th><td>Nostalgia, remembrance, bittersweet memories</td></tr><tr><th scope="row">Iris</th><td>Hope, resilience, personal growth</td></tr>
+        </tbody></table>
+        <p style="margin-top:14px">Each type needs a recognizable silhouette and palette in the same illustrated style. Slight size variation and gentle swaying feel organic; every memory remains individually selectable even when flower types repeat.</p>
+        <p class="note">Six is the target. Four is an allowed fallback if necessary to preserve asset quality; agree the subset with the learner if that becomes necessary. No per-memory image generation.</p>
+      </div>
+      <p class="callout" style="margin-top:16px">Happy, difficult, and bittersweet memories all belong. Do not label emotions good or bad, force positivity, or assume a story has only one emotion. Any flower can represent any memory.</p>
+    </section>
+
+    <section id="surfaces" aria-labelledby="surfaces-title">
+      <div class="eyebrow">Explore the product definition</div><h2 id="surfaces-title">Each surface, its states, its proof.</h2>
+      <p>Expand a surface to read its behavior, important empty/error states, and observable checks.</p>
+      <details open><summary>Garden <span>Arrival, placement, and repeated pages</span></summary><div>
+        <p><strong>Behavior:</strong> garden-first layout, small upper-left logo, discoverable “Plant a Memory,” minimal integrated controls. A welcoming sign invites the first memory. Automatically choose an available spot after review; let the user optionally select another highlighted empty spot.</p>
+        <p><strong>Empty / full states:</strong> empty soil patches remain natural and inviting. Occupied spots cannot be overwritten. A full page automatically makes another copy of the same scene available; lightweight controls navigate pages. Deletion frees a spot.</p>
+        <p><strong>Check:</strong> each memory stays associated with its own flower, page, and spot after refresh; repeated flower types remain individually selectable without overcrowding. Deletion frees its original spot without moving other flowers. Remove only completely empty trailing pages; preserve populated pages and stable positions. Navigation stays minimal: logo, planting action, and simple page/saved-memory access.</p>
+      </div></details>
+      <details><summary>Writing and review journal <span>A personal book, with an optional AI route</span></summary><div>
+        <p><strong>Behavior:</strong> garden dims or softens while the book opens. Use two pages on desktop and one comfortable page on mobile. Prompt: “What moment would you like to remember?” Include original story, optional photo, and adjustable date. Review shows editable title, emotional theme, and flower illustration.</p>
+        <p><strong>AI:</strong> “Find My Flower” requires an explicit request and an understandable consent explanation before the first analysis. The manual path sends no story for suggestions. Never send text while typing or rewrite the story.</p>
+        <p><strong>Error / interruption:</strong> autosave one draft. AI failure retains everything and offers “Try Again” and “Choose My Own Flower.” Closing unfinished writing offers save, keep writing, or explicitly confirmed discard. Require 10–2,000 characters of memory text. Accept one optional JPEG, PNG, or WebP photo of at most 5 MB original size; optimize it before local saving. Friendly validation errors preserve the draft.</p>
+        <p><strong>Check:</strong> suggestion fields remain editable, every flower stays available regardless of emotion, and manual planting works without AI. Refresh restores a successfully saved draft.</p>
+      </div></details>
+      <details><summary>Planting transition <span>The signature moment follows a successful save</span></summary><div>
+        <p><strong>Behavior:</strong> save first; only on success clear the associated draft and close the journal. Focus attention on the selected spot, then seed drops → small sprout → growing stem → selected flower blossoms → subtle sparkle or glow.</p>
+        <p><strong>Error state:</strong> if saving fails, keep the journal open and draft intact, show retry, and do not show a completed bloom. Repeated clicks must not create duplicates.</p>
+        <p><strong>Check:</strong> the final flower matches the reviewed choice. Refresh after a successful save preserves the memory even if the animation was interrupted. With system reduced motion enabled, use immediate or minimal transitions instead of the growth sequence, journal-opening motion, parallax if present, and decorative animation. The garden remains beautiful and fully functional without animation.</p>
+      </div></details>
+      <details><summary>Reading journal <span>Intimate, nostalgic, and independent of AI</span></summary><div>
+        <p><strong>Behavior:</strong> the selected flower gently glows or sways; the garden dims and the same illustrated book opens. Desktop left page: title, original memory date, full original story. Right page: flower illustration, optional framed photo, subtle emotional theme, and botanical details. Mobile uses one vertically scrollable page.</p>
+        <p><strong>Return:</strong> obvious “Back to Garden” and Escape close the journal to the same garden page and flower position. Provide keyboard navigation, accessible labels, focus management, comfortable reading, and reduced-motion support.</p>
+        <p><strong>Check:</strong> reopening needs no AI, the story remains exactly as written, and closing changes no memories. Existing memories are viewable and deletable; editing is deferred.</p>
+      </div></details>
+      <details><summary>Deletion confirmation <span>Safe primary choice, peaceful removal</span></summary><div>
+        <p><strong>Behavior:</strong> deletion stays visually secondary. Selecting it opens a custom confirmation dialog:</p>
+        <blockquote><p><strong>Let this memory go?</strong></p><p>This will remove the memory and its flower from your garden. This action cannot be undone.</p></blockquote>
+        <p><strong>Keep My Memory</strong> is the primary, safe option. <strong>Delete Forever</strong> is clearly destructive; only its explicit confirmation authorizes removal.</p>
+        <p><strong>Success:</strong> close the journal, peacefully fade the flower, and free the spot. Other flowers remain unchanged. Never depict withering or death.</p>
+        <p><strong>Check:</strong> canceling preserves the memory; confirmed successful deletion remains effective after refresh. Do not display a failed deletion as successful removal. Preserve remaining flowers' positions and remove only completely empty trailing pages. Use immediate/minimal removal under reduced motion.</p>
+      </div></details>
+    </section>
+
+    <section id="protection" aria-labelledby="protection-title">
+      <div class="eyebrow">Writing should feel safe and forgiving</div><h2 id="protection-title">One protected draft, without a complex system.</h2>
+      <div class="grid">
+        <article class="panel green"><h3>While writing</h3><p>Autosave locally with a short debounce: text, selected date, title, flower, emotional theme, and attached photo where supported. Use suitable storage for photos. Quietly show “Draft saved” after a successful save.</p><p>Preserve the draft across refresh/reopen while browser storage remains available. One active draft per browser; no history or cloud synchronization.</p></article>
+        <article class="panel"><h3>When closing</h3><ul><li><strong>Save for Later:</strong> preserve the draft and close.</li><li><strong>Keep Writing:</strong> return to the journal.</li><li><strong>Discard Draft:</strong> explicitly confirm before permanently removing it.</li></ul><p>Do not silently overwrite an unfinished story with a new one.</p></article>
+        <article class="panel purple"><h3>When returning</h3><blockquote><p>Your story is still waiting to bloom 🌱</p></blockquote><p>Offer <strong>Continue Writing</strong> and <strong>Not Now</strong>. Deferring leaves the draft intact until successfully planted or deliberately discarded.</p></article>
+        <article class="panel"><h3>When something fails</h3><p><strong>AI:</strong> retain all entered content, show a friendly message, and offer “Try Again” or “Choose My Own Flower.” No automatic resend.</p><p><strong>Final save:</strong> keep journal and draft, offer retry, prevent duplicates, and withhold the completed bloom until the memory is saved.</p></article>
+      </div>
+      <p class="note" style="margin-top:16px">Local persistence depends on storage being available and site data remaining intact. It is not cloud backup. Never claim “saved” when saving failed. Friendly photo-validation or storage-failure feedback must preserve current writing and valid selections; exact handling belongs to technical planning.</p>
+    </section>
+
+    <section id="criteria" aria-labelledby="criteria-title">
+      <div class="eyebrow">Observable acceptance criteria</div><h2 id="criteria-title">What we should be able to demonstrate.</h2>
+      <div class="grid">
+        <article class="panel"><h3>Experience and interaction</h3><ul class="checks">
+          <li>An inviting garden exists before the first memory, with accessible controls on desktop and mobile.</li>
+          <li>Any available flower can represent any memory; repeated types retain independent targets.</li>
+          <li>Automatic placement works, optional empty-spot choice works, and occupied spots cannot be overwritten.</li>
+          <li>A successful save leads to the correct seed-to-flower sequence and a revisitable flower.</li>
+          <li>Reading preserves the original text, needs no AI, and returns to the same page and position.</li>
+          <li>Keyboard access and focus management work. System reduced motion replaces growth, journal-opening, parallax if present, and decoration with immediate/minimal transitions; all functionality remains available.</li>
+        </ul></article>
+        <article class="panel"><h3>Reliability and user control</h3><ul class="checks">
+          <li>AI requires consent and explicit action; manual planting remains available.</li>
+          <li>Successfully autosaved draft fields survive refresh and resume; discard requires confirmation.</li>
+          <li>AI failure keeps everything; retry is explicit and manual selection remains available.</li>
+          <li>Failed final saving keeps the journal and draft, offers retry, and creates no duplicates or completed bloom.</li>
+          <li>Saved memories and their page/spot associations persist; full pages allow continued planting.</li>
+          <li>Confirmed deletion persists and frees its spot; canceled deletion changes nothing.</li>
+          <li>Text stays within 10–2,000 characters. One optional JPEG/PNG/WebP photo of up to 5 MB original size is validated and optimized before storage without losing the draft on errors.</li>
+          <li>Only completely empty trailing pages are removed; deletion never moves other flowers.</li>
+        </ul></article>
+      </div>
+      <p class="note" style="margin-top:16px">These are requirements for future verification, not claims that the application has been built or tested. The canonical PRD contains the full criteria.</p>
+    </section>
+
+    <section id="boundary" aria-labelledby="boundary-title">
+      <div class="eyebrow">Protect the proof of concept</div><h2 id="boundary-title">Now, deferred, and excluded.</h2>
+      <details open><summary>Now <span>The complete, protected memory-to-flower journey</span></summary><div><p>Create → manual or AI-assisted choices → review → save → plant and bloom → revisit → local persistence → confirmed deletion. Include one active draft, responsive illustrated surfaces, accessible interactions, and reduced-motion support. Establish one polished scene first, then reuse it for lightweight garden pages.</p></div></details>
+      <details><summary>Deferred <span>Useful later, outside this version</span></summary><div><p>Surprise rediscovery, editing planted memories, exporting, and advanced organization. Revisit flowers directly in this version.</p></div></details>
+      <details><summary>Excluded <span>No platform or gardening-system expansion</span></summary><div><p>No accounts, authentication, cloud memory database, cross-device sync, public profiles, sharing, followers, community, analytics, unnecessary collection, realistic 3D, or per-memory image generation. No complex encryption or infrastructure beyond secure AI access.</p><p>No drag-and-drop, watering, flower death, daily maintenance, additional environments, infinitely expanding world, draft history, multiple simultaneous drafts, or complex recovery.</p></div></details>
+      <p class="callout" style="margin-top:16px"><strong>Feasibility:</strong> visual polish, draft protection, and pagination create real schedule pressure against the curriculum's 2–4-hour target. Technical planning must assess the smallest feasible implementation and surface tradeoffs before building. A short demo video and public GitHub repository remain required; deployment is optional. Public samples are fictional and configuration must be secret-free.</p>
+    </section>
+
+    <section id="questions" aria-labelledby="questions-title">
+      <div class="eyebrow">Feature scope finalized</div><h2 id="questions-title">Final decisions, carried into the blueprint.</h2>
+      <p>The learner approved the PRD and requested technical planning. The visual experience is a first-class requirement for architecture and early build work, alongside reliable storage and draft protection.</p>
+      <details open><summary>Minimal navigation <span>Integrated into the storybook garden</span></summary><div><p>Logo, primary “Plant a Memory,” and simple garden-page navigation or saved-memory access. Selecting flowers opens their journals. No separate saved-memory library is required; avoid sidebars, complicated menus, analytics, and unnecessary controls. Optional spot-selection layout is a technical-planning detail.</p></div></details>
+      <details><summary>Memory and photo limits <span>Friendly validation, protected writing</span></summary><div><p>Memory text: 10–2,000 characters. One optional JPEG, PNG, or WebP photo per memory, maximum original upload size 5 MB. Optimize accepted photos before local storage. Validation errors are friendly and preserve the draft. Technical planning specifies precise counting, image optimization, date defaults, and storage-failure handling.</p></div></details>
+      <details><summary>Stable garden pages <span>No unexpected rearrangement</span></summary><div><p>Deletion frees original planting spots without moving other flowers. Remove trailing pages only when completely empty. Never remove pages containing memories. Reuse the same scene and fixed layout; choose routine page controls and empty-spot selection order during technical planning.</p></div></details>
+      <details><summary>Reduced motion <span>The complete experience without animation</span></summary><div><p>Honor the system reduced-motion preference. Replace seed-growing, journal-opening, parallax if present, and decorative animation with immediate or minimal transitions. Keep the garden beautiful, accessible, and fully functional; a successful save still shows the final chosen flower. Parallax is not an added requirement.</p></div></details>
+      <p class="note">Exact fonts, final artwork, coordinates, debounce intervals, animation timings, technical tools, storage design, and secure AI integration belong to technical planning and visual refinement. Six flowers remain the target; a four-flower fallback requires agreement on the subset if needed.</p>
+    </section>
+  </main>
+  <footer><p><strong>Review state: approved.</strong> Read <a href="prd.md">prd.md</a> for the primary product definition. Next: <strong>4-spec</strong>, the technical blueprint. Product scope is finalized; important technical choices remain learner-owned.</p><p>Self-contained and available offline. No remote fonts, scripts, images, or libraries. This page does not process or store memories.</p></footer>
+</body>
+</html>

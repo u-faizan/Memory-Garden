@@ -1,0 +1,142 @@
+{
+  "browser": "155.0.8059.82",
+  "baseURL": "http://127.0.0.1:4173",
+  "checks": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "normalGrowth": "passed",
+      "keyboardAndNote": "passed",
+      "stableAnchors": [
+        {
+          "stage": "Seed",
+          "x": 525.59375,
+          "y": 675.59375
+        },
+        {
+          "stage": "Sprout",
+          "x": 525.59375,
+          "y": 675.59375
+        },
+        {
+          "stage": "Young plant",
+          "x": 525.59375,
+          "y": 675.59375
+        },
+        {
+          "stage": "Bloom",
+          "x": 525.59375,
+          "y": 675.59375
+        }
+      ],
+      "consoleErrors": [],
+      "localHeadlessFramePacing": {
+        "frames": 154,
+        "medianMs": 16.7,
+        "p95Ms": 33.3,
+        "maxMs": 149.8
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "normalGrowth": "passed",
+      "keyboardAndNote": "passed",
+      "stableAnchors": [
+        {
+          "stage": "Seed",
+          "x": 125.359375,
+          "y": 590.796875
+        },
+        {
+          "stage": "Sprout",
+          "x": 125.359375,
+          "y": 590.796875
+        },
+        {
+          "stage": "Young plant",
+          "x": 125.359375,
+          "y": 590.796875
+        },
+        {
+          "stage": "Bloom",
+          "x": 125.359375,
+          "y": 590.796875
+        }
+      ],
+      "consoleErrors": [],
+      "localHeadlessFramePacing": {
+        "frames": 186,
+        "medianMs": 16.7,
+        "p95Ms": 17.1,
+        "maxMs": 33.7
+      }
+    },
+    {
+      "reducedMotion": "passed",
+      "livePreferenceChange": "passed"
+    }
+  ],
+  "requests": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "resources": [
+        {
+          "path": "/assets/index-5kTBVTLF.js",
+          "transferSize": 71299,
+          "durationMs": 40
+        },
+        {
+          "path": "/assets/index-ZH0Ojjci.css",
+          "transferSize": 4101,
+          "durationMs": 22
+        },
+        {
+          "path": "/assets/garden/base.webp",
+          "transferSize": 500376,
+          "durationMs": 16
+        },
+        {
+          "path": "/assets/flowers/sunflower/bloom.webp",
+          "transferSize": 177292,
+          "durationMs": 15
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "resources": [
+        {
+          "path": "/assets/index-5kTBVTLF.js",
+          "transferSize": 71299,
+          "durationMs": 53
+        },
+        {
+          "path": "/assets/index-ZH0Ojjci.css",
+          "transferSize": 4101,
+          "durationMs": 33
+        },
+        {
+          "path": "/assets/garden/base.webp",
+          "transferSize": 500376,
+          "durationMs": 28
+        },
+        {
+          "path": "/assets/flowers/sunflower/bloom.webp",
+          "transferSize": 177292,
+          "durationMs": 24
+        }
+      ]
+    }
+  ]
+}
