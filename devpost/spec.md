@@ -7,6 +7,8 @@ status: approved
 
 **Approved technical specification.** The learner approved this blueprint and authorized entry into `5-build`, preserving its build-order review, verification, commits, learner checkpoints, and learning activities. Scope and PRD remain approved and unchanged. This is a plan, not evidence of an installed, built, generated, or deployed application. Markdown is canonical; `spec.html` is the offline visual companion.
 
+**Storybook revision, 2026-10-21 (learner-authorized):** a storybook opening/closing, a stylized code-native layered art pipeline, five-stage growth, three journal layouts and opt-in audio are added. The stack, privacy model, IndexedDB design, AI contract and deployment plan are unchanged. Revised build order: `checklist.md`.
+
 ## How This Works, In Plain Language
 
 React displays the illustrated garden and a real HTML botanical journal. Flowers are separate interactive elements placed over the scenery. Code controls planting spots, growth stages, journal transitions, and accessible interaction. Vite builds static files; Cloudflare Pages serves them.
@@ -27,6 +29,11 @@ Implements `prd.md > The Core Journey`; detailed PRD mappings appear under Compo
 | Flower layers were provisional | Pilot one scene and sunflower before selecting the final asset pipeline or generating the other five. |
 | Optional welcome/display name | Not an added required screen or auth system. Start directly in the inviting garden; omit the name for simplicity. |
 | Draft message includes a small wording variation | Retain PRD wording “Your story is still waiting to bloom 🌱” with Continue Writing / Not Now. |
+| Painted raster garden + transparent painted flowers (image generation) | Storybook revision: code-native layered SVG/CSS art. Two painted pilots were rejected and no image-generation tool is available here. Learner-supplied painted layers may replace SVG layers later at the same coordinates. |
+| Four-stage growth, Georgia/system fonts | Five stages (bud added). Self-hosted OFL fonts (no external requests) give the storybook typography a concrete visual benefit. |
+| Garden opens directly | Storybook cover with a short, skippable, remembered opening; Close My Garden reverses it. |
+| Single journal layout | Three predefined layouts (Classic, Photo Story, Scrapbook) stored per memory. No page editor. |
+| No audio | Opt-in music/effects, original or verified-licence audio only. Video attachments deferred. |
 | Curriculum targets 2–4 active hours | A target, not a delivery promise. Custom artwork, draft protection, pages, safeguards, testing, and deployment add real work. Surface tradeoffs instead of silently cutting requirements. |
 
 No product conflict requires discarding approved behavior. Preserve original stories, emotional nuance, the desktop/mobile journal, consent/manual choice, deletion confirmation, local recovery, and reduced motion. Future seasons, environments, import/export, and cloud features remain deferred. The new hosting/stack decisions are explicit supersessions, not changes hidden in the approved documents.
@@ -38,6 +45,9 @@ No product conflict requires discarding approved behavior. Preserve original sto
 | UI | React + React DOM, TypeScript; one screen with dialog modes, no router or global state library | [React versions](https://react.dev/versions), [TypeScript](https://www.typescriptlang.org/docs/) |
 | Build | Vite React/TypeScript template with official React plugin, static `dist` output | [Vite guide](https://vite.dev/guide/), [React on Pages](https://developers.cloudflare.com/pages/framework-guides/deploy-a-react-site/) |
 | Styling | Custom CSS, transforms/keyframes, simple SVG motifs; Motion only for a demonstrated interaction that benefits | [Motion React](https://motion.dev/docs/react) |
+| Art | Code-native layered SVG (seeded shapes) + CSS motion; no game engine, canvas renderer or animation runtime | [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) |
+| Fonts | `@fontsource/cormorant-garamond`, `@fontsource/lora`, `@fontsource/caveat` 5.3.0 (OFL 1.1), latin subsets bundled by Vite | [Fontsource](https://fontsource.org/docs/getting-started/introduction) |
+| Audio | Web Audio API (procedural ambience) or a licensed file in `public/audio/`; decided in Slice 6 | [Web Audio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) |
 | Persistence | `idb` promise wrapper, owned by a small local repository module; no database server | [idb upstream](https://github.com/jakearchibald/idb), [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) |
 | Backend | One typed Pages Function using native Request/Response, fetch and Web Crypto; no OpenAI SDK required | [Pages TypeScript](https://developers.cloudflare.com/pages/functions/typescript/), [bindings/secrets](https://developers.cloudflare.com/pages/functions/bindings/) |
 | Runtime tooling | Wrangler and Cloudflare Function types; compatibility date `2026-10-19` | [Local development](https://developers.cloudflare.com/pages/functions/local-development/), [Wrangler Pages](https://developers.cloudflare.com/workers/wrangler/commands/pages/) |
@@ -95,63 +105,59 @@ Name availability, account setup, actual hostname controls, and live model acces
 
 Implements `prd.md > Look and Feel`, `Screens and Layout`, and `scope.md > Inspiration & Identity`.
 
-Carry one master art direction through the scene, flowers, journal, controls, typography, and motion: soft hand-painted edges, three-quarter perspective, upper-left light, natural greens, warm pastels, cream paper, mature whimsy. Proposed pilot tokens: parchment `#faf2de`, ink `#293d34`, moss `#62765a`, lavender `#9b86b5`, muted gold `#d9b56c`. Test text/control contrast; pastel styling does not justify unreadable content. Begin with Georgia/serif display text and a readable system body stack; optional locally hosted licensed fonts need a concrete visual benefit, not external font requests.
+Carry one master art direction (the *style bible*) through the book, scene, flowers, journal, controls, typography and motion. *Storybook revision:* stylized animated 2D storybook, soft expressive shapes, three-quarter elevated view, upper-left light, cooler sage/moss greens, selective warm gold, cream paper, mature whimsy, butterfly motif.
+
+| Token | Value | Use |
+| --- | --- | --- |
+| Sky | `#9fcbe7` → `#edf2e6` | Soft sky wash; clouds `#fdf9f0` with `#e8dbc6` shade |
+| Hills | `#b2bfd8`, `#8fa2c3` | Cool distant ranges with haze |
+| Greens | grass `#bdd090` → `#8faa66`; trees `#5f8a4b`/`#86ad62`; cypress `#41694a`; foreground `#3c6646`–`#5f8a54` | Calm planting ground, darker framing edges |
+| Wood / stone / soil | fence `#d4b68f`/`#b4895f`; path `#f0e5d1` on `#d6c4a3`; soil `#8a5b40`/`#a2715a` | Ground details |
+| Book | cloth `#2f4a3d`; gilt `#d6b56a`/`#ead08e`; paper `#f7efdc`; ink `#2b3a35` | Cover, endpaper, journal, controls |
+| Flowers | Each type owns its saturated hues (sunflower `#f4bf3e`/`#e39a26`); scenery never uses them | Memory flowers read first |
+| Type | Cormorant Garamond (titles/cover), Lora (journal writing/UI), Caveat (sparing handwritten notes) | Storybook typography |
+| Motion | Opening ~5 s; closing ~3.6 s; growth ~4.6 s; hover 200 ms; ambient loops 5–70 s, offset | Calm, never synchronized |
+
+Test text/control contrast; pastel styling does not justify unreadable content. Layer order back to front: sky, hills, trees/fence/gate, ground (+ interactive spots and flowers), front foliage, air.
 
 The garden fills most of the screen; logo, planting, and page controls stay minimal. Desktop book uses two pages; mobile uses one comfortable scrollable page. Text/inputs/buttons are HTML; paper and botanical accents are decoration. No image-flattened form, generic dashboard, mismatched art pack, or art postponed to a final decoration pass.
 
-Prioritize bloom, book opening/closing, flower feedback, and journal-to-garden transition; ambient sway/particles/butterflies follow. Nest placement/growth/sway transforms separately. Use CSS first; add Motion only when it clearly simplifies a specific behavior. System reduced motion disables growth movement, book transforms, parallax if any, and decorative motion while retaining the final states and every action. Nothing depends solely on hover.
+Opening and closing use one transformed stage: the live garden is rendered once at viewport size and scaled into the open book, so the zoom ends on exactly the interactive scene (no swapped video frame). Prioritize bloom, book opening/closing, flower feedback, and journal-to-garden transition; ambient sway/particles/butterflies follow. Nest placement/growth/sway transforms separately. Use CSS first; add Motion only when it clearly simplifies a specific behavior. System reduced motion disables growth movement, book transforms, parallax if any, and decorative motion while retaining the final states and every action. Nothing depends solely on hover.
 
 ## Visual Asset Inventory and Pilot
 
+**Storybook revision (2026-10-21):** the painted-raster pipeline (generated garden plate + transparent painted flowers) is retired. Two painted pilots were rejected because the scenery competed with the flowers. This environment has no image- or video-generation tool, and the new direction is a stylized, layered 2D storybook world, so the art is now **code-native**: seeded SVG layers and CSS motion, designed from the learner's concept storyboards. This also makes genuine growth (drawn stems, unfolding leaves, opening petals), parallax depth and a seamless book-to-garden transition practical. If the learner later supplies painted layers generated elsewhere, they can replace individual SVG layers at the same coordinates; prompts and export requirements will be provided on request. Earlier painted sources remain recoverable from Git history (`24cf09f`).
+
 ### Asset Inventory
 
-These are production targets; the garden and sunflower now have pilot exports, while the remaining collection/journal art is not generated. Keep common canvases and soil anchors when optimizing. Only learner-approved artwork proceeds beyond the pilot.
-
-| File(s) under `public/assets/` | Format / approximate source dimensions | Intended use / production |
+| Asset | Format | Use |
 | --- | --- | --- |
-| `garden/base.webp` | Opaque WebP; pilot native output 1536×1024, versus proposed 2400×1600 target | One custom clearing/path/fence/edge-plant/light painting. Pilot uses the native resolution without upscaling; large-screen sharpness remains part of visual review. No UI text, memory flowers, or baked planting indicators. |
-| `garden/foreground.webp` | Optional transparent WebP, aligned 2400×1600 | Matching sparse foliage depth only if helpful; cannot obscure flower targets. |
-| `flowers/<type>/bloom.webp` | Transparent WebP, normalized 768×1024 source canvas | All six types, bottom-center soil anchor, distinct silhouettes, common light/detail/scale. Only sunflower during pilot. |
-| `flowers/<type>/{stem,head}.webp` | Optional aligned transparent 768×1024 layers | Use if pilot proves reliable matching preparation; do not independently generate and assume registration. |
-| `growth/{seed,sprout,young-plant}.svg` | Code-authored SVG, e.g. 256×256 viewBox | Shared early stages matching the painted palette; adapt stem/leaf character when needed for a type. |
-| `journal/paper.webp` | Light seamless 512×512 texture | One subtle cream texture beneath real HTML content. |
-| `journal/botanical-corner.webp` | Up to two transparent 512×512 accents | Reuse accepted botanical art or generate with its reference; not unrelated stock. |
-| Controls, spot rings, sign text, glows, particles | HTML/CSS/simple SVG | Accessible real interactions; one small SVG butterfly if needed. No generated button text. |
+| Garden layers: sky, hills, trees/fence/gate, ground (grass, path stones, soil beds), front foliage, air (birds, butterfly, motes) | Inline SVG components, seeded deterministic shapes, one composition per layout (`wide` 1600×900, `tall` 800×1600) | Separately composited layers for depth, parallax, pop-up opening and independent ambient motion. No memory flowers or UI in scenery; decorative blossoms only on gate/edges. |
+| Six flowers × five growth stages | One SVG per type on a shared 200×400 canvas, soil anchor (100, 396) | Stem drawn with `stroke-dashoffset`, leaves unfold from their joints, bud swells, petal rings open. Same skeleton for every type; distinct heads, leaves and palettes per type. |
+| Storybook cover, endpaper, desk | HTML/CSS with inline SVG ornament | Real text over cloth texture; gilded sprigs, wreath and butterfly motif. |
+| Journal paper, botanical borders, tape, pressed flowers | CSS textures + inline SVG | Decoration around real HTML inputs and text; reused from the cover ornament set. |
+| Fonts | Self-hosted OFL via `@fontsource` (Cormorant Garamond, Lora, Caveat; latin subsets) | Bundled with the app; no external font requests. |
+| Music and effects | Original procedurally generated Web Audio ambience, or a verified CC0/licensed file if one fits better | Opt-in only; decided and verified in Slice 6. |
 
-Keep lossless source PNGs, prompts/reference IDs and export notes in `artwork/source/` and `artwork/manifest.md`, separate from runtime assets. WebP is for painted raster art; genuine SVG for vectors. The available image-generation tool produces raster output, not promised editable SVG. Request true transparent backgrounds for flowers; verify alpha rather than trusting appearance. The learner can supply art if generation fails.
+The art is original code, covered by the project's code licence once one is chosen. The concept storyboards are private reference only (`context/`, git-ignored) and are never shipped.
 
-### Concrete Pilot Proposal
-
-1. Prepare one art brief: palette, painted edges, perspective, upper-left light, mature storybook mood, and ground anchor. Generate one clean garden, inspect it, then one transparent sunflower using the accepted visual reference. Do not generate the other five yet.
-2. Normalize the sunflower canvas/anchor and make an alpha-preserving WebP export. Inspect native/display size on white, dark, and checkerboard backgrounds for opaque corners, halos, clipping, and mismatched painted shadows.
-3. Prepare shared seed/sprout/young-plant SVG stages. Test a controlled final-flower reveal first; also try clean stem/head layers if available. Do not equate stretching one flat bloom image with a satisfying growth sequence.
-4. After project foundation, build a small fictional visual pilot with one spot, one sunflower, replay and reduced-motion views. It tests art/animation feasibility, not persistence or AI. Keep its review controls out of the final public UI.
-5. Show the static scene and actual motion on desktop/mobile; record evidence and learner feedback. Agree the workflow before creating the other five flowers or detailed final composition.
-
-### Pilot Pass Criteria
-
-**Slice 1 visual decision:** the learner rejected the original pilot and a subsequent layout revision. The latter passed technical checks at 1366×768, 1680×900, 390×844 and 375×667, but still failed the intended immersive experience. Application implementation is stopped pending a composition choice; see the unapproved `devpost/design-proposal.md` / `.html`. Keep code and artwork intact for reuse. The background/flower exports remain 500,076 + 176,992 bytes; the full flower collection is not generated. This technical specification and its architecture remain approved; neither proposal nor Slice 1 is visually approved. A chosen direction must still pass an actual live pilot review before Slice 2.
+### Pilot Pass Criteria (Slice 1)
 
 | Check | Required evidence |
 | --- | --- |
-| Style | Scene and sunflower share palette, painted edge/detail, light and scale. Learner reviews them together; no silent stock substitution. |
-| Transparency | True alpha around the flower; inspect light/dark/checkerboard composites and edge halos, source versus optimized export. |
-| Alignment | Pause seed/sprout/young/bloom stages: the same soil point holds throughout with no visible jump. |
-| Growth | Distinct four-stage sequence ending in the selected sunflower, restrained unfurl/glow, assessed in replay. Proposed 2.4–3.0 s total, adjusted from feedback. |
-| Integration | Natural grounding/depth, no scenery occlusion of essential targets; separate keyboard/touch-accessible button. |
-| Responsive | Inspect at 390×844 and 1440×900; later add 320/768 widths. No planting spot can be cropped away by a blind mobile cover transform. |
-| Reduced motion | Immediate/minimal final-state change, no decorative continuous movement, complete functionality. |
-| Loading | Record actual export bytes/cold requests/frame pacing. Proposed art budgets: base ≤700 KB, bloom ≤150 KB each, foreground ≤200 KB if used, texture ≤60 KB, initial scene art roughly ≤1.5 MB. These are targets, not measured results; discuss compression/quality tradeoffs. |
-
-If registered layers fail, use shared code-driven early stages plus an art-directed reveal of each accepted final flower. If the pilot still looks poor, refine or request learner-provided/edited layers before producing the full set. Do not force poor results, fake the kernel, or silently reduce the six types. This pilot addresses the learner's actual uncertainty about coherent generated art and convincing code-driven animation.
+| Composition | Empty garden is calm and beautiful; planting areas quiet; memory flower clearly the brightest element. Desktop and portrait are deliberately composed, not cropped. |
+| Growth | Seed → sprout → young plant → bud → bloom, ~4.6 s, real stem/leaf/petal growth, fixed soil anchor across stages, gentle final sway. |
+| Opening | Cover → cover lifts → layers rise from the pages → zoom into the live garden with no visible jump; Skip from frame one; remembered; Close My Garden reverses it. |
+| Responsive | 1366×768, 1680×900, 390×844, 375×667: no page scroll, no overlapping controls, all ten spots visible and ≥44 CSS px targets. |
+| Reduced motion | Opening/closing become a short fade; growth shows the final flower immediately; continuous decoration stops. |
+| Performance | Record bundle size and frame pacing in Chromium; SVG layers stay static apart from compositor transforms. |
+| Learner acceptance | Learner tries the running app; visual acceptance is their decision, not an automated assertion. |
 
 ### Scene Mapping, Organization, and Rights
 
-`flowerCatalog.ts` maps type IDs to paths, dimensions, soil/layer anchors and display scale. `scene.ts` maps ten stable spot IDs (within approved 8–12) to normalized desktop/mobile positions and depth. Use separate non-interactive background/foreground layers. Mobile has deliberate framing and a spot map for the same logical IDs, not cropping that loses flowers. Variations are small, stable per memory, and bounded inside the spot's hit area.
+`src/garden/layouts.ts` defines both compositions and ten stable spot IDs (`glade-01`…`glade-10`), each with layout-specific coordinates and depth. The world box is cover-fitted to the viewport at the layout's exact aspect ratio, so HTML buttons positioned in percentages stay registered with the SVG soil. Layout is chosen by viewport orientation (portrait → `tall`); the same IDs map across both, so memories never move when the layout changes. One Secret Glade is repeated across garden pages. Future atmosphere variations must keep geometry and `pageId`/`spotId` placements.
 
-**Latest visual planning constraint:** one Secret Glade environment for the MVP, repeated across garden pages. The learner prefers A but has not approved its final A2 composition; current previews are at `devpost/design-proposal.html`. Any future morning/golden-hour/evening atmosphere must preserve registered scene geometry and existing `pageId`/`spotId` placements. Keep scenery/lighting separate from the fixed spot map; changing atmosphere must not move memories. This records future compatibility only—no atmosphere assets, selector, theme infrastructure or application code is implemented now.
-
-Keep a provenance manifest: provider/tool/date, prompt/reference identifiers, ownership/license evidence, and export transformations. Verify the actual generation-service/account terms and any supplied reference/art licenses before publishing. Do not promise exclusive copyright in AI output. Recommend MIT for learner-owned code if permissive reuse is desired, with third-party notices retained; artwork needs its own explicit notice and learner-approved redistribution terms. A public repository alone does not grant a chosen license. No license is applied now; unclear rights block publication, not technical planning.
+Rights: fonts are OFL 1.1 (notices retained); art and audio are original unless a licence is recorded here. No reference image is redistributed.
 
 ## Components
 
@@ -159,13 +165,21 @@ Keep a provenance manifest: provider/tool/date, prompt/reference identifiers, ow
 
 `src/app/App.tsx` and `useGardenController.ts`: modes garden, write, review, choose-spot, read, confirmation; current page, selection, save/AI status. Use accessible dialog semantics, focus trapping/return, visible controls, and appropriate Escape behavior. Escape in writing follows safe draft-close rules; Escape in reading returns to the garden. No router needed. Implements `prd.md > Screens and Layout`, `The Core Journey`.
 
+### Storybook Opening and Closing
+
+`App.tsx` phase state (`cover` → `opening` → `garden` → `closing` → `cover`) plus `components/book/` (cover, endpaper, desk). CSS keyframes drive the cover rotation, layer pop-up and zoom; a timer commits the phase. Skip commits immediately. `introSeen` is remembered (local storage in Slice 1, the `preferences` store once the repository exists). The garden is `inert` outside the `garden` phase. Reduced motion uses a short fade. Implements `prd.md > Open and Close the Storybook`.
+
+### Music and Sound
+
+`audio.ts` creates audio only after a user gesture and the user's opt-in, keeps one looping source across navigation, and stores on/off (and volume if offered) in preferences. Effects are short and quiet and respect mute. Implements `prd.md > Atmosphere and Motion`.
+
 ### Garden Scene and Bloom
 
-`GardenScene.tsx`, `FlowerButton.tsx`, `Bloom.tsx`, `GardenPager.tsx`: illustrated layers, fixed positions, selectable flowers, available/occupied states, page controls, growth states. Decorations use `pointer-events:none`; flower buttons have labels, visible focus and roughly 44 CSS px targets. IDs stay stable across breakpoints; coordinates are fixed from the pilot before real content is stored. Implements `prd.md > Arrive and Explore`, `Planting Spots and Garden Pages`, `Plant and Bloom`.
+`art/GardenWorld.tsx` (layers), `art/flowers/FlowerArt.tsx` (staged flowers), `GardenScene.tsx`, `GardenPager.tsx`: illustrated layers, fixed positions, selectable flowers, available/occupied states, page controls, growth states. Decorations use `pointer-events:none`; flower buttons have labels, visible focus and roughly 44 CSS px targets. IDs stay stable across breakpoints; coordinates are fixed from the pilot before real content is stored. Implements `prd.md > Arrive and Explore`, `Planting Spots and Garden Pages`, `Plant and Bloom`.
 
 ### Botanical Journal
 
-One `MemoryJournal.tsx` shell with editor/review/reader children. Desktop reader left: title/date/full original text; right: selected flower, subtle theme, optional framed photo. Mobile: one scrollable page. Escape user text, preserve line breaks, never use saved content as HTML. Existing memories are view/delete only and require no AI. Implements `prd.md > Writing and Review Journal`, `Revisited Memory`, `Write a Memory`, `Revisit, Persist, and Delete`.
+One `MemoryJournal.tsx` shell with editor/review/reader children and a shared `PageLayout` renderer for Classic / Photo Story / Scrapbook, so editing, preview and reading use the same layout component. Desktop reader left: title/date/full original text; right: selected flower, subtle theme, optional framed photo. Mobile: one scrollable page. Escape user text, preserve line breaks, never use saved content as HTML. Existing memories are view/delete only and require no AI. Implements `prd.md > Writing and Review Journal`, `Revisited Memory`, `Write a Memory`, `Revisit, Persist, and Delete`.
 
 ### Validation and Photo Processing
 
@@ -195,10 +209,10 @@ IndexedDB database `memorygarden`, version 1; four stores, local only:
 
 | Store | Key and fields | Lifecycle |
 | --- | --- | --- |
-| `memories` | `id`; original `story`; `title`; `emotionalTheme`; enum `flowerType`; `memoryDate`; `createdAt`; `pageId`; `spotId`; optional `photo` {blob, mime, width, height, bytes}; `variationSeed` | Create once, read, explicitly delete. Unique index `[pageId,spotId]`. |
+| `memories` | `id`; original `story`; `title`; `emotionalTheme`; enum `flowerType`; `memoryDate`; `createdAt`; `pageId`; `spotId`; optional `photo` {blob, mime, width, height, bytes}; `variationSeed`; `layout` (`classic`, `photo` or `scrapbook`; default `classic`) | Create once, read, explicitly delete. Unique index `[pageId,spotId]`. |
 | `drafts` | key `active`; `draftId` (eventual memory ID); `revision`; unfinished fields/selections/photo; `updatedAt` | One active draft; incomplete values allowed; resume/defer, atomic planting conversion, or confirmed discard. |
 | `pages` | stable `pageId`; monotonic `order`; `createdAt` | Initial clearing retained; new pages reuse scene; delete only empty trailing records, never renumber populated layouts. |
-| `preferences` | singleton; consent version/acknowledgment; last viewed page; relevant local UI preferences | No analytics or required name. A consent acknowledgment never triggers a request. |
+| `preferences` | singleton; consent version/acknowledgment; last viewed page; `introSeen`; `musicEnabled`; optional `musicVolume` | No analytics or required name. A consent acknowledgment never triggers a request. |
 
 Embed photo blobs in their owning draft/memory record to avoid a separate media system/orphans. Plant transaction spans memories/drafts/pages: read revision, check placement, insert once, update pages, remove matching draft; any failure rolls back. Delete/page cleanup is also transactional. Close old DB connections on version change; blocked upgrades ask to close other tabs. Recreate and revoke blob URLs as views mount/unmount. Browser clearing/eviction or unavailable storage remains a disclosed limitation.
 
@@ -268,34 +282,36 @@ Planned tree; no application files are generated during this stage:
 
 ```text
 src/
-  main.tsx
-  app/{App.tsx,useGardenController.ts}              # mode/dialog transitions
-  garden/{GardenScene,FlowerButton,Bloom,GardenPager}.tsx
-  garden/{scene.ts,flowerCatalog.ts}                # stable coordinates/asset anchors
-  journal/{MemoryJournal,MemoryEditor,SuggestionReview,MemoryReader}.tsx
-  components/{ConfirmDialog,DraftRecovery,AIConsent}.tsx
+  main.tsx                                         # fonts + global styles
+  app/{App.tsx,useGardenController.ts}              # phases, modes, dialogs
+  art/geometry.ts                                  # seeded shapes, splines
+  art/GardenWorld.tsx                              # layered scene (wide/tall)
+  art/flowers/FlowerArt.tsx                        # six staged flowers, shared defs
+  components/book/{BookArt,StoryBook}.tsx          # cover, endpaper, desk, opening stage
+  components/garden/{GardenScene,GardenPager}.tsx
+  journal/{MemoryJournal,MemoryEditor,SuggestionReview,MemoryReader,PageLayout}.tsx
+  components/{ConfirmDialog,DraftRecovery,AIConsent,SoundToggle}.tsx
+  garden/{layouts.ts,useBloomPreview.ts,useReducedMotion.ts}
   hooks/useDraft.ts                                # serialized autosave/recovery
-  storage/{db.ts,repository.ts,placement.ts}          # browser transactions
-  lib/{photos.ts,ai.ts,turnstile.ts}
-  styles/{tokens.css,garden.css,journal.css,motion.css}
-shared/{contracts.ts,validation.ts}                 # pure browser/Function contracts
+  storage/{db.ts,repository.ts,placement.ts}       # browser transactions
+  lib/{photos.ts,ai.ts,turnstile.ts,audio.ts}
+  styles/{tokens,book,world,flower,journal,motion}.css
+shared/{contracts.ts,validation.ts}                # pure browser/Function contracts
 functions/
   api/suggest-flower.ts                            # only backend route
-server/{openai.ts,turnstile.ts,guards.ts}            # helpers outside Pages route directory
+server/{openai.ts,turnstile.ts,guards.ts}          # helpers outside Pages route directory
 public/
-  assets/garden/{base,foreground}.webp              # foreground optional
-  assets/flowers/<type>/{bloom,stem,head}.webp        # layers pilot-dependent
-  assets/growth/{seed,sprout,young-plant}.svg
-  assets/journal/{paper,botanical-corner}.webp
+  audio/                                           # only if a licensed file is chosen
   _routes.json                                     # Function only for /api/*
   _headers                                         # static security headers
-artwork/{source/,manifest.md}                       # approved source/provenance
-tests/{unit/,e2e/,fixtures/}                        # fictional fixtures
-devpost/                                           # planning and review companions
+scripts/check-pilot.mjs                            # real-browser review harness
+tests/{unit/,e2e/,fixtures/}                       # fictional fixtures
+devpost/                                           # skill-owned planning documents
+context/                                           # private local reference (git-ignored)
 index.html / package.json / package-lock.json
 vite.config.ts / tsconfig*.json / wrangler.jsonc
 .dev.vars.example / .gitignore / .node-version
-README.md / LICENSE / ARTWORK-LICENSE.md            # license choices pending publication
+README.md / LICENSE                                # licence choice pending publication
 ```
 
 Derive actual files from working slices; do not create empty files for symmetry. Use separate browser/Function TypeScript compilation and a narrow checked Env type. Shared validation cannot import DOM/storage code. Keep helper modules outside the file-routed `functions/` directory so they do not become unintended routes. Server code/secret bindings must not enter the Vite browser dependency graph. The actual completed tree will be reflected in the learning app map.
@@ -310,21 +326,25 @@ Derive actual files from working slices; do not create empty files for symmetry.
 | Close/refresh/concurrent draft changes | Controlled exit flush; restore last committed revision; reject stale revision and duplicate/occupied insertion without destroying input. Disclose debounce/storage limits. |
 | Delete fails / trailing page removed | No false success; preserve existing data on failure. On success free original spot, keep other positions, return to retained context. |
 | Pilot artwork/growth fails quality check | Pause full collection; show evidence, refine or agree supplied/edited art. No mismatched final placeholders. |
+| Opening interrupted (Skip, resize, tab hidden, reduced-motion change) | Commit straight to the garden in a consistent state; never leave the garden inert or half-transformed. |
+| Audio blocked or unavailable | Stay silent, keep the toggle truthful (off), never retry autoplay; the app is fully usable without sound. |
 
 ## Implementation and Verification Plan
 
 After spec approval invoke `5-build`, create/review the canonical `devpost/checklist.md`, and choose learn/fast pacing under that skill. Do not create an HTML build checklist. Each meaningful slice records verification, commits only intended safe files, and shows the learner the working result. Learner checkpoints, final review/revision, and the learning wrap-up/app map remain required; no slice is complete because files merely exist.
 
+The storybook revision replaces slices A–H with the eight slices in `checklist.md`:
+
 | Slice | Deliverable | Verification / learner evidence |
 | --- | --- | --- |
-| A — Foundation | React/Vite/TS, styling entry, actual dependency lock, Function typing/scripts/ignore rules | Engine/peer compatibility; typecheck/lint/build/local start; record versions. Check credential/profile tracking before commit. |
-| B — Visual foundation | Garden/sunflower pilot, palette/anchors, responsive composition, basic bloom | Alpha, alignment, style, actual replay/reduced motion, byte/load checks, learner visual review before other five flowers. |
-| C — Memory foundation | Repository, journal editor, photo handling, protected draft | Isolated transactions plus real-browser reload/resume/defer/discard; storage failure; text/date/photo boundaries; mobile writing. |
-| D — Garden interactions | Stable spots, six coherent flowers, auto/optional placement, save-before-bloom | Rapid double submit, stale occupied spot, rollback, refresh mid-bloom, deterministic restoration, keyboard/touch targets. |
-| E — Revisit and pages | Reading journal, exact delete flow, page navigation/cleanup | Same context on close; no AI reading; cancel/delete/failure; middle gaps versus empty tails; photo/deletion refresh. |
-| F — AI integration | One Pages Function, consent/manual route, structured OpenAI, Turnstile/safeguards | Method/body/schema/origin checks; controlled refusal/403/429/503/timeout; emulator check; one real fictional request with authorized account access and no text logs. |
-| G — Polish and test | Coherent final visuals, priority motion, accessibility | Browser journeys 390×844/1440×900 plus 320/768 widths; focus/Escape/keyboard, contrast, reduced motion; production bundle through Wrangler. Label isolated vs browser/live evidence. |
-| H — Approved deployment | Pages hostname, verified server secrets, public working app | Approval before external changes; manual + consented AI; independent browser gardens; draft/reload/deletion; bundle/Git secret/profile/privacy checks. Verify failure still permits manual planting. |
+| 1 — Storybook visual foundation | Cover, short opening/closing, layered animated garden (wide/tall), five-stage sunflower, spot selection | Four viewports, screenshots inspected, reduced motion, no overflow/overlap, targets ≥44 px; learner hands-on visual acceptance. |
+| 2 — Persistent journal journey | Journal (Classic layout), write/date/title/theme/flower, placement, save-before-bloom, reading | Real-browser refresh persistence, duplicate/stale/rollback checks; learner checkpoint. |
+| 3 — Drafts, photo, deletion | Protected draft, local optimized photo, exact delete flow | Reload/resume/defer/discard, photo boundaries, delete/cancel/failure; integrated learner checkpoint. |
+| 4 — Six flowers and pages | Lavender, rose, daisy, forget-me-not, iris in the same skeleton; garden pages | Distinct silhouettes, anchors, growth per type; multi-page allocation/cleanup. |
+| 5 — Optional AI | One Pages Function, consent/manual route, structured OpenAI, Turnstile/safeguards | Contract/failure tests, emulator, one authorized fictional live call. |
+| 6 — Storybook polish | Photo Story + Scrapbook layouts, opt-in music/effects, closing refinement; car arrival only if time remains | Layout switching preserves fields; audio opt-in/mute/persistence; licence recorded. |
+| 7 — Complete journey QA | Accessibility, performance, visual refinement, demo fixtures | Full journeys at four viewports plus narrow widths; final learner review. |
+| 8 — Approved deployment | Pages hostname, secrets, public app | Approval gates; production checks; hand off to `6-ship`. |
 
 Unit checks focus on allocation, idempotency, validation and rollback; Playwright checks real IndexedDB, navigation and accessible interaction. Mock success does not prove live AI or illustration quality. Avoid tests that merely mirror CSS. Keep source data fictional. Verify one polished scene before pagination enhancements, but do not mark the final journey complete without its committed capacity behavior.
 
@@ -344,9 +364,11 @@ Code license and artwork redistribution terms are separate reviewed choices. Ver
 
 ## Decisions and Open Issues
 
-**Learner-selected:** React/Vite/TypeScript/custom CSS, IndexedDB, Pages/one Function, OpenAI text suggestions, no auth/cloud database, local-first then `pages.dev`, six flowers, hybrid illustration/code, pilot before full artwork, verified slices A–H, and first-class visual quality.
+**Learner-selected:** React/Vite/TypeScript/custom CSS, IndexedDB, Pages/one Function, OpenAI text suggestions, no auth/cloud database, local-first then `pages.dev`, six flowers, hybrid illustration/code, pilot before full artwork, verified slices (A–H, revised to slices 1–8 by the storybook revision), and first-class visual quality.
 
 **Implementation defaults accepted through specification approval:** idb; native fetch; `gpt-6-luna`/reasoning none; Turnstile only for AI actions; 500 ms serialized draft saves; ten stable spots; temporary selection strip; image optimization/counting/metadata defaults; concrete asset targets; best-effort non-global endpoint throttles. These were explicitly identified recommendations rather than invented earlier learner choices. The learner additionally confirmed GPT-6 Luna for initial testing with server-side model configuration. Artwork and motion are still subject to the planned visual pilot review.
+
+**Storybook revision (2026-10-21):** learner-authorized direction from their brief and concept storyboards. Agent defaults pending the learner's plan confirmation: code-native SVG art (no image-generation tool available), car/character arrival as optional P2, video attachments deferred.
 
 **Genuine uncertainty:** the learner explicitly questions generated-art consistency and animation alignment. Slice B tests one garden + transparent sunflower + early stages + actual composite/bloom before producing the rest. Record real findings and feedback; do not claim the question is already resolved.
 

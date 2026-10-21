@@ -29,6 +29,8 @@ Happy, bittersweet, and difficult memories all belong here; the experience must 
 
 The interactive garden and seed-to-flower animation are required product experiences. The garden, flowers, journal, typography, animations, and interface elements must belong to the same illustrated storybook world. Prioritize a polished, reliable journey over adding features.
 
+**Storybook revision (learner-authorized, 2026-10-21):** after hands-on testing the learner set a new creative direction: *a magical book that contains your own little world.* The experience now begins with a closed botanical storybook that opens into the garden, and the art moves from dense painted scenery to a stylized, animated 2D storybook world: cooler sage and moss greens, selective golden light, soft layered depth, calm planting areas, decorative flowers only at the edges, and memory flowers as the brightest things on screen. A small butterfly is the recurring motif across book, garden and journal. The learner's concept storyboards and full brief are kept as private local reference (`context/`, git-ignored). The kernel, privacy decisions and core journey are unchanged.
+
 ## Why This Matters to the Learner
 
 Personal learning goals are maintained in the private, Git-ignored learner profile. A small architecture should support an exceptionally polished core experience.
@@ -37,7 +39,7 @@ Personal learning goals are maintained in the private, Git-ignored learner profi
 
 The primary success scenario is a roughly one-minute demonstration:
 
-1. **0–10 seconds:** Open a cohesive, gently animated garden with a clear “Plant a Memory” action.
+1. **0–10 seconds:** Open the storybook. Its cover lifts, the garden rises from the pages, and the view moves into a cohesive, gently animated garden with a clear “Plant a Memory” action. The opening is skippable, and returning visitors go straight in.
 2. **10–25 seconds:** Enter a fictional story about an evening with university friends in the journal; a photo is optional.
 3. **25–35 seconds:** Request AI suggestions, then review an editable title, emotional theme, and flower. “An Evening to Remember,” friendship and joy, and lavender illustrate the intended result; exact wording is not fixed.
 4. **35–45 seconds:** Plant the memory. The journal closes gently, attention returns to the garden, and a seed settles, sprouts, and blossoms into the chosen flower. This is the signature moment.
@@ -53,12 +55,16 @@ The saved garden survives refresh and reopening in the same browser while the si
 - External AI suggestions only after an explicit request and a brief, understandable consent explanation before the first analysis. Never send memory text automatically while typing. Manual title, emotional theme, and flower selection must be available without AI.
 - AI access must keep credentials out of frontend code. The technical specification will choose the simplest secure integration and explain the external service's role without claiming all processing stays on-device.
 - Responsive desktop and mobile layouts, consistent assets, gentle ambient movement, and reliable save/revisit behavior. Keep feature breadth small to protect these qualities.
+- Storybook additions from the 2026-10-21 revision, in priority order: a short, skippable book-opening transition into the garden (and its reverse, “Close My Garden”); three predefined journal page layouts (Classic, Photo Story, Scrapbook) that users can switch between without losing content; and opt-in background music with a visible mute control and quiet sound effects. These are polish on top of the core journey and never replace it: the core journey must work first, and a short polished transition beats a long inconsistent cinematic.
 
 The curriculum targets 2–4 hours of active work. Asset preparation and visual refinement are the main schedule risks; the technical plan must assess feasibility against this quality bar before implementation.
 
 ## Later
 
 - Surprise rediscovery of an older memory, if the core experience is complete and polished. Revisit memories by clicking flowers in the MVP.
+- A full arrival cinematic (car on the road, small character, gate sequence): attempted only after the core journey and all P1 polish are done; otherwise it stays here.
+- Short video attachments: browser-local video storage risks quota, performance and recovery problems, so the MVP accepts photos only. No placeholder video control is shown.
+- Morning, golden-hour or evening atmosphere variations of the same garden.
 
 ## Explicitly Cut
 

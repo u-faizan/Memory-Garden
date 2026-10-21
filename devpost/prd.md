@@ -11,10 +11,13 @@ Source: `scope.md > Who It's For` and `scope.md > The Unique Kernel`.
 
 **Approved product definition:** the learner finalized the feature scope and the remaining navigation, input, photo, page-management, and reduced-motion decisions. `prd.html` is the visual companion; Markdown remains canonical. Technical planning is next. The illustrated world, botanical journal, and planting experience are first-class requirements that must guide architecture and build sequencing.
 
+**Storybook revision, 2026-10-21 (learner-authorized):** the experience now opens from a closed botanical storybook, the art direction becomes a stylized animated 2D storybook world, flowers grow through five stages including a bud, the journal offers three page layouts, and music is opt-in. These additions are marked *(storybook revision)* below. Every earlier functional requirement still applies.
+
 ## The Core Journey
 
 Source: `scope.md > The Core Loop` and `scope.md > What “Working” Looks Like`.
 
+0. *(storybook revision)* On a first visit, see a closed botanical storybook titled “MemoryGarden — Where Memories Bloom” with one clear action, **Open My Garden**. The cover lifts, the garden rises from the pages, and the view moves into the garden until the book's edges disappear. The opening is skippable from its first frame. Returning visitors enter the garden directly.
 1. Enter a peaceful, living garden. On first use, see an inviting clearing, naturally integrated planting spots, and a small illustrated sign such as “Your story begins here.”
 2. Choose “Plant a Memory.” The garden gently softens or dims and an illustrated journal opens in the center.
 3. Write a story beneath “What moment would you like to remember?”, optionally attach a photo, and select or adjust the memory date. Automatically preserve one active local draft and quietly indicate when it has been saved.
@@ -28,9 +31,15 @@ Source: `scope.md > The Core Loop` and `scope.md > What “Working” Looks Like
 
 Source: `scope.md > Inspiration & Identity` and `scope.md > The POC Boundary`.
 
+### Storybook Cover and Opening *(storybook revision)*
+
+A clothbound storybook rests on a softly lit desk. Its cover carries the title, the tagline, gilded botanical ornament and the small butterfly motif. Gentle ambient movement (light on the gilt, steam from a cup) keeps it alive. **Open My Garden** is the only action. The opening is short and coherent: the same garden art is used inside the book and in the live garden, so there is no jump between unrelated scenes. A small “Close My Garden” control in the garden reverses the sequence back to the cover, and opening the book again replays the introduction. Neither transition is ever required for ordinary navigation.
+
 ### Garden
 
 The garden occupies most of the screen. Use a slightly elevated, three-quarter 2D viewpoint that shows the ground, flower beds, a winding stone pathway, and surrounding scenery. Compose a small clearing with soft grass, tiny edge wildflowers, a small wooden fence, decorative plants, golden sunlight, and subtle shadows.
+
+*(storybook revision)* The clearing is a Secret Glade: soft sky with drifting clouds and occasional birds, distant hills, restrained trees, a wooden fence with a vine-arched gate, a short winding stone path, calm grass, framing foliage at the edges, and a butterfly. Planting areas stay visually quiet. Decorative blossoms appear only at the gate and outer edges, never as large memory-flower species in the scenery. Desktop and mobile have separately composed layouts with the same logical planting spots.
 
 Integrate approximately 8–12 predefined planting positions naturally along the pathways and flower beds, with no visible grid. Empty spots use subtle soil patches or tiny glowing indicators. A welcoming central spot and small illustrated sign invite the first memory. Keep “Plant a Memory” easy to discover without overpowering the landscape.
 
@@ -55,6 +64,8 @@ On desktop, use a two-page botanical journal:
 - **Left page:** title in elegant typography, original memory date, and full original text with comfortable reading spacing and subtle handwritten or storybook-inspired character.
 - **Right page:** the selected flower's botanical illustration, an optional beautifully framed photo, a subtle emotional theme, and small botanical decorations.
 
+*(storybook revision)* A memory is shown in the page layout chosen when it was written: **Classic** (story on one page, flower illustration and optional photo on the other, as above), **Photo Story** (a large framed photograph with a shorter writing area and botanical decoration), or **Scrapbook** (title, date, story, photo and flower combined with tape, a pressed-flower note and looser composition). Without a photo, Photo Story and Scrapbook fall back gracefully to their text-and-flower arrangement.
+
 On mobile, use a single-page vertically scrollable journal. Warm paper textures, soft shadows, delicate floral decoration, and smooth transitions maintain the shared art direction. Keep reading comfortable and provide an obvious, elegant “Back to Garden” control. Deletion is visually secondary; a small options menu is a possible treatment rather than an additional feature requirement.
 
 ## Look and Feel
@@ -68,6 +79,8 @@ Hand-painted, soft, cozy, whimsical, and mature enough for young adults. Draw in
 The garden, flower library, journal, typography, animations, and interface elements must belong to the same world. The interactive garden and seed-to-flower animation are core experiences. Exclude pixel art, realistic 3D, corporate styling, SaaS sidebars, tables, analytics cards, and unnecessary navigation.
 
 Controls use natural colors, soft rounded shapes, and gentle responses. The journal has warm cream-colored pages, delicate botanical decoration, elegant typography, and subtle paper textures. Exact font choices remain open. The flower collection and its art requirements are defined below; final asset artwork has not been selected.
+
+*(storybook revision)* The look is a stylized, animated 2D storybook world rather than a dense painted landscape: soft expressive shapes, cooler sage and moss greens, selective warm golden light, soft layered depth, and refined cozy-game charm that adults also enjoy. Avoid photorealism, pixel art, generic icon packs and harsh neon. One style bible (palette, typography, shapes, light, layer order, motion timing) governs the book, garden, flowers and journal. A small butterfly recurs as the shared motif. Decoration stays restrained so text and memory flowers always read first.
 
 ### Flower Collection
 
@@ -92,6 +105,10 @@ The empty garden already feels alive: leaves and flowers sway slowly, butterflie
 
 Respect the user's system reduced-motion preference throughout the garden, journal, and planting experience. Replace seed-growing, journal-opening, parallax if present, and decorative animations with immediate or minimal transitions. Keep the garden beautiful, accessible, and fully functional without animation; the selected flower must still appear after a successful save. Parallax is not a new requirement. No game engine or explorable world is required.
 
+*(storybook revision)* Scenery is composed in separate layers (sky, hills, trees/fence/gate, ground, foreground foliage, atmosphere), so clouds, birds, butterflies and foliage can move independently and a subtle pointer parallax adds depth on desktop. Reduced motion also skips or replaces the book opening and closing with a short fade.
+
+**Music and sound** *(storybook revision)*: soft instrumental ambience (gentle piano or acoustic texture, no vocals or drums) and quiet effects for opening the book, planting and blooming. Audio is always opt-in: nothing plays before the user turns it on. A visible, integrated control toggles it, and the preference is remembered locally. Music loops gracefully and does not restart during ordinary navigation. Only original or properly licensed audio is used.
+
 ### Emotional Tone
 
 Comforting, magical, playful, and emotionally meaningful. Happy, bittersweet, and difficult memories all belong. AI and interface copy must not force cheerful interpretations or overwrite a person's meaning. Flower associations are symbolic suggestions, never restrictions: users can choose any flower for any memory. Do not label emotions good or bad or assume a memory has only one emotion. The emotional theme may acknowledge mixed feelings; its exact editing control remains open.
@@ -103,6 +120,18 @@ Comforting, magical, playful, and emotionally meaningful. Happy, bittersweet, an
 Source: `scope.md > The Unique Kernel` and `scope.md > What “Working” Looks Like`.
 
 The first-use garden is an intentional, inviting scene, not a lifeless empty container. Existing flowers represent saved memories and open their stories when selected. Use the agreed flower collection and fixed positions. Preserve individually selectable flowers, subtle hover responses, and accessible click targets. Avoid overcrowding, including when several memories share the same flower type.
+
+### Open and Close the Storybook *(storybook revision)*
+
+Source: `scope.md > Inspiration & Identity`, storybook revision.
+
+First visits start on the closed book. **Open My Garden** plays a short opening (cover lifts → garden rises from the pages → view moves into the garden) and ends in the live, interactive garden with focus on its primary action. **Skip** is visible from the first frame and goes straight to the garden. Remember locally that the introduction was seen; returning visitors start in the garden. **Close My Garden** reverses the sequence back to the cover, where opening again replays the introduction. Reduced motion replaces both sequences with a short fade. The transitions never block planting, reading or deletion and are never required to reach them.
+
+### Journal Page Layouts *(storybook revision)*
+
+Source: `scope.md > The POC Boundary`, storybook revision.
+
+While writing or reviewing, users choose one of three predefined layouts (Classic, Photo Story, Scrapbook). Switching layouts never changes or loses the story, title, date, theme, flower or photo, and all fields remain editable. The chosen layout is saved with the memory and used when it is reopened. There is no free-form drag-and-drop page editor. If practical, Photo Story may offer a photo-left / photo-right choice within its fixed boundaries.
 
 ### Planting Spots and Garden Pages
 
@@ -156,7 +185,7 @@ Source: `scope.md > The Unique Kernel` and `scope.md > What “Working” Looks 
 
 “Plant This Memory” first saves the memory. Prevent repeated clicks from creating duplicates. If saving fails, keep the journal open, preserve the draft, provide a clear retry action, and do not display a completed bloom. Only after a successful save clear the associated draft, close the journal gently, and focus attention on the selected garden spot. A refresh after saving must not lose the memory even if its animation was interrupted; the animation is a presentation of a saved memory.
 
-Use the consistent sequence **seed dropping into soil → small sprout → growing stem → flower blooming**, with a subtle sparkle or gentle glow celebrating the new memory. The final bloom matches the reviewed flower choice, remains associated with that memory, and is individually available to revisit. Exact pacing and the optional spot-selection layout belong to technical planning. With system reduced motion enabled, use immediate or minimal transitions to show the successfully planted flower without the full growth sequence or decorative animation.
+Use the consistent sequence **seed dropping into soil → small sprout → growing stem → flower blooming**, with a subtle sparkle or gentle glow celebrating the new memory. *(storybook revision)* The sequence is seed → sprout → young plant → bud → bloom, about five seconds: the seed settles, the stem genuinely grows, leaves unfold from their joints, the bud forms and the petals open ring by ring, then the plant settles into a gentle sway. It must never be a full flower image simply scaled from zero. The final bloom matches the reviewed flower choice, remains associated with that memory, and is individually available to revisit. Exact pacing and the optional spot-selection layout belong to technical planning. With system reduced motion enabled, use immediate or minimal transitions to show the successfully planted flower without the full growth sequence or decorative animation.
 
 ### Revisit, Persist, and Delete
 
@@ -185,6 +214,9 @@ After deletion succeeds, the journal closes and the flower peacefully fades away
 
 Source: `scope.md > The POC Boundary`.
 
+- **First visit** *(storybook revision)*: show the closed storybook with **Open My Garden**; the opening is skippable and remembered locally.
+- **Returning visit** *(storybook revision)*: enter the garden directly; Close My Garden returns to the cover, from which the introduction can be replayed.
+- **Audio** *(storybook revision)*: silent until the user turns music on; the choice is remembered locally; muting is always one action away.
 - **First use:** show the complete illustrated clearing, ambient life, inviting sign, planting spots, and discoverable planting action.
 - **AI consent:** explain external processing before the first analysis; permit manual planting without external AI use. Never imply all processing is on-device.
 - **Writing:** debounce local autosave of one active draft, including the selected date, title, flower, emotional theme, and supported photo. Quietly show “Draft saved” after saving.
@@ -234,6 +266,11 @@ Source: `scope.md > What “Working” Looks Like`.
 - Only completely empty trailing pages are removed after deletion. Populated pages and all remaining flower positions are preserved.
 - The system reduced-motion preference replaces seed-growing, journal-opening, parallax if present, and decorative movement with immediate or minimal transitions. Planting, reading, deletion, navigation, and draft recovery remain fully usable.
 - Validate memory text at 10–2,000 characters and accept at most one JPEG, PNG, or WebP image of up to 5 MB original size. Optimize accepted photos before local saving; invalid input shows friendly feedback without losing the draft.
+- *(storybook revision)* A first visit shows the closed book; Open My Garden leads into the live garden through a short, coherent transition with no visible jump; Skip works from the first frame; a returning visit enters the garden directly; Close My Garden returns to the cover and the introduction can be replayed.
+- *(storybook revision)* Planting shows seed → sprout → young plant → bud → bloom with real stem growth, unfolding leaves and opening petals, ending in the selected flower type.
+- *(storybook revision)* Switching among Classic, Photo Story and Scrapbook layouts preserves every field; the reopened memory uses its saved layout.
+- *(storybook revision)* No sound plays before the user opts in; music can be muted at any time and the preference survives refresh.
+- *(storybook revision)* The empty garden is beautiful and calm; a planted garden is visibly more colorful, and memory flowers stand out more than any scenery decoration.
 
 ## Product Decisions
 
@@ -251,7 +288,10 @@ Source: `scope.md > What “Working” Looks Like`.
 - Six distinct flower types provide symbolic variety; four are an acceptable fallback if necessary to preserve coherent asset quality, with the subset still to be agreed if that fallback is used.
 - Emotional associations guide AI suggestions without restricting flower choice, labeling emotions good or bad, or assuming a single feeling per memory.
 - Repeated flower types are allowed, with each planted memory individually selectable. Avoid overcrowding.
-- Every flower uses the same four-stage growth sequence, ending in the chosen type.
+- Every flower uses the same four-stage growth sequence, ending in the chosen type. *(storybook revision: five stages, adding a bud before the bloom.)*
+- *(storybook revision)* The product opens as a storybook; the opening and closing are short, skippable and remembered, never a barrier to the garden.
+- *(storybook revision)* Three predefined journal layouts give personal expression without a page editor.
+- *(storybook revision)* Music and sound are opt-in atmosphere, never required and never autoplayed.
 - Approximately 8–12 fixed spots per scene maintain natural spacing. Automatic placement with an optional empty-spot choice keeps planting effortless; no drag-and-drop editor.
 - Repeated garden pages provide room for more memories without an expanding world or additional environments. Establish reliable planting in one scene first.
 - Deletion frees the memory's spot; occupied spots cannot be overwritten accidentally.
@@ -278,6 +318,8 @@ Source: `scope.md > Later`.
 Surprise rediscovery of an older memory waits until the core journey is complete and polished. Clicking flowers provides rediscovery in this version.
 
 Editing existing memories, exporting, and advanced organization are also deferred by the learner during the PRD interview. Sharing remains outside this personal MVP, as established in scope.
+
+*(storybook revision)* Also deferred: short video attachments (browser-local quota and recovery risk; photos only, with no placeholder video control); the full car-and-character arrival cinematic unless time remains after all core and P1 work; and atmosphere variations such as golden hour or evening.
 
 ## Non-Goals
 

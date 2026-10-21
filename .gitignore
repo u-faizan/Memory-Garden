@@ -1,4 +1,5 @@
 /devpost/learner-profile.md
+/context/
 .env
 .env.*
 !.env.example
