@@ -7,7 +7,7 @@ status: approved
 
 **Approved technical specification.** The learner approved this blueprint and authorized entry into `5-build`, preserving its build-order review, verification, commits, learner checkpoints, and learning activities. Scope and PRD remain approved and unchanged. This is a plan, not evidence of an installed, built, generated, or deployed application. Markdown is canonical; `spec.html` is the offline visual companion.
 
-**Storybook revision, 2026-10-21 (learner-authorized):** a storybook opening/closing, layered storybook art (learner-generated paintings composited with code-driven motion), five-stage growth, three journal layouts and opt-in audio are added. The stack, privacy model, IndexedDB design, AI contract and deployment plan are unchanged. Revised build order: `checklist.md`.
+**Storybook revision, 2026-10-21 (learner-authorized):** a storybook opening/closing, layered storybook art (learner-generated paintings composited with code-driven motion), five-stage growth, three journal layouts and opt-in audio are added. The stack, privacy model, IndexedDB design, AI contract and deployment plan are unchanged. Revised build order: `checklist.md`. 2026-10-24: editing is included, two layouts, pages derived from memories (no separate pages store), Flow opening clip, AI optional.
 
 ## How This Works, In Plain Language
 
@@ -211,7 +211,7 @@ IndexedDB database `memorygarden`, version 1; four stores, local only:
 
 | Store | Key and fields | Lifecycle |
 | --- | --- | --- |
-| `memories` | `id`; original `story`; `title`; `emotionalTheme`; enum `flowerType`; `memoryDate`; `createdAt`; `pageId`; `spotId`; optional `photo` {blob, mime, width, height, bytes}; `variationSeed`; `layout` (`classic`, `photo` or `scrapbook`; default `classic`) | Create once, read, explicitly delete. Unique index `[pageId,spotId]`. |
+| `memories` | `id`; original `story`; `title`; `emotionalTheme`; enum `flowerType`; `memoryDate`; `createdAt`; `pageId`; `spotId`; optional `photo` {blob, mime, width, height, bytes}; `variationSeed`; optional `feeling` replaces the required theme; no layout field (one adaptive page) | Create once, read, explicitly delete. Unique index `[pageId,spotId]`. |
 | `drafts` | key `active`; `draftId` (eventual memory ID); `revision`; unfinished fields/selections/photo; `updatedAt` | One active draft; incomplete values allowed; resume/defer, atomic planting conversion, or confirmed discard. |
 | `pages` | stable `pageId`; monotonic `order`; `createdAt` | Initial clearing retained; new pages reuse scene; delete only empty trailing records, never renumber populated layouts. |
 | `preferences` | singleton; consent version/acknowledgment; last viewed page; `introSeen`; `musicEnabled`; optional `musicVolume` | No analytics or required name. A consent acknowledgment never triggers a request. |

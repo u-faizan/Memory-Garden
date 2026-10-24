@@ -11,6 +11,8 @@ Source: `scope.md > Who It's For` and `scope.md > The Unique Kernel`.
 
 **Approved product definition:** the learner finalized the feature scope and the remaining navigation, input, photo, page-management, and reduced-motion decisions. `prd.html` is the visual companion; Markdown remains canonical. Technical planning is next. The illustrated world, botanical journal, and planting experience are first-class requirements that must guide architecture and build sequencing.
 
+**Revision, 2026-10-24 (learner decisions):** saved memories can now be edited from the reading journal; the journal uses one adaptive page instead of selectable layouts (with a photo: title, date and photo on the left, words, feeling note and pressed-flower tag on the right; without one: words on the left, flower on the right), replacing the three layouts listed below; growth runs in about 2–3 seconds without visible stage captions; the opening may be a learner-generated video clip ending on the garden frame; AI suggestions become an optional extra. `context/brief.md` (private) is the learner's full story.
+
 **Storybook revision, 2026-10-21 (learner-authorized):** the experience now opens from a closed botanical storybook, the art direction becomes a stylized animated 2D storybook world, flowers grow through five stages including a bud, the journal offers three page layouts, and music is opt-in. These additions are marked *(storybook revision)* below. Every earlier functional requirement still applies.
 
 ## The Core Journey

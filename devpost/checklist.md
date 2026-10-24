@@ -7,7 +7,7 @@ status: approved
 
 Build mode: fast — explicitly selected by the learner. Keep concise updates, mechanical verification, commits, and the required hands-on checkpoints. The learner additionally requested a manual-journey check immediately after slice 2. Routine implementation/fixes are authorized; major visual, product-scope, or architecture changes require input.
 
-**Storybook revision (2026-10-21):** the learner set a new creative direction and authorized the agent to own implementation decisions. This revised eight-slice order replaces the earlier seven slices; the learner approved it on 2026-10-22. Priorities: P0 core journey first (slices 1–4), then P1 polish (5–6), with P2 extras (car arrival cinematic) only if time remains. The core journey must work without AI.
+**Storybook revision (2026-10-21):** the learner set a new creative direction and authorized the agent to own implementation decisions. This revised order replaces the earlier seven slices; the learner approved it on 2026-10-22 and condensed it to seven slices on 2026-10-24 (see Revisions). Priorities: P0 core journey first (slices 1–4), then P1 polish (5–6), with P2 extras (car arrival cinematic) only if time remains. The core journey must work without AI.
 
 ## Slices
 
@@ -21,81 +21,70 @@ Build mode: fast — explicitly selected by the learner. Keep concise updates, m
   Learner check: Open the local URL and press Open My Garden (and Skip on a second try). Plant the sunflower in a couple of spots, watch it grow, try Close My Garden, then try a phone-sized window. Say whether this feels like a magical storybook world and what you would change before the journal is built on it.
   Commit: `Add storybook opening, layered garden and sunflower growth`
 
-- [ ] **2. Write, plant, and reopen a memory that survives refresh**
-  Becomes usable: The first manual end-to-end memory journey. Open the botanical journal (Classic layout), write and date a fictional memory, choose a title, theme and the sunflower, accept or change the planting spot, save, watch it bloom, reopen its original story, and refresh without losing it.
-  Why now: Connects the accepted visuals to a real memory early, proving the journal, transactional storage, placement and reading together.
-  PRD ref: `prd.md > The Core Journey`, `Write a Memory`, `Plant and Bloom`, `Revisit, Persist, and Delete`, `Planting Spots and Garden Pages`, `Revisited Memory`.
-  Spec ref: `spec.md > The Core Journey Through the System`, `Botanical Journal`, `IndexedDB Repository and Page Allocation`, `Data Model`, `Validation and Photo Processing`.
-  Build: Journal shell, editor, review and reader with a desktop two-page / mobile single-page Classic `PageLayout`; validated story, date, title and theme; `idb` repository with the four stores (including `layout`, `introSeen` and music preferences); placement with auto-selected and optional alternate spots; idempotent save-before-bloom; reading with Back to Garden and Escape. Move `introSeen` from local storage to the preferences store. Real HTML controls, no AI.
-  Verify (mechanical): Typecheck, lint, focused validation/allocation/transaction tests, build. In a real browser create a memory, choose another spot, refresh, reopen, and confirm text, date, metadata and position. Test fast repeated submission, occupied/stale placement, forced storage rollback and refresh during bloom: no duplicates and no false success.
-  Learner check: Write a fictional memory, plant it in a different spot, refresh, and open the flower again. Confirm the story and location remain and that writing → bloom → reading feels like one storybook.
-  Commit: `Add persistent manual memory planting and reading`
+- [ ] **2. Write, plant, reopen, edit and delete memories that survive refresh**
+  Becomes usable: The complete manual memory journey. Tap a soil spot (or Plant a Memory) to open the botanical journal; write a title, story and date, add a photo, choose a flower; preview the single adaptive page; plant; watch it grow in place; reopen, edit or delete it; refresh and find everything still there. Unfinished writing is autosaved and offered back. The fictional sample page is removed and nothing is prefilled.
+  Why now: The journal and persistence are the heart of panels 05–07. Merging the old slices 2 and 3 gets the whole usable journey working in one step, at hackathon pace.
+  PRD ref: `prd.md > The Core Journey`, `Write a Memory`, `Protect One Active Draft`, `Plant and Bloom`, `Revisit, Persist, and Delete`, `Journal Page Layouts`.
+  Spec ref: `spec.md > Botanical Journal`, `Draft Controller`, `IndexedDB Repository and Page Allocation`, `Data Model`, `Validation and Photo Processing`.
+  Build: `idb` repository (memories, drafts, preferences; pages derived from memories); spot-first planting with auto-selected spot from Plant a Memory; journal dialog with write, preview and read modes sharing one adaptive `PageLayout` (photo left with words and flower tag right, or words left and flower right); local photo resize; flower picker showing every species whose art exists; save-before-bloom with double-click protection; growth at the saved spot; reading with Edit and confirmed Delete; debounced draft autosave and a return prompt; garden pages of ten spots; introSeen moves to preferences.
+  Verify (mechanical): Typecheck, lint, build. One real-browser smoke run: plant a memory with a photo, reopen it, edit it, refresh and confirm content and position, delete with confirmation, and confirm a draft survives refresh. Inspect desktop and phone screenshots of the journal and reading page.
+  Learner check: Write a real-feeling fictional memory with a photo, plant it, reopen and edit it, refresh, then delete another. Say whether writing → bloom → reading feels like one storybook.
+  Commit: `Add persistent memory journal with planting, editing and deletion`
 
-- [ ] **3. Protect unfinished writing, attach a photo, and safely delete a memory**
-  Becomes usable: The core manual journey is reliable. A draft resumes after refresh, an optional optimized photo stays with its story, closing the journal offers safe choices, and confirmed deletion frees the spot without moving other flowers.
-  Why now: Tests the personal-data protections through real behavior before broadening the garden or calling a paid service. This is the integrated manual-journey learner checkpoint.
-  PRD ref: `prd.md > Protect One Active Draft`, `Write a Memory`, `Delete With Confirmation`, `States and Boundaries`, `Acceptance Criteria`.
-  Spec ref: `spec.md > Draft Controller`, `Validation and Photo Processing`, `Data Model`, `Important Failure Modes`.
-  Build: One serialized debounced draft with revision checks, truthful save status, the recovery prompt, and Save for Later / Keep Writing / confirmed Discard; atomic draft-to-memory conversion; local photo validation, optimization and blob storage with friendly errors; the exact approved deletion dialog with transactional removal and a peaceful fade. Focus, keyboard and reduced motion for all dialogs. No editing of planted memories, no video.
-  Verify (mechanical): Targeted tests and build. Real-browser checks cover draft fields and photo across refresh, defer/resume, close/save/continue/discard, invalid/corrupt/oversized and supported images, repeated planting and stale revisions, forced storage failures, cancel/delete/failure, deletion after refresh, and no movement of other flowers.
-  Learner check: Start a story with a photo, close it safely, refresh, resume and plant it. Cancel one deletion, then confirm another and refresh. Try an invalid photo and check that the app protects the story and responds calmly.
-  Commit: `Protect drafts and add local photos and safe deletion`
+- [ ] **3. Grow all six flowers across stable garden pages**
+  Becomes usable: Lavender, rose, daisy, forget-me-not and iris join the sunflower, each growing through its own painted stages; the garden continues on new pages when one fills.
+  Why now: Uses the learner's generated growth sheets in the proven sunflower format; the populated garden (panel 07) becomes colourful.
+  PRD ref: `prd.md > Flower Collection`, `Planting Spots and Garden Pages`.
+  Spec ref: `spec.md > Visual Asset Inventory and Pilot`, `Scene Mapping, Organization, and Rights`.
+  Build: Run `npm run assets` on the new sheets (slice and align to the stem base), enable each species in the flower catalog, tune per-species display scale, check page navigation with more than ten memories.
+  Verify (mechanical): Typecheck, lint, build; screenshot a garden with all six species on desktop and phone; confirm each grows anchored to its soil.
+  Learner check: Plant several species, including two of the same, and move between pages. Check they belong to one world.
+  Commit: `Add six-flower collection and garden pages`
 
-- [ ] **4. Choose all six flowers and grow across stable garden pages**
-  Becomes usable: Users can plant any of the six flowers, including repeats, and continue on extra garden pages when the scene fills. Deletion keeps layouts stable and removes only empty trailing pages.
-  Why now: Extends the working journey with the accepted flower skeleton. Visual variety and capacity arrive together without new environments.
-  PRD ref: `prd.md > Flower Collection`, `Planting Spots and Garden Pages`, `Discover and Review a Flower`, `Revisit, Persist, and Delete`.
-  Spec ref: `spec.md > Visual Asset Inventory and Pilot`, `Scene Mapping, Organization, and Rights`, `IndexedDB Repository and Page Allocation`, `Garden Scene and Bloom`.
-  Build: Lavender, rose, daisy, forget-me-not and iris on the shared 200×400 skeleton, each with its own head, leaves and palette and all five stages; flower picker (seed packets) in the journal; small stable per-memory variation; page navigation, allocation across pages and transaction-safe trailing-page cleanup. No seasons, environments, watering or dragging.
-  Verify (mechanical): Inspect every flower at every stage for distinct silhouettes, anchors and normal/reduced-motion growth. Run allocation/cleanup tests and a real-browser journey filling more than one page, refreshing, reopening repeated types and deleting internal and trailing memories; positions never shift. Check mobile framing and each flower's target.
-  Learner check: Plant several flower types, including two of the same, move between pages and revisit them. Check the collection belongs to the same world and deletion does not rearrange the garden.
-  Commit: `Add six-flower collection and stable garden pages`
+- [ ] **4. Add the Flow opening clip and opt-in music**
+  Becomes usable: Opening My Garden plays the learner's Flow clip (book → car → gate → garden) that ends exactly on the live garden; optional soft music can be switched on and off and is remembered.
+  Why now: Cinematic and atmosphere layers sit on top of a working garden (brief: panels 01–03 and 08 are optional enhancements).
+  PRD ref: `prd.md > Storybook Cover and Opening`, `Open and Close the Storybook`, `Atmosphere and Motion`.
+  Spec ref: `spec.md > Storybook Opening and Closing`, `Music and Sound`.
+  Build: Play the desktop or phone clip inside the open-book stage, crossfade to the live garden on its matching last frame, keep Skip and reduced motion; keep the CSS opening as fallback. Gesture-gated music toggle with remembered preference.
+  Verify (mechanical): Build; watch the opening on desktop and phone for a visible jump; confirm Skip and returning visits; confirm no sound before opt-in.
+  Learner check: Open the book a few times on desktop and phone, toggle music, refresh. Say whether the arrival feels magical and short enough.
+  Commit: `Add Flow opening clip and opt-in music`
 
-- [ ] **5. Request optional OpenAI suggestions through the protected Pages Function**
-  Becomes usable: A user explicitly requests consented title, theme and flower suggestions, edits them and plants. Failures or disabled AI preserve the draft and leave the manual journey intact.
-  Why now: The product already works without AI, so the paid external boundary is verified against a reliable fallback.
-  PRD ref: `prd.md > Discover and Review a Flower`, `Protect One Active Draft`, `Emotional Tone`, `States and Boundaries`.
-  Spec ref: `spec.md > AI Client and Pages Function`, `Browser to Function`, `Function to OpenAI`, `Bot Protection, Throttling, and Spending`, `Secrets and Public Deployment`.
-  Build: `functions/api/suggest-flower.ts` as the only route; shared contract validation; bounded native fetch to OpenAI with server-side `OPENAI_MODEL` (verify the model's availability first); explicit consent; Find My Flower beside the manual choice; Turnstile; limits, timeouts, no automatic resends, stale-result handling, throttles and a disable switch. Keys stay server-side; no account or secret changes without authorization.
-  Verify (mechanical): Browser/Function type checks, strict contract/method/origin/body/error tests, frontend build and Pages emulator. Manual mode works without credentials. Test refusal, malformed output, timeout, bad bot token, throttle, missing key and quota; all preserve the story. With authorized credentials, make one small real fictional call and record its quality; otherwise record it as unfinished.
-  Learner check: Ask for suggestions on a fictional mixed-emotion memory, change the suggested flower, and plant it. Try manual planting and a controlled failure; confirm AI is optional and the story is unchanged.
-  Commit: `Add consented OpenAI suggestions with protected Pages proxy`
+- [ ] **5. Polish the complete storybook journey**
+  Becomes usable: The finished experience, ready for the final hands-on review and demo recording.
+  Why now: Refine working behavior; no new features.
+  PRD ref: `prd.md > Acceptance Criteria`, `Look and Feel`.
+  Spec ref: `spec.md > Look and Feel`, `Implementation and Verification Plan`.
+  Build: Visual and motion refinements from review, keyboard and focus pass, reduced motion, mobile spacing, fictional demo memories kept separate from personal data, factual README.
+  Verify (mechanical): Typecheck, lint, build; full journey smoke run on desktop and phone; check the bundle for secrets.
+  Learner check: Explore everything freely; note anything broken, confusing or unsatisfying.
+  Commit: `Polish the complete MemoryGarden journey`
 
-- [ ] **6. Personalize journal pages and add opt-in music**
-  Becomes usable: Users pick Classic, Photo Story or Scrapbook layouts while writing, and each memory reopens in its layout. Optional soft music and quiet effects can be switched on and muted, and the choice is remembered. The closing animation is refined. The car-and-character arrival is added only if time remains.
-  Why now: P1 polish that adds personality and atmosphere on top of a complete, reliable journey.
-  PRD ref: `prd.md > Journal Page Layouts`, `Revisited Memory`, `Atmosphere and Motion`, `Open and Close the Storybook`.
-  Spec ref: `spec.md > Botanical Journal`, `Music and Sound`, `Storybook Opening and Closing`, `Data Model`.
-  Build: Photo Story and Scrapbook renderers in the shared `PageLayout`, with switching that keeps every field and graceful no-photo fallbacks; `audio.ts` with original procedural ambience or a verified-licence track, gesture-gated and opt-in, a persistent toggle, and effects for book/plant/bloom; a refined closing. Optional P2: car, character and gate segment inside the opening, kept skippable and short. No video attachments.
-  Verify (mechanical): Layout switching preserves all fields in a real browser; reopened memories use their saved layout at desktop and mobile sizes. Audio: silent until opt-in, mute works, the preference survives refresh, music does not restart on navigation, and nothing breaks with audio unavailable. Record the audio licence or provenance.
-  Learner check: Write one memory in each layout and reopen them. Turn music on and off, refresh, and say whether the sound and pages make the garden feel more personal.
-  Commit: `Add journal page layouts and opt-in music`
+- [ ] **6. Publish the approved Cloudflare Pages version**
+  Becomes usable: A public working app for judges, alongside the required demo video and repository.
+  Why now: Only a stable, reviewed app is published.
+  PRD ref: `prd.md > What We're Building`.
+  Spec ref: `spec.md > Secrets and Public Deployment`, `Shipping, Licensing, and Submission Handoff`.
+  Build: With explicit approval, deploy the static build to Pages, record the real URL, then hand off to `6-ship`.
+  Verify (mechanical): Open the public URL in two browser profiles; run the core journey; confirm separate gardens.
+  Learner check: Open the public URL in your usual browser and a private window and try the journey.
+  Commit: `Publish MemoryGarden on Cloudflare Pages`
 
-- [ ] **7. Refine and verify the complete accessible storybook journey**
-  Becomes usable: The full experience is ready for final hands-on review. Book, garden, journal, all flowers, manual/AI choice, drafts, photos, layouts, pages, deletion and audio work on desktop and mobile, with keyboard and reduced motion.
-  Why now: Refines working behavior and accepted art rather than treating visuals as a late overlay. No new features.
-  PRD ref: `prd.md > Acceptance Criteria`, `Look and Feel`, `The Core Journey`, `States and Boundaries`.
-  Spec ref: `spec.md > Look and Feel`, `Important Failure Modes`, `Implementation and Verification Plan`, `Pilot Pass Criteria (Slice 1)`.
-  Build: Refine priority motion, typography and contrast, mobile composition, and empty/recovery/error states; fix real test findings; prepare fictional demo memories and factual setup instructions; remove pilot-only controls from the public UI.
-  Verify (mechanical): All tests, typecheck, lint, production build and Pages preview. Full real-browser journeys at the four target viewports plus 320 and 768 widths; keyboard, focus and Escape; reduced motion; refresh/draft/deletion/page behavior; controlled failures. Check that no secrets or private content reach the bundle or commit; record asset sizes and remaining limitations.
-  Learner check: Explore the whole local app freely with fictional memories. Note anything broken, confusing, inconsistent or unsatisfying, including awkward input and interrupted writing; agree refinements before changing behavior.
-  Commit: `Polish and verify the complete MemoryGarden journey`
-
-- [ ] **8. Publish and verify the approved Cloudflare Pages version**
-  Becomes usable: A public working app on an approved `pages.dev` hostname, with separate browser-local gardens and protected optional AI where authorized and verified.
-  Why now: Only a stable, reviewed app is published. Hosting does not replace the required demo video or repository.
-  PRD ref: `prd.md > What We're Building`, `States and Boundaries`, `Acceptance Criteria`.
-  Spec ref: `spec.md > Secrets and Public Deployment`, `Bot Protection, Throttling, and Spending`, `Shipping, Licensing, and Submission Handoff`.
-  Build: Prepare deployment and configuration; review hostname, bot controls, model access, alert amount, residual cost risk and code/font/audio licences. Get explicit approval before any account, secret, spend or publication change. Deploy with the documented Pages workflow and keep AI off if safeguards are missing. Do not publish the repository or submit without approval; hand off to `6-ship`.
-  Verify (mechanical): Check the real URL, assets and Function behavior, two independent browser contexts, the full journey, keyboard/mobile/reduced motion, and manual mode when AI fails. Confirm server secrets are absent from browser code and the history is free of credentials and private material. Report live limitations honestly.
-  Learner check: Open the public URL in your usual browser and a private window, create fictional memories in each, and confirm the gardens stay separate and the journey is ready to share.
-  Commit: `Verify Cloudflare Pages release and document setup`
+- [ ] **7. (Optional extra) Consented AI flower suggestions**
+  Becomes usable: If time remains, Find My Flower suggests a title, feeling and flower through the protected Pages Function, after consent, with manual choice always available.
+  Why now: An optional extra the learner may build later or skip; the product is complete without it.
+  PRD ref: `prd.md > Discover and Review a Flower`.
+  Spec ref: `spec.md > AI Client and Pages Function`, `Browser to Function`, `Function to OpenAI`.
+  Build: As specified in the spec, only if the learner chooses to proceed and authorizes the account and key setup.
+  Verify (mechanical): Function contract and failure checks; one authorized fictional live call.
+  Learner check: Request suggestions for a fictional memory, change them and plant.
+  Commit: `Add consented AI flower suggestions`
 
 ## Hands-on Checkpoints
 
 - [ ] Early visual pilot explored after slice 1 — storybook opening, layered garden and sunflower growth reviewed on desktop and mobile; feedback resolved before the journal and other five flowers are built on it.
-- [ ] Manual memory journey explored after slice 2 — learner plants/reopens a fictional memory and tests persistence after refresh before subsequent slices.
-- [ ] Integrated manual journey explored after slice 3 — real writing, photo, protected draft, planting, reading, refresh and deletion tried; feedback resolved.
+- [ ] Integrated memory journey explored after slice 2 — writing, photo, layouts, planting, reading, editing, deletion, draft and refresh tried; feedback resolved.
 - [ ] Final kick-the-tires exploration and feedback completed after the working release — no claim of completion until the learner reports back.
 
 Learn mode also uses each slice's Learner check before its commit. Fast mode retains the planned checkpoints and any useful additional feedback, with concise explanations. External publication/account approval is a separate action gate, not implied by checklist approval.
@@ -120,6 +109,7 @@ Activity mode: not selected; keep the learning activity proportionate and avoid 
 
 ## Revisions
 
+- 2026-10-24, learner decisions from `context/brief.md`: slices 2 and 3 merge into one memory-journey slice; editing saved memories is now included; the journal uses one adaptive page instead of three layouts (learner refinement after trying two); growth runs in about 2–3 s with no visible stage captions; the opening uses a learner-generated Flow clip that ends on the garden frame; in-app AI becomes an optional final slice. Hackathon pace: one smoke run per slice instead of full assertion passes. Eight slices became seven.
 - 2026-10-24, slice 1 art: the learner found the code-drawn art pass too plain and generated a calmer painted set (garden plates, foreground leaves, desk, soil beds, sunflower growth sheet, book cover and endpaper), supplied with prompts. `scripts/prepare-assets.mjs` exports optimized WebP files and aligns the sunflower stages to one stem base; provenance is copied to `artwork/provenance/`. Comparing with concept A also added growth captions, the memory title written above the bloom, a visiting butterfly, the book tilted on the desk and an "Open My Garden" card. The car-and-character arrival stays P2. `spec.md` was updated in the affected sections.
 - 2026-10-21, storybook revision: the learner rejected the painted A2 pilot direction as still too dense and supplied a new creative brief and concept storyboards (kept privately in git-ignored `context/`). The product now opens from a closed storybook, art becomes a stylized code-native layered SVG world (no image-generation tool is available in this environment), growth gains a bud stage, the journal gains three layouts, and opt-in music is added; video attachments and atmosphere themes are deferred, and the car-and-character arrival is P2. `scope.md`, `prd.md` and `spec.md` (and their HTML companions) were updated in the affected sections only, marked *storybook revision*. The seven slices became eight. Repository cleanup removed the retired painted assets, review documents and pilot scripts, leaving only skill-owned documents in `devpost/`; earlier versions remain in Git history (`24cf09f`). Slice 1 and its checkpoint stay unchecked until the learner accepts the new running pilot.
 

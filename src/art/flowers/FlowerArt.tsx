@@ -1,15 +1,11 @@
 import { memo } from 'react'
 import { growthStages, type GrowthStage } from './stages'
+import { flowerArt, type FlowerType } from '../../garden/flowers'
 
 // Painted growth stages (sliced and aligned by scripts/prepare-assets.mjs) on a
 // shared 1024×2048 frame whose stem base is at (512, 2036). Each new stage
 // rises from the soil while the previous one settles away; the seed is drawn.
 const painted = ['sprout', 'young', 'bud', 'bloom'] as const
-const flowers = {
-  sunflower: { name: 'Sunflower', art: (stage: string) => `/assets/flowers/sunflower/${stage}.webp` },
-} as const
-export type FlowerType = keyof typeof flowers
-
 interface Props { type: FlowerType; stage: GrowthStage; animate: boolean }
 export const FlowerArt = memo(function FlowerArt({ type, stage, animate }: Props) {
   const reached = stage === 'empty' ? -1 : growthStages.indexOf(stage)
@@ -23,7 +19,7 @@ export const FlowerArt = memo(function FlowerArt({ type, stage, animate }: Props
     {painted.map(name => {
       const index = growthStages.indexOf(name)
       const state = index === reached ? 'current' : index < reached ? 'past' : 'future'
-      return <img key={name} className={`flower-stage flower-stage--${name}`} data-state={state} src={flowers[type].art(name)} alt="" draggable="false" />
+      return <img key={name} className={`flower-stage flower-stage--${name}`} data-state={state} src={flowerArt(type, name)} alt="" draggable="false" />
     })}
     <span className="sparkles">{[0, 1, 2, 3].map(i => <i key={i} />)}</span>
   </span>

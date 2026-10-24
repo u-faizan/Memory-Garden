@@ -1,7 +1,7 @@
 // Stable logical spot IDs. Each layout places every ID on its own painted lawn,
 // clear of the path and foreground foliage; switching layout (or, later,
 // atmosphere) never reassigns a memory.
-export const spotIds = ['glade-01', 'glade-02', 'glade-03', 'glade-04', 'glade-05', 'glade-06', 'glade-07', 'glade-08', 'glade-09', 'glade-10'] as const
+export const spotIds = ['glade-01', 'glade-02', 'glade-03', 'glade-04', 'glade-05', 'glade-06', 'glade-07', 'glade-08', 'glade-09', 'glade-10', 'glade-11', 'glade-12', 'glade-13', 'glade-14'] as const
 export type SpotId = typeof spotIds[number]
 export type LayoutName = 'wide' | 'tall'
 
@@ -24,13 +24,13 @@ export const layouts: Record<LayoutName, WorldLayout> = {
   wide: {
     name: 'wide', width: 1600, height: 900,
     plate: '/assets/garden/desktop.webp', leaves: '/assets/garden/leaves-desktop.webp',
-    spots: place([[440, 440, .6], [1280, 450, .6], [270, 540, .7], [660, 522, .7], [1120, 540, .72], [440, 645, .8], [1250, 690, .86], [640, 775, .92], [1080, 780, .92], [1380, 575, .74]]),
+    spots: place([[440, 440, .6], [1280, 450, .6], [270, 540, .7], [660, 522, .7], [1120, 540, .72], [440, 645, .8], [1250, 690, .86], [600, 728, .9], [1100, 738, .9], [1380, 575, .74], [210, 445, .6], [780, 425, .58], [1460, 482, .62], [800, 640, .8]]),
     flowerUnit: '30cqh',
   },
   tall: {
     name: 'tall', width: 800, height: 1600,
     plate: '/assets/garden/phone.webp', leaves: '/assets/garden/leaves-phone.webp',
-    spots: place([[190, 520, .6], [690, 540, .6], [250, 660, .7], [660, 690, .7], [170, 820, .8], [640, 840, .8], [250, 980, .88], [620, 1000, .9], [180, 1150, .96], [600, 1180, 1]]),
+    spots: place([[190, 520, .6], [690, 540, .6], [250, 660, .7], [660, 690, .7], [170, 820, .8], [640, 840, .8], [250, 980, .88], [620, 1000, .9], [180, 1150, .96], [600, 1180, 1], [380, 565, .62], [330, 765, .74], [700, 925, .84], [520, 1300, 1]]),
     flowerUnit: '38cqw',
   },
 }
