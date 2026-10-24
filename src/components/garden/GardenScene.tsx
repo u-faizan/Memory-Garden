@@ -4,6 +4,7 @@ import { FlowerArt } from '../../art/flowers/FlowerArt'
 import type { GrowthStage } from '../../art/flowers/stages'
 import { soilSize, type SpotId, type WorldLayout } from '../../garden/layouts'
 import type { Memory } from '../../lib/db'
+import { flowerInfo } from '../../garden/flowers'
 
 interface Props {
   layout: WorldLayout; memories: Memory[]; growingId: string | null; stage: GrowthStage; playing: boolean; parallax: boolean
@@ -66,9 +67,10 @@ export function GardenScene({ layout, memories, growingId, stage, playing, paral
           return <div key={spot.id} className="spot spot--occupied" data-spot-id={spot.id} style={style}>
             <button className={`flower-button ${growing && playing ? 'flower-button--growing' : ''} ${celebrate ? 'flower-button--celebrating' : ''}`}
               data-spot-id={spot.id} data-memory-id={memory.id} data-stage={growing ? stage : 'bloom'} disabled={growing && playing}
-              onClick={() => onOpen(memory)} aria-label={`Open memory: ${memory.title}`}>
+              onClick={() => onOpen(memory)} aria-label={`Open memory: ${memory.title}`} style={{ '--plant-top': flowerInfo(memory.flowerType).top } as CSSProperties}>
+              <span className="flower-hit" aria-hidden="true" />
               <span className="flower-sway"><FlowerArt type={memory.flowerType} stage={growing ? stage : 'bloom'} animate={growing && playing} /></span>
-              <span className="flower-title" aria-hidden="true">{memory.title}</span>
+              <span className={`flower-title flower-title--${spot.x / w < .3 ? 'start' : spot.x / w > .7 ? 'end' : 'middle'}`} aria-hidden="true"><span>{memory.title}</span></span>
               {celebrate && <svg className="visitor" viewBox="-20 -14 40 28" aria-hidden="true" focusable="false">
                 <path className="visitor-wing" d="M0,0C-6,-12 -18,-13 -17,-4C-18,3 -9,7 0,1Z" fill="#f0a23b" />
                 <path className="visitor-wing visitor-wing--right" d="M0,0C6,-12 18,-13 17,-4C18,3 9,7 0,1Z" fill="#e8912c" />
