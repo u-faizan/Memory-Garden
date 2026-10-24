@@ -1,0 +1,122 @@
+/* The garden world: cover-fitted at its painted plate's exact aspect ratio so
+   HTML spots stay registered with the lawn, then split into composited layers. */
+.world-frame { position: absolute; inset: 0; overflow: hidden; container-type: size; }
+.world {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  width: max(100cqw, calc(100cqh * var(--ratio))); height: max(100cqh, calc(100cqw / var(--ratio)));
+  container-type: size; scale: 1.014; /* overscan so drifting layers never show an edge */
+}
+.world--wide { --ratio: 1.77778; }
+.world--tall { --ratio: .5; }
+.wl { position: absolute; inset: 0; pointer-events: none; transition: translate .8s cubic-bezier(.2, .7, .3, 1); }
+.wl--plate > img, .wl--front > img, .wl > svg { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; }
+.wl > svg { overflow: visible; }
+.wl--plate > img { object-fit: cover; }
+.wl--ground { pointer-events: auto; }
+.wl--front > img { object-fit: cover; }
+
+/* Pointer parallax: plate and ground move together; nearer layers drift further. */
+.wl--plate, .wl--ground { translate: calc(var(--px, 0) * -5px) calc(var(--py, 0) * -2px); }
+.wl--front { translate: calc(var(--px, 0) * -9px) calc(var(--py, 0) * -4px); }
+.wl--air { translate: calc(var(--px, 0) * -10px) calc(var(--py, 0) * -4px); }
+.wl--front > img { animation: leaves-drift 8s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+@keyframes leaves-drift { from { transform: translateX(-3px) rotate(-.25deg); } to { transform: translateX(3px) rotate(.25deg); } }
+
+/* Ambient life: slow, offset loops so nothing moves in sync. */
+.birds { animation: birds-cross 32s linear infinite; animation-delay: 4s; opacity: 0; }
+@keyframes birds-cross {
+  0% { transform: translate(0, 0); opacity: 0; }
+  3% { opacity: 1; }
+  40% { transform: translate(var(--fly), -60px); opacity: 1; }
+  41%, 100% { transform: translate(var(--fly), -60px); opacity: 0; }
+}
+.bird { animation: wing-beat .42s ease-in-out infinite alternate; }
+.bird--late { animation-delay: -.2s; }
+@keyframes wing-beat { to { transform: scaleY(.35); } }
+.butterfly-path { animation: butterfly-wander 26s ease-in-out infinite; }
+@keyframes butterfly-wander {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(80px, -46px); }
+  40% { transform: translate(190px, -10px); }
+  60% { transform: translate(120px, 40px); }
+  80% { transform: translate(30px, 14px); }
+}
+.wing { animation: wing-flap .2s ease-in-out infinite alternate; }
+.wing--right { animation-delay: -.1s; }
+@keyframes wing-flap { to { transform: scaleX(.3); } }
+.mote { animation: mote-rise 9s ease-in-out infinite; opacity: 0; }
+@keyframes mote-rise {
+  0% { transform: translate(0, 0); opacity: 0; }
+  30% { opacity: .85; }
+  100% { transform: translate(16px, -70px); opacity: 0; }
+}
+
+/* Painted soil beds, then planting spots and flowers. */
+.soil { position: absolute; translate: -50% -51%; height: auto; pointer-events: none; user-select: none; }
+.spots { position: absolute; inset: 0; }
+.spot { position: absolute; width: 0; height: 0; }
+.spot-target {
+  position: absolute; left: 0; top: 0; translate: -50% -50%;
+  width: max(48px, calc(var(--soil-w) * 1.1)); height: max(48px, calc(var(--soil-h) * 2.2));
+  border-radius: 50%; background: none; padding: 0; opacity: 0; pointer-events: none;
+  transition: opacity .3s ease, translate .2s ease;
+}
+.world-frame--selecting .spot-target { opacity: 1; pointer-events: auto; }
+.spot-glow {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 238, 176, .6), rgba(255, 228, 150, .28) 60%, rgba(255, 228, 150, 0));
+  box-shadow: 0 0 0 2px rgba(255, 246, 214, .7), 0 0 18px rgba(255, 236, 170, .55);
+  animation: spot-pulse 2.4s ease-in-out infinite alternate;
+}
+@keyframes spot-pulse { from { transform: scale(.95); opacity: .75; } to { transform: scale(1.05); opacity: 1; } }
+.spot-target:hover, .spot-target:focus-visible { translate: -50% calc(-50% - 3px); }
+.spot-target:hover .spot-glow, .spot-target:focus-visible .spot-glow { background: radial-gradient(closest-side, rgba(255, 245, 205, .85), rgba(255, 236, 170, .42) 60%, rgba(255, 236, 170, 0)); }
+.spot-target:focus-visible { outline: 3px solid #fff7dc; outline-offset: 2px; box-shadow: none; }
+.spot-label {
+  position: absolute; left: 50%; bottom: calc(100% + 4px); translate: -50% 0; white-space: nowrap;
+  padding: .2rem .65rem; border-radius: 999px; background: rgba(250, 244, 228, .95); color: var(--ink);
+  font: 500 .82rem/1.4 var(--serif-text); box-shadow: 0 4px 12px rgba(40, 50, 30, .2);
+  opacity: 0; transition: opacity .2s ease; pointer-events: none;
+}
+.spot-target:hover .spot-label, .spot-target:focus-visible .spot-label { opacity: 1; }
+
+.flower-button {
+  position: absolute; left: 0; bottom: calc(var(--soil-h) * -.1); translate: -50% 0;
+  height: var(--flower-h); aspect-ratio: 1 / 2; min-width: 44px; min-height: 88px;
+  padding: 0; background: none; border-radius: 45% 45% 18px 18px;
+}
+.flower-button:focus-visible { outline-offset: 4px; }
+.flower-sway { display: block; width: 100%; height: 100%; transform-origin: 50% 99.4%; }
+.flower-button[data-stage='bloom']:not(.flower-button--growing) .flower-sway { animation: flower-sway 5.5s ease-in-out infinite alternate; }
+@keyframes flower-sway { from { transform: rotate(-1.3deg); } to { transform: rotate(1.2deg); } }
+.flower-button:not(:disabled):hover .flower-stage[data-state='current'] { filter: drop-shadow(0 0 12px rgba(255, 238, 180, .85)); }
+
+/* The memory's title writes itself above the bloom, then returns on hover/focus. */
+.flower-title {
+  position: absolute; left: 50%; bottom: 102%; translate: -50% 0; white-space: nowrap;
+  font: italic 500 clamp(1.05rem, .8rem + .9cqmin, 1.6rem)/1.2 var(--serif-display); color: #23372c;
+  text-shadow: 0 0 10px rgba(255, 252, 238, .95), 0 0 3px rgba(255, 252, 238, .9);
+  padding-bottom: .35em; opacity: 0; transition: opacity .35s ease; pointer-events: none;
+}
+.flower-title::after { content: ''; position: absolute; left: 20%; right: 20%; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, #8a7652, transparent); }
+.flower-button:hover .flower-title, .flower-button:focus-visible .flower-title { opacity: 1; }
+.flower-button--celebrating .flower-title { opacity: 1; animation: title-write 1.4s .2s steps(24) both, title-fade .8s 4s ease both; }
+@keyframes title-write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes title-fade { to { opacity: 0; } }
+.visitor { position: absolute; left: 50%; top: 4%; width: 26%; min-width: 22px; animation: visitor-flight 4.6s ease-in-out both; }
+.visitor-wing { animation: wing-flap .18s ease-in-out infinite alternate; transform-origin: 0 0; }
+.visitor-wing--right { animation-delay: -.09s; }
+@keyframes visitor-flight {
+  0% { transform: translate(260%, -240%) rotate(18deg); opacity: 0; }
+  12% { opacity: 1; }
+  38% { transform: translate(40%, 60%) rotate(-8deg); }
+  62% { transform: translate(55%, 40%) rotate(6deg); }
+  88% { opacity: 1; }
+  100% { transform: translate(-320%, -260%) rotate(-20deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world *, .world { animation: none !important; transition: none !important; }
+  .birds, .mote, .visitor { opacity: 0; }
+  .flower-button--celebrating .flower-title { opacity: 1; }
+}

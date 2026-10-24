@@ -1,45 +1,79 @@
-import type { CSSProperties, RefObject } from 'react'
-import { Bloom, type GrowthStage } from './Bloom'
-import { pilotSpot } from '../../garden/scene'
+import { useEffect, useRef, useState, type CSSProperties, type RefObject } from 'react'
+import { GardenWorld } from '../../art/GardenWorld'
+import { FlowerArt } from '../../art/flowers/FlowerArt'
+import type { GrowthStage } from '../../art/flowers/stages'
+import { soilSize, type SpotId, type WorldLayout } from '../../garden/layouts'
 
 interface Props {
-  stage: GrowthStage
-  playing: boolean
-  ready: boolean
-  selected: boolean
-  flowerRef: RefObject<HTMLButtonElement | null>
-  onPlant: () => void
-  onExplore: () => void
+  layout: WorldLayout; stage: GrowthStage; playing: boolean; selecting: boolean; parallax: boolean
+  activeSpot: SpotId; title: string; flowerRef: RefObject<HTMLButtonElement | null>
+  onPlant: (spot: SpotId) => void; onExplore: () => void
 }
 
-export function GardenScene({ stage, playing, ready, selected, flowerRef, onPlant, onExplore }: Props) {
-  const position = {
-    '--spot-x': `${pilotSpot.desktop.x * 100}%`, '--spot-y': `${pilotSpot.desktop.y * 100}%`,
-    '--spot-mobile-x': `${pilotSpot.mobile.x * 100}%`, '--spot-mobile-y': `${pilotSpot.mobile.y * 100}%`,
-  } as CSSProperties
-  return (
-    <div className="scene-crop">
-      <div className="scene-plane">
-        <img className="garden-painting" src="/assets/garden/base.webp" width="1536" height="1024" alt="" fetchPriority="high" />
-        <div className="motes" aria-hidden="true">{[0, 1, 2, 3].map(i => <i key={i} style={{ '--i': i } as CSSProperties} />)}</div>
-        <div className={`planting-place ${selected ? 'planting-place--selected' : ''}`} style={position}>
-          <span className="ground-shadow" aria-hidden="true" />
-          <svg className="soil-patch" viewBox="0 0 100 36" aria-hidden="true">
-            <defs><radialGradient id="soil-paint"><stop stopColor="#806443" /><stop offset=".65" stopColor="#98814f" /><stop offset="1" stopColor="#a99c5d" stopOpacity="0" /></radialGradient></defs>
-            <ellipse cx="50" cy="17" rx="48" ry="14" fill="url(#soil-paint)" />
-            <path d="M22 20Q34 13 48 15M59 19L66 18M38 24L43 23M70 13L74 14" stroke="#c0ab72" strokeWidth="1.5" strokeLinecap="round" opacity=".8" />
-          </svg>
-          <button ref={flowerRef} className={`flower-button flower-button--${stage}`} disabled={playing || !ready}
-            onClick={stage === 'bloom' ? onExplore : onPlant}
-            aria-label={stage === 'bloom' ? 'Explore the sunflower' : 'Plant a sunflower in this spot'}
-            aria-expanded={stage === 'bloom' ? selected : undefined} aria-controls={selected ? 'pilot-panel' : undefined}>
-            <Bloom stage={stage} playing={playing} />
-            {stage === 'empty' && <span className="empty-spot" aria-hidden="true">+</span>}
-          </button>
-          <svg className="root-grass" viewBox="0 0 64 18" aria-hidden="true"><path d="M17 17L13 8L21 14L20 4L26 16M29 17L30 10L33 16L38 8L36 17M42 17L46 4L46 13L53 9L49 17" fill="#84934c" /><path d="M24 17L22 10M43 17L47 8" stroke="#bfbc71" strokeWidth="1.1" /></svg>
-          {stage === 'empty' && <span className="garden-sign" aria-hidden="true">Your story<br /><em>begins here</em></span>}
-        </div>
+export function GardenScene({ layout, stage, playing, selecting, parallax, activeSpot, title, flowerRef, onPlant, onExplore }: Props) {
+  const frameRef = useRef<HTMLDivElement>(null)
+  const [celebrating, setCelebrating] = useState(false)
+  const wasPlaying = useRef(false)
+  // When a bloom finishes, its title writes itself above the flower and a
+  // butterfly visits; afterwards the title returns on hover or focus.
+  useEffect(() => {
+    const finished = wasPlaying.current && !playing && stage === 'bloom'
+    wasPlaying.current = playing
+    if (!finished) return
+    const start = setTimeout(() => setCelebrating(true), 0)
+    const end = setTimeout(() => setCelebrating(false), 4800)
+    return () => { clearTimeout(start); clearTimeout(end) }
+  }, [playing, stage])
+  const celebrate = celebrating && !playing
+  // Pointer parallax writes CSS variables directly; no React render per move.
+  useEffect(() => {
+    const frame = frameRef.current
+    if (!frame || !parallax) return
+    let raf = 0
+    const move = (event: PointerEvent) => {
+      if (event.pointerType !== 'mouse') return
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        frame.style.setProperty('--px', (event.clientX / innerWidth * 2 - 1).toFixed(3))
+        frame.style.setProperty('--py', (event.clientY / innerHeight * 2 - 1).toFixed(3))
+      })
+    }
+    addEventListener('pointermove', move)
+    return () => { removeEventListener('pointermove', move); cancelAnimationFrame(raf); frame.style.removeProperty('--px'); frame.style.removeProperty('--py') }
+  }, [parallax])
+
+  const { width: w, height: h } = layout
+  return <section ref={frameRef} className={`world-frame ${selecting ? 'world-frame--selecting' : ''}`} aria-label="Your Secret Glade garden">
+    <GardenWorld layout={layout}>
+      <div className="spots">
+        {layout.spots.map((spot, index) => {
+          const occupied = spot.id === activeSpot && stage !== 'empty'
+          const { rx, ry } = soilSize(layout, spot.depth)
+          const style = {
+            left: `${spot.x / w * 100}%`, top: `${spot.y / h * 100}%`, zIndex: Math.round(spot.y),
+            '--soil-w': `${(rx * 2 / w * 100).toFixed(2)}cqw`, '--soil-h': `${(ry * 2 / h * 100).toFixed(2)}cqh`,
+            '--flower-h': `calc(${spot.depth} * ${layout.flowerUnit})`,
+          } as CSSProperties
+          return <div key={spot.id} className={`spot ${occupied ? 'spot--occupied' : ''}`} data-spot-id={spot.id} style={style}>
+            {occupied
+              ? <button ref={flowerRef} className={`flower-button ${playing ? 'flower-button--growing' : ''} ${celebrate ? 'flower-button--celebrating' : ''}`}
+                data-spot-id={spot.id} data-stage={stage} disabled={playing || selecting} onClick={onExplore} aria-label={`${title}, a sunflower — open its journal page`}>
+                <span className="flower-sway"><FlowerArt type="sunflower" stage={stage} animate={playing} /></span>
+                {stage === 'bloom' && <span className="flower-title" aria-hidden="true">{title}</span>}
+                {celebrate && <svg className="visitor" viewBox="-20 -14 40 28" aria-hidden="true" focusable="false">
+                  <path className="visitor-wing" d="M0,0C-6,-12 -18,-13 -17,-4C-18,3 -9,7 0,1Z" fill="#f0a23b" />
+                  <path className="visitor-wing visitor-wing--right" d="M0,0C6,-12 18,-13 17,-4C18,3 9,7 0,1Z" fill="#e8912c" />
+                  <path d="M0,-6L0,7" stroke="#4a3626" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>}
+              </button>
+              : <button className="spot-target" data-spot-id={spot.id} aria-label={`Plant here, spot ${index + 1} of ${layout.spots.length}`}
+                disabled={playing} tabIndex={selecting ? 0 : -1} onClick={() => onPlant(spot.id)}>
+                <span className="spot-glow" aria-hidden="true" />
+                <span className="spot-label" aria-hidden="true">Plant here</span>
+              </button>}
+          </div>
+        })}
       </div>
-    </div>
-  )
+    </GardenWorld>
+  </section>
 }

@@ -29,7 +29,7 @@ The harness drives installed Chrome/Edge (or `PILOT_BROWSER`) at 1366×768, 1680
 ## How it is built
 
 - **React + Vite + TypeScript**, custom CSS, no game engine.
-- **Code-native art:** the garden is drawn as separate seeded SVG layers (sky, hills, trees and gate, ground, foreground, atmosphere), with one composition for landscape and one for portrait screens. Flowers are staged SVGs whose stems, leaves and petals actually grow.
+- **Painted layers, code-driven motion:** generated paintings (garden, foreground leaves, soil beds, desk, book cover, flower growth stages) are composited in separate layers with one composition for landscape and one for portrait screens; growth, parallax and the book opening are animated in code. `node scripts/prepare-assets.mjs` rebuilds the optimized WebP files from the private source art.
 - **Planned:** IndexedDB for memories, drafts and photos (browser-local, no accounts); one Cloudflare Pages Function for optional, consented OpenAI suggestions.
 
 ## Planning documents

@@ -1,0 +1,57 @@
+/* Painted growth. Every stage image shares one frame and stem base (50%, 99.4%).
+   The incoming stage grows up from the base; the outgoing one stays beneath it
+   until covered, so the plant never thins out mid-transition. */
+.flower-art { position: relative; display: block; width: 100%; height: 100%; }
+.flower-stage {
+  position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; pointer-events: none;
+  transform-origin: 50% 99.4%; opacity: 0; transform: scale(.8, .58);
+  transition: opacity .3s ease, transform .6s cubic-bezier(.2, .9, .28, 1.06);
+}
+.flower-stage[data-state='current'] { opacity: 1; transform: none; }
+.flower-stage[data-state='past'] { opacity: 0; transform: none; transition: opacity .25s ease .35s; }
+.flower-art[data-stage='bloom']:not(.flower-art--still) .flower-stage--bloom { animation: petals-open .9s cubic-bezier(.22, .9, .3, 1) both; }
+@keyframes petals-open {
+  0% { opacity: 0; transform: scale(.88, .82); filter: saturate(.6) brightness(1.1); }
+  55% { opacity: 1; transform: scale(1.025); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+
+.seed-grain { position: absolute; left: 50%; bottom: .4%; width: 7%; translate: -50% 0; opacity: 0; transition: opacity .5s ease; overflow: visible; }
+.flower-art[data-stage='seed'] .seed-grain { opacity: 1; }
+.flower-art[data-stage='seed']:not(.flower-art--still) .seed-grain { animation: seed-drop .42s cubic-bezier(.3, .6, .4, 1) both; }
+@keyframes seed-drop {
+  0% { transform: translateY(-900%) rotate(-30deg); opacity: 0; }
+  55% { transform: translateY(15%) rotate(10deg); opacity: 1; }
+  76% { transform: translateY(-40%) rotate(4deg); }
+  100% { transform: none; }
+}
+.flower-contact {
+  position: absolute; left: 50%; bottom: 0; width: 34%; height: 3%; translate: -50% 45%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(58, 48, 22, .42), rgba(58, 48, 22, 0)); opacity: 0;
+  transition: opacity .6s ease, width .9s ease;
+}
+.flower-art:not([data-stage='empty']) .flower-contact { opacity: .7; }
+.flower-art:is([data-stage='young'], [data-stage='bud'], [data-stage='bloom']) .flower-contact { width: 52%; opacity: 1; }
+
+.bloom-glow {
+  position: absolute; left: 50%; top: -6%; width: 125%; aspect-ratio: 1; translate: -50% 0; border-radius: 50%; opacity: 0;
+  background: radial-gradient(closest-side, rgba(255, 240, 185, .9), rgba(255, 226, 140, .35) 50%, rgba(255, 226, 140, 0));
+}
+.flower-art[data-stage='bloom']:not(.flower-art--still) .bloom-glow { animation: bloom-glow 1.5s ease-out .1s both; }
+@keyframes bloom-glow { 0% { opacity: 0; transform: scale(.55); } 40% { opacity: 1; } 100% { opacity: 0; transform: scale(1.15); } }
+.sparkles i {
+  position: absolute; width: 9%; aspect-ratio: 1; opacity: 0; background: #fff3c4;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.sparkles i:nth-child(1) { left: 4%; top: 8%; }
+.sparkles i:nth-child(2) { left: 84%; top: 3%; width: 7%; }
+.sparkles i:nth-child(3) { left: 88%; top: 26%; width: 6%; }
+.sparkles i:nth-child(4) { left: 8%; top: 30%; width: 6%; }
+.flower-art[data-stage='bloom']:not(.flower-art--still) .sparkles i { animation: sparkle 1.3s ease-out both; }
+.sparkles i:nth-child(1) { animation-delay: .55s; }
+.sparkles i:nth-child(2) { animation-delay: .7s; }
+.sparkles i:nth-child(3) { animation-delay: .85s; }
+.sparkles i:nth-child(4) { animation-delay: 1s; }
+@keyframes sparkle { 0% { opacity: 0; transform: scale(.3); } 35% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(.6); } }
+
+.flower-art--still, .flower-art--still * { transition: none !important; animation: none !important; }

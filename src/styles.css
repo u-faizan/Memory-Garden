@@ -1,57 +1,36 @@
-@import url('./styles/garden.css');
+@import url('./styles/world.css');
+@import url('./styles/flower.css');
+@import url('./styles/book.css');
+@import url('./styles/ui.css');
+@import url('./styles/journal.css');
+
 :root {
-  font-family:Inter,'Segoe UI',Arial,sans-serif;
-  color:#293d34;
-  background:#e9e5c7;
-  font-synthesis:none;
-  text-rendering:optimizeLegibility;
-  -webkit-font-smoothing:antialiased;
-  font-weight:400;
-  --ink:#293d34;
-  --paper:#faf2de;
-  --moss:#415840
+  --ink: #2b3a35;
+  --ink-soft: #4a5b51;
+  --paper: #f7efdc;
+  --paper-deep: #ebdfc4;
+  --cloth: #2f4a3d;
+  --gilt: #d6b56a;
+  --gilt-deep: #a8873f;
+  --moss: #4f7a4c;
+  --serif-display: 'Cormorant Garamond', Georgia, serif;
+  --serif-text: 'Lora', Georgia, serif;
+  --hand: 'Caveat', 'Segoe Print', cursive;
+  font-family: var(--serif-text);
+  color: var(--ink);
+  background: #c9a57c;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
-* {
-  box-sizing:border-box
-}
-body {
-  margin:0
-}
-button,a,summary {
-  -webkit-tap-highlight-color:transparent
-}
-button {
-  font:inherit;
-  cursor:pointer
-}
-button:disabled {
-  cursor:default
-}
-button:focus-visible,a:focus-visible,summary:focus-visible {
-  outline:3px solid #293d34;
-  outline-offset:5px
-}
-button {
-  touch-action:manipulation
-}
-button,a,summary {
-  color:inherit
-}
-button:disabled {
-  opacity:.8
-}
-button {
-  border:0
-}
-a {
-  text-decoration:none
-}
-p,h1,h2 {
-  margin:0
-}
-::selection {
-  background:#e5d79e
-}
-svg {
-  display:block
-}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body { margin: 0; overflow: hidden; }
+button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+button:disabled { cursor: default; }
+button:focus-visible { outline: 3px solid #fff4cf; outline-offset: 3px; box-shadow: 0 0 0 6px rgba(43, 58, 53, .55); }
+p, h1, h2 { margin: 0; }
+svg { display: block; }
+::selection { background: #ecd99c; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.defs-only { position: absolute; width: 0; height: 0; overflow: hidden; }

@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react'
-import type { GrowthStage } from '../components/garden/Bloom'
+import { growthStages, type GrowthStage } from '../art/flowers/stages'
 
-const sequence: GrowthStage[] = ['seed', 'sprout', 'young', 'bloom']
-const duration = { seed: 650, sprout: 750, young: 800, bloom: 1000 }
+const duration: Record<typeof growthStages[number], number> = { seed: 420, sprout: 520, young: 560, bud: 560, bloom: 1500 }
 
 export function useBloomPreview(reducedMotion: boolean) {
   const [stage, setStage] = useState<GrowthStage>('empty')
   const [playing, setPlaying] = useState(false)
   // Each committed stage gets a frame and its own hold time. Delayed rendering
-  // cannot flush four independent timers and skip straight to the final flower.
+  // cannot flush independent timers and skip straight to the final flower.
   useEffect(() => {
     if (!playing || reducedMotion || stage === 'empty') return
     let timer: ReturnType<typeof setTimeout>
     const frame = requestAnimationFrame(() => {
       timer = setTimeout(() => {
         if (stage === 'bloom') setPlaying(false)
-        else setStage(sequence[sequence.indexOf(stage) + 1])
+        else setStage(growthStages[growthStages.indexOf(stage) + 1])
       }, duration[stage])
     })
     return () => { cancelAnimationFrame(frame); clearTimeout(timer) }

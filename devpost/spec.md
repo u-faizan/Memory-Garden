@@ -7,7 +7,7 @@ status: approved
 
 **Approved technical specification.** The learner approved this blueprint and authorized entry into `5-build`, preserving its build-order review, verification, commits, learner checkpoints, and learning activities. Scope and PRD remain approved and unchanged. This is a plan, not evidence of an installed, built, generated, or deployed application. Markdown is canonical; `spec.html` is the offline visual companion.
 
-**Storybook revision, 2026-10-21 (learner-authorized):** a storybook opening/closing, a stylized code-native layered art pipeline, five-stage growth, three journal layouts and opt-in audio are added. The stack, privacy model, IndexedDB design, AI contract and deployment plan are unchanged. Revised build order: `checklist.md`.
+**Storybook revision, 2026-10-21 (learner-authorized):** a storybook opening/closing, layered storybook art (learner-generated paintings composited with code-driven motion), five-stage growth, three journal layouts and opt-in audio are added. The stack, privacy model, IndexedDB design, AI contract and deployment plan are unchanged. Revised build order: `checklist.md`.
 
 ## How This Works, In Plain Language
 
@@ -29,7 +29,7 @@ Implements `prd.md > The Core Journey`; detailed PRD mappings appear under Compo
 | Flower layers were provisional | Pilot one scene and sunflower before selecting the final asset pipeline or generating the other five. |
 | Optional welcome/display name | Not an added required screen or auth system. Start directly in the inviting garden; omit the name for simplicity. |
 | Draft message includes a small wording variation | Retain PRD wording “Your story is still waiting to bloom 🌱” with Continue Writing / Not Now. |
-| Painted raster garden + transparent painted flowers (image generation) | Storybook revision: code-native layered SVG/CSS art. Two painted pilots were rejected and no image-generation tool is available here. Learner-supplied painted layers may replace SVG layers later at the same coordinates. |
+| Dense painted garden plates (rejected pilots) | Storybook revision: calm learner-generated painted layers (garden plate, foreground leaves, soil beds, staged flowers, book) composited and animated in code. A code-drawn SVG pass was tried first and replaced at the learner's request. |
 | Four-stage growth, Georgia/system fonts | Five stages (bud added). Self-hosted OFL fonts (no external requests) give the storybook typography a concrete visual benefit. |
 | Garden opens directly | Storybook cover with a short, skippable, remembered opening; Close My Garden reverses it. |
 | Single journal layout | Three predefined layouts (Classic, Photo Story, Scrapbook) stored per memory. No page editor. |
@@ -45,7 +45,7 @@ No product conflict requires discarding approved behavior. Preserve original sto
 | UI | React + React DOM, TypeScript; one screen with dialog modes, no router or global state library | [React versions](https://react.dev/versions), [TypeScript](https://www.typescriptlang.org/docs/) |
 | Build | Vite React/TypeScript template with official React plugin, static `dist` output | [Vite guide](https://vite.dev/guide/), [React on Pages](https://developers.cloudflare.com/pages/framework-guides/deploy-a-react-site/) |
 | Styling | Custom CSS, transforms/keyframes, simple SVG motifs; Motion only for a demonstrated interaction that benefits | [Motion React](https://motion.dev/docs/react) |
-| Art | Code-native layered SVG (seeded shapes) + CSS motion; no game engine, canvas renderer or animation runtime | [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) |
+| Art | Learner-generated painted WebP layers + CSS motion; `scripts/prepare-assets.mjs` optimizes them and aligns flower stages; no game engine, canvas renderer or animation runtime | [Sharp](https://sharp.pixelplumbing.com/) |
 | Fonts | `@fontsource/cormorant-garamond`, `@fontsource/lora`, `@fontsource/caveat` 5.3.0 (OFL 1.1), latin subsets bundled by Vite | [Fontsource](https://fontsource.org/docs/getting-started/introduction) |
 | Audio | Web Audio API (procedural ambience) or a licensed file in `public/audio/`; decided in Slice 6 | [Web Audio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) |
 | Persistence | `idb` promise wrapper, owned by a small local repository module; no database server | [idb upstream](https://github.com/jakearchibald/idb), [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) |
@@ -126,20 +126,22 @@ Opening and closing use one transformed stage: the live garden is rendered once 
 
 ## Visual Asset Inventory and Pilot
 
-**Storybook revision (2026-10-21):** the painted-raster pipeline (generated garden plate + transparent painted flowers) is retired. Two painted pilots were rejected because the scenery competed with the flowers. This environment has no image- or video-generation tool, and the new direction is a stylized, layered 2D storybook world, so the art is now **code-native**: seeded SVG layers and CSS motion, designed from the learner's concept storyboards. This also makes genuine growth (drawn stems, unfolding leaves, opening petals), parallax depth and a seamless book-to-garden transition practical. If the learner later supplies painted layers generated elsewhere, they can replace individual SVG layers at the same coordinates; prompts and export requirements will be provided on request. Earlier painted sources remain recoverable from Git history (`24cf09f`).
+**Storybook revision (2026-10-21, updated 2026-10-24):** the dense painted plates of the rejected pilots are retired. A code-drawn SVG pass was tried first; the learner judged it too plain and generated a new, calmer painted set themselves from the concept storyboards. The app composites those paintings in separate layers and animates them in code, so growth, parallax, the pop-up opening and the book-to-garden zoom stay code-driven while the art stays painterly. Originals and the learner's prompts stay private in `context/generated/`; `scripts/prepare-assets.mjs` exports optimized WebP files to `public/assets/` and copies provenance to `artwork/provenance/`.
 
 ### Asset Inventory
 
-| Asset | Format | Use |
+| Asset (runtime) | Source and format | Use |
 | --- | --- | --- |
-| Garden layers: sky, hills, trees/fence/gate, ground (grass, path stones, soil beds), front foliage, air (birds, butterfly, motes) | Inline SVG components, seeded deterministic shapes, one composition per layout (`wide` 1600×900, `tall` 800×1600) | Separately composited layers for depth, parallax, pop-up opening and independent ambient motion. No memory flowers or UI in scenery; decorative blossoms only on gate/edges. |
-| Six flowers × five growth stages | One SVG per type on a shared 200×400 canvas, soil anchor (100, 396) | Stem drawn with `stroke-dashoffset`, leaves unfold from their joints, bud swells, petal rings open. Same skeleton for every type; distinct heads, leaves and palettes per type. |
-| Storybook cover, endpaper, desk | HTML/CSS with inline SVG ornament | Real text over cloth texture; gilded sprigs, wreath and butterfly motif. |
-| Journal paper, botanical borders, tape, pressed flowers | CSS textures + inline SVG | Decoration around real HTML inputs and text; reused from the cover ornament set. |
-| Fonts | Self-hosted OFL via `@fontsource` (Cormorant Garamond, Lora, Caveat; latin subsets) | Bundled with the app; no external font requests. |
-| Music and effects | Original procedurally generated Web Audio ambience, or a verified CC0/licensed file if one fits better | Opt-in only; decided and verified in Slice 6. |
+| `garden/desktop.webp`, `garden/phone.webp` | Painted plates 2400×1350 and 1200×2400 (upscaled from ~1670 px generations) | Empty lawn, path, fence, gate, trees; no flowers, soil or UI. One per layout. |
+| `garden/leaves-desktop.webp`, `garden/leaves-phone.webp` | Transparent foreground leaves at the plate sizes | Front layer for depth and gentle drift. |
+| `soil/soil-01…03.webp` | Three transparent painted soil beds, 900×360 | Placed at each spot, varied and mirrored. |
+| `flowers/sunflower/{sprout,young,bud,bloom}.webp` | One generated four-panel sheet, sliced to 1024×2048 frames; each stage shifted so its stem base sits at (512, 2036) | Staged growth: each stage grows up from the base over the previous one; seed, glow and sparkles are drawn in code. Other five flowers follow the same sheet format in Slice 4. |
+| `book/desk.webp`, `book/cover.webp`, `book/endpaper.webp` | Painted desk 2400×1500; flat cover and endpaper 1200×1500 | Desk scene, cover face (title stays HTML text) and inside cover. |
+| Birds, butterfly, motes, spot glows, journal ornaments | Small inline SVG/CSS | Atmosphere and controls. |
+| Fonts | Self-hosted OFL via `@fontsource` (Cormorant Garamond, Lora, Caveat; latin subsets) | No external font requests. |
+| Music and effects | Original Web Audio ambience or a verified CC0/licensed file | Opt-in only; decided in Slice 6. |
 
-The art is original code, covered by the project's code licence once one is chosen. The concept storyboards are private reference only (`context/`, git-ignored) and are never shipped.
+Rights: the paintings were generated by the learner with a built-in image-generation tool; prompts and refinements are recorded in `artwork/provenance/`. Confirm the generator's terms before public release. The concept storyboards remain private reference and are never shipped.
 
 ### Pilot Pass Criteria (Slice 1)
 
@@ -150,7 +152,7 @@ The art is original code, covered by the project's code licence once one is chos
 | Opening | Cover → cover lifts → layers rise from the pages → zoom into the live garden with no visible jump; Skip from frame one; remembered; Close My Garden reverses it. |
 | Responsive | 1366×768, 1680×900, 390×844, 375×667: no page scroll, no overlapping controls, all ten spots visible and ≥44 CSS px targets. |
 | Reduced motion | Opening/closing become a short fade; growth shows the final flower immediately; continuous decoration stops. |
-| Performance | Record bundle size and frame pacing in Chromium; SVG layers stay static apart from compositor transforms. |
+| Performance | Record bundle and image sizes and frame pacing in Chromium; painted layers move only by compositor transforms. |
 | Learner acceptance | Learner tries the running app; visual acceptance is their decision, not an automated assertion. |
 
 ### Scene Mapping, Organization, and Rights
@@ -284,7 +286,7 @@ Planned tree; no application files are generated during this stage:
 src/
   main.tsx                                         # fonts + global styles
   app/{App.tsx,useGardenController.ts}              # phases, modes, dialogs
-  art/geometry.ts                                  # seeded shapes, splines
+  art/geometry.ts                                  # leaf shape for small gilded sprigs
   art/GardenWorld.tsx                              # layered scene (wide/tall)
   art/flowers/FlowerArt.tsx                        # six staged flowers, shared defs
   components/book/{BookArt,StoryBook}.tsx          # cover, endpaper, desk, opening stage
@@ -368,7 +370,7 @@ Code license and artwork redistribution terms are separate reviewed choices. Ver
 
 **Implementation defaults accepted through specification approval:** idb; native fetch; `gpt-6-luna`/reasoning none; Turnstile only for AI actions; 500 ms serialized draft saves; ten stable spots; temporary selection strip; image optimization/counting/metadata defaults; concrete asset targets; best-effort non-global endpoint throttles. These were explicitly identified recommendations rather than invented earlier learner choices. The learner additionally confirmed GPT-6 Luna for initial testing with server-side model configuration. Artwork and motion are still subject to the planned visual pilot review.
 
-**Storybook revision (2026-10-21):** learner-authorized direction from their brief and concept storyboards. Agent defaults pending the learner's plan confirmation: code-native SVG art (no image-generation tool available), car/character arrival as optional P2, video attachments deferred.
+**Storybook revision (2026-10-21):** learner-authorized direction from their brief and concept storyboards. The learner approved the eight-slice plan, then replaced the first code-drawn art pass with their own generated paintings (prompts recorded in `artwork/provenance/`). Car/character arrival remains optional P2; video attachments are deferred.
 
 **Genuine uncertainty:** the learner explicitly questions generated-art consistency and animation alignment. Slice B tests one garden + transparent sunflower + early stages + actual composite/bloom before producing the rest. Record real findings and feedback; do not claim the question is already resolved.
 

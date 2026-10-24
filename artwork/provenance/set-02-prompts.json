@@ -1,0 +1,72 @@
+{
+  "generatedWith": "Built-in image generation",
+  "styleReference": "/workspace/scratch/f867fa2f5f51/memorygarden-assets/garden-desktop.png",
+  "assets": [
+    {
+      "name": "soil-patch-01.png",
+      "requestedSize": [
+        900,
+        360
+      ],
+      "source": "/workspace/scratch/f867fa2f5f51/generated_images/exec-7bc51c8d-1277-4313-805e-d291bb96bb8a.png",
+      "prompt": "Use case: illustration-story. Production asset for MemoryGarden: one isolated soil patch, variant 1, on a transparent 900×360 canvas (5:2 aspect ratio). Input image garden-desktop.png is the STYLE AND LAWN-PERSPECTIVE REFERENCE only; do not include the scene.\nA small patch of freshly turned garden soil seen from a slightly elevated three-quarter view, matching the lawn perspective of the reference. Irregular soft oval shape, gentle mound, grass blades feathering over its edges. No plants, no stones or rings around it.\nMake this variant a softly rounded irregular oval with a low, gently raised centre. Subtle warm brown soil clods; a few fine grass blades partially overlap the perimeter. Centre the whole patch with transparent clearance on every side. The patch is wider than it is deep, not a circular top-down disc. Keep the painterly shapes simple and calm, without a hard outlined rim or large turf platform. No sprout, seed, flowers, roots, pot, cast shadow, scenery, or rectangle behind the subject.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard).",
+      "refinementPrompt": null
+    },
+    {
+      "name": "soil-patch-02.png",
+      "requestedSize": [
+        900,
+        360
+      ],
+      "source": "/workspace/scratch/f867fa2f5f51/generated_images/exec-37b13fa1-1e62-4a71-ac35-d539050dbe78.png",
+      "prompt": "Use case: illustration-story. Production asset for MemoryGarden: one isolated soil patch, variant 2, on a transparent 900×360 canvas (5:2 aspect ratio). Input image garden-desktop.png is the STYLE AND LAWN-PERSPECTIVE REFERENCE only; do not include the scene.\nA small patch of freshly turned garden soil seen from a slightly elevated three-quarter view, matching the lawn perspective of the reference. Irregular soft oval shape, gentle mound, grass blades feathering over its edges. No plants, no stones or rings around it.\nMake this variant a slightly asymmetric broad oval, gently fuller on the left with a softly tapering right edge. Keep the mound low. Subtle warm brown soil clods; a few fine grass blades partially overlap the perimeter. Centre the whole patch with transparent clearance on every side. The patch is wider than it is deep, not a circular top-down disc. Keep the painterly shapes simple and calm, without a hard outlined rim or large turf platform. No sprout, seed, flowers, roots, pot, cast shadow, scenery, or rectangle behind the subject.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard).",
+      "refinementPrompt": null
+    },
+    {
+      "name": "soil-patch-03.png",
+      "requestedSize": [
+        900,
+        360
+      ],
+      "source": "/workspace/scratch/f867fa2f5f51/generated_images/exec-6c9d71a8-858e-407a-9966-5a76de35b322.png",
+      "prompt": "Use case: illustration-story. Production asset for MemoryGarden: one isolated soil patch, variant 3, on a transparent 900×360 canvas (5:2 aspect ratio). Input image garden-desktop.png is the STYLE AND LAWN-PERSPECTIVE REFERENCE only; do not include the scene.\nA small patch of freshly turned garden soil seen from a slightly elevated three-quarter view, matching the lawn perspective of the reference. Irregular soft oval shape, gentle mound, grass blades feathering over its edges. No plants, no stones or rings around it.\nMake this variant a flatter, elongated irregular oval with a subtle shallow indentation along the near edge and a gentle mound toward the right of centre. Subtle warm brown soil clods; a few fine grass blades partially overlap the perimeter. Centre the whole patch with transparent clearance on every side. The patch is wider than it is deep, not a circular top-down disc. Keep the painterly shapes simple and calm, without a hard outlined rim or large turf platform. No sprout, seed, flowers, roots, pot, cast shadow, scenery, or rectangle behind the subject.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard).",
+      "refinementPrompt": null
+    },
+    {
+      "name": "sunflower-growth-sheet.png",
+      "requestedSize": [
+        4096,
+        2048
+      ],
+      "source": "/workspace/scratch/f867fa2f5f51/generated_images/exec-0e9021a6-8a23-4ac0-b16a-756fddf6de49.png",
+      "prompt": "Use case: illustration-story. Production sprite sheet for MemoryGarden, a SINGLE transparent 4096×2048 image (2:1 aspect ratio), four invisible equal 1024×2048 panels in one horizontal row. Input image garden-desktop.png is the STYLE REFERENCE only; do not reproduce any scenery.\nSprite sheet of one sunflower growing, four evenly spaced panels left to right: tiny two-leaf sprout, young plant with leaves, tall plant with a closed green bud, fully bloomed sunflower. Same scale and side view in every panel; each stem base sits on the same baseline at the bottom centre of its panel. No soil, pot or ground shadow. Bloom fills about 90% of the panel height.\nPrecise composition: four stem bases aligned on one horizontal baseline at 95% of total image height, and centred at 12.5%, 37.5%, 62.5%, and 87.5% of image width. Stage 1 is genuinely tiny, about 12% of panel height, with exactly two small leaves. Stage 2 is about 37% of panel height with growing leaves and no bud. Stage 3 is about 72% of panel height with a tightly closed green sunflower bud and no yellow petals. Stage 4 is a fully grown sunflower plant about 90% of panel height, with an open golden-yellow sunflower and warm brown seeded disk; the flower head itself is proportional to the full plant, not the whole panel. Preserve a consistent botanical design, stem thickness appropriate to growth, palette, and camera. Plants stand upright in the same side elevation and are anchored in the same place, not floating at vertically centred positions. Keep each plant completely within its own quarter with enough transparent clearance for slicing. No panel outlines, dividers, labels, numbers, arrows, dirt, roots, detached petals, additional flowers, insects or backdrop.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard).",
+      "refinementPrompt": "Use case: precise-object-edit. Image 1 garden-desktop.png is the STYLE REFERENCE. Image 2 is the sunflower sheet to refine. Return one transparent 4096×2048 sunflower growth sprite sheet, four equal invisible 1024×2048 panels in one row.\nPreserve the exact four-stage concept, painterly botanical sunflower design, colours and relative growth sizes of image 2. Correct the spacing: EVERY plant must fit fully within the INNER 80% WIDTH of its own quarter. Leave a fully empty vertical transparent gap at each quarter division. In particular, neither the third plant's leaves nor the fourth plant's leaves or petals may cross their panel boundaries. Draw somewhat narrower leaves and bloom to achieve this without clipping. Stem bases centre precisely at x=512,1536,2560,3584 on the shared baseline y=1946. Stage 1 tiny two-leaf sprout 12% panel height; stage 2 young leafy plant 37%; stage 3 tall plant with fully closed green bud 72%; stage 4 fully bloomed golden sunflower about 90% panel height. Same side view and scene scale throughout. Full plants visible with no cropping. No soil, pot, roots, ground shadow, dividers, panel outlines, labels or extra plants. Generate all four stages together as ONE SHEET.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard)."
+    },
+    {
+      "name": "book-cover-front.png",
+      "requestedSize": [
+        1200,
+        1500
+      ],
+      "source": "/workspace/scratch/f867fa2f5f51/generated_images/exec-b143e03f-0ffc-4015-b956-092ece076a79.png",
+      "prompt": "Use case: illustration-story. Production book-cover layer for MemoryGarden: transparent 1200×1500 canvas (4:5 aspect ratio). Input image garden-desktop.png is the STYLE AND PALETTE REFERENCE only; no garden scene.\nFlat front cover of a dark green clothbound storybook seen straight-on, no perspective or shadow. Gold-foil botanical ornament: corner sprigs, a small gold butterfly at the top, a flower wreath near the bottom, a thin gold double border. Leave the centre-top area empty for a title.\nOne isolated rectangular front cover, nearly filling the canvas with a narrow transparent margin around its complete silhouette. No visible spine, pages, book thickness, tilt, bevelled 3D perspective or cast shadow. Rich dark forest-green cloth with restrained painterly texture and delicate muted gold foil. Keep a generous empty title area across the upper-middle, below the small top butterfly and above the lower wreath. The gold double border is decoration ON the cover, with delicate corner sprigs; no additional external frame or image border. No lettering or placeholder title, no symbol in the empty title area.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard).",
+      "refinementPrompt": "Use case: precise-object-edit. Image 1 garden-desktop.png is the STYLE REFERENCE. Image 2 is the book cover to refine. Return a transparent 1200×1500 PNG.\nMake only this correction to image 2: remove the spine-like vertical ridge and shading down the left edge and the shaded, rounded 3D bevel around the cover. It must be one completely FLAT front-cover design, viewed straight-on, not a rendered physical closed book. Use uniform flat cloth surface illumination, no perspective, cast shadow, spine, gutter, raised ridge, thickness, page edges, or volumetric shading.\nPreserve the dark forest-green cloth texture, thin gold double border printed ON the cover, four botanical corner sprigs, small gold butterfly at the top, flower wreath low on the cover and spacious empty centre-top for the title. Preserve the same ornament composition and colours. Flat rectangular cover with a narrow real transparent margin outside it. No external image frame; the double gold line is part of the requested cover artwork. No lettering.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard)."
+    },
+    {
+      "name": "book-endpaper.png",
+      "requestedSize": [
+        1200,
+        1500
+      ],
+      "source": "/workspace/scratch/f867fa2f5f51/generated_images/exec-7eac4a2f-24ed-4992-b807-f4a56d926357.png",
+      "prompt": "Use case: illustration-story. Production book-endpaper layer for MemoryGarden: transparent 1200×1500 canvas (4:5 aspect ratio). Input image garden-desktop.png is the STYLE AND PALETTE REFERENCE only; no garden scene.\nFlat inside endpaper of a storybook, straight-on: warm cream paper with a very faint pattern of tiny botanical sprigs and butterflies.\nOne single flat rectangular cream paper sheet, nearly filling the canvas with a narrow truly transparent margin around the complete silhouette. The paper itself is opaque, warm cream with a subtle natural paper texture. Tiny delicate sage botanical sprigs and soft gold butterflies form a sparse, evenly distributed, extremely faint pattern: quiet enough to read journal content placed over it. No central illustration, no large motifs, no book spine, no page fold, no perspective, no shadow, no rules or writing lines, no ornament frame, no torn edges.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard).",
+      "refinementPrompt": "Use case: precise-object-edit. Image 1 garden-desktop.png is the STYLE REFERENCE. Image 2 is the endpaper to refine. Return a transparent 1200×1500 PNG.\nPreserve one flat, straight-on opaque warm cream paper rectangle, subtle paper texture, and a narrow transparent margin outside. Correct the pattern: make botanical sprigs and butterflies MUCH SMALLER AND MUCH FAINTER than image 2. They should be tiny, barely visible sage and pale warm gold marks about 5–8% opacity on the cream paper, an extremely low-contrast whisper of a pattern. Reduce motif size to approximately half the current size and keep ample cream negative space. The paper should read almost plain cream at thumbnail size, with the pattern discoverable close up. Clean rectangular edges with nothing floating or speckled outside the paper. No central picture, no large motifs, no border, no frame, no fold, no shadow or perspective.\nSame painterly storybook style, palette and soft upper-left light as the reference garden. No text, no watermark, no border. Real transparent PNG background (not a checkerboard)."
+    }
+  ],
+  "notes": [
+    "Six specified image assets; prompts for #7–9 were not present in the request.",
+    "All image-generation calls received garden-desktop.png as the first reference.",
+    "Final exports use Lanczos resizing to requested pixel dimensions while preserving alpha. These are export sizes, not claims of native generation resolution.",
+    "Sunflower remains one sheet; stages have not been split or individually aligned."
+  ]
+}
