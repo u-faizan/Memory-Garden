@@ -12,7 +12,8 @@ import { availableFlowers } from '../garden/flowers'
 import { newId, store, today, type Draft, type Entry, type Memory } from '../lib/db'
 import { hasSeenIntro, rememberIntro } from '../lib/preferences'
 
-type Phase = 'cover' | 'opening' | 'garden' | 'closing'
+type Phase = 'cover' | 'opening' | 'film' | 'garden' | 'closing'
+type Film = 'idle' | 'starting' | 'playing' | 'fading'
 const phaseLength = { opening: 5000, closing: 3600 }
 const messages: Record<GrowthStage, string> = {
   empty: '', seed: 'A seed of a memory…', sprout: 'A new beginning…', young: 'Finding its shape…', bud: 'Finding its shape…', bloom: 'In full bloom — still here.',
@@ -23,7 +24,9 @@ export default function App() {
   const reducedMotion = useReducedMotion()
   const layout = useLayout()
   const geometry = useBookGeometry(layout.name)
-  const { stage, playing, plant } = useBloomPreview(reducedMotion)
+  // The intro and growth are user-started story moments, so they always play;
+  // the reduced-motion preference calms ambient decoration (parallax, drift).
+  const { stage, playing, plant } = useBloomPreview(false)
   const [phase, setPhase] = useState<Phase>(() => hasSeenIntro() ? 'garden' : 'cover')
   const [memories, setMemories] = useState<Memory[]>([])
   const [draft, setDraft] = useState<Draft | null>(null)
@@ -32,6 +35,8 @@ export default function App() {
   const [session, setSession] = useState<Session | null>(null)
   const [growingId, setGrowingId] = useState<string | null>(null)
   const [notice, setNotice] = useState('')
+  const [film, setFilm] = useState<Film>('idle')
+  const filmRef = useRef<HTMLVideoElement>(null)
   const plantRef = useRef<HTMLButtonElement>(null)
   const openRef = useRef<HTMLButtonElement>(null)
   const arrivedFrom = useRef<Phase | null>(null)
@@ -60,9 +65,28 @@ export default function App() {
   const pageCount = lastPage + 1 + (occupied(lastPage).size >= spotIds.length ? 1 : 0)
   const freeSpot = (p: number) => spotIds.find(id => !occupied(p).has(id))
 
-  function openBook() { rememberIntro(); arrivedFrom.current = 'cover'; setPhase(reducedMotion ? 'garden' : 'opening') }
-  function closeBook() { arrivedFrom.current = 'garden'; setPhase(reducedMotion ? 'cover' : 'closing') }
-  function skip() { arrivedFrom.current = phase; setPhase(phase === 'closing' ? 'cover' : 'garden') }
+  // Wide screens play the learner's Flow clip (book → car → gate); phones keep
+  // the CSS opening, which is also the fallback.
+  const filmable = layout.name === 'wide'
+  function openBook() {
+    rememberIntro(); arrivedFrom.current = 'cover'
+    const video = filmRef.current
+    if (!filmable || !video) { setPhase('opening'); return }
+    setFilm('starting')
+    video.currentTime = 0
+    video.play().catch(() => { setFilm('idle'); setPhase('opening') })
+  }
+  function finishFilm(fade = 900) {
+    filmRef.current?.pause()
+    arrivedFrom.current = 'cover'
+    setFilm('fading'); setPhase('garden')
+    setTimeout(() => setFilm('idle'), fade)
+  }
+  function closeBook() { arrivedFrom.current = 'garden'; setPhase('closing') }
+  function skip() {
+    if (phase === 'film') { finishFilm(300); return }
+    arrivedFrom.current = phase; setPhase(phase === 'closing' ? 'cover' : 'garden')
+  }
 
   // Start (or resume) writing a new memory for a chosen or automatic spot.
   function startMemory(spot?: SpotId) {
@@ -110,7 +134,7 @@ export default function App() {
   const growingTitle = memories.find(m => m.id === growingId)?.title ?? ''
   return <>
     <h1 className="visually-hidden">MemoryGarden — Where Memories Bloom</h1>
-    <div className="storybook" data-phase={phase} data-layout={layout.name} data-motion={reducedMotion ? 'reduced' : 'full'}
+    <div className="storybook" data-phase={phase} data-layout={layout.name} data-motion="full"
       style={{ ...geometry, '--open-ms': `${phaseLength.opening}ms`, '--close-ms': `${phaseLength.closing}ms` } as CSSProperties}>
       <Desk />
       <div className="book-stage">
@@ -129,7 +153,11 @@ export default function App() {
       {phase === 'cover' && <div className="cover-actions">
         <button ref={openRef} className="open-book" onClick={openBook}><Sprig className="open-book-sprig" gold={false} />Open My Garden</button>
       </div>}
-      {(phase === 'opening' || phase === 'closing') && <button className="skip-intro" onClick={skip}>{phase === 'opening' ? 'Skip introduction' : 'Skip'}</button>}
+      {filmable && (phase === 'cover' || film !== 'idle') && <video ref={filmRef} className="intro-film" data-state={film} src="/assets/intro/intro-desktop.mp4"
+        preload="auto" muted playsInline aria-hidden="true"
+        onPlaying={() => { if (film === 'starting') { setFilm('playing'); setPhase('film') } }}
+        onEnded={() => finishFilm()} onError={() => { if (film === 'starting') { setFilm('idle'); setPhase('opening') } }} />}
+      {(phase === 'opening' || phase === 'film' || phase === 'closing') && <button className="skip-intro" onClick={skip}>{phase === 'closing' ? 'Skip' : 'Skip introduction'}</button>}
 
       {inGarden && <div className="garden-ui">
         <p className="identity" aria-hidden="true"><Butterfly className="identity-mark" fill="#a8873f" />MemoryGarden</p>

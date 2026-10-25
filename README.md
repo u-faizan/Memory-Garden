@@ -1,39 +1,64 @@
 # MemoryGarden — Where Memories Bloom
 
-A magical storybook that contains your own little world: write a memory, plant it, and watch it bloom into a flower you can return to.
+A magical storybook that holds your own little world. Open the book, step into a painted garden, write a memory in a botanical journal, and watch it grow into a flower you can return to.
 
-**Status: storybook rebuild in progress (Slice 1 of 8).** The visual direction changed on 2026-10-21. The app opens from a closed botanical book into a layered, animated garden, where a sunflower grows from seed to bloom. Memory writing, saving, photos, the other five flowers, AI suggestions, journal layouts and music follow in later slices. See the [build checklist](devpost/checklist.md).
+## What you can do
+
+- **Open the book.** A short intro: the cover opens on a desk, the garden rises from the pages, a little car drives up and a girl walks through the gate. Skippable; returning visitors go straight to the garden.
+- **Plant a memory.** Tap any soil patch or **Plant a Memory**. Write a title, date, an optional feeling and your story, add a photo if you like, and choose one of six flowers: sunflower, lavender, rose, daisy, forget-me-not or iris.
+- **Watch it bloom.** The memory is saved first, then a seed settles, sprouts and blooms in that spot, and its title writes itself above.
+- **Revisit, edit or let go.** Tap a flower to reopen its journal page. Edit it, or delete it after a gentle confirmation.
+- **Never lose a thought.** Unfinished writing is autosaved and offered back: “Your story is still waiting to bloom 🌱”.
+- **Room to grow.** Each garden page holds 14 flowers; a new page appears when one fills.
+- **Close the book** to return to the desk.
+
+Memories, photos and drafts are stored only in this browser (IndexedDB). There are no accounts and nothing is uploaded. Clearing the browser's site data removes the garden, and a different browser or device has its own garden.
 
 ## Try it locally
 
-Use Node 22.14.0 or a compatible Node version ≥22.12.
+Use Node 22.12 or newer.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173/**. In Windows PowerShell use `npm.cmd` if execution policy blocks `npm.ps1`.
+Open **http://127.0.0.1:5173/**. In Windows PowerShell use `npm.cmd` if script execution is blocked.
 
-## Verify
+## Check it
 
 ```sh
 npm run typecheck
 npm run lint
 npm run build
-npm run check:pilot   # real-browser review harness; keep the dev server running
+npm run smoke   # with the dev server running: plants, previews, reopens, edits, deletes and restores a draft in real Chrome, desktop and phone
 ```
 
-The harness drives installed Chrome/Edge (or `PILOT_BROWSER`) at 1366×768, 1680×900, 390×844 and 375×667 and writes screenshots to the ignored `test-results/` folder. Automated checks support visual review; they do not approve the experience.
+## Deploy (Cloudflare Pages)
+
+MemoryGarden is a static site, so no server or secrets are needed.
+
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+- **Environment variable:** `NODE_VERSION` = `22.14.0`
+
+Connect the GitHub repository in the Cloudflare dashboard (Workers & Pages → Create → Pages → Connect to Git), or upload a local build with `npx wrangler pages deploy dist`.
 
 ## How it is built
 
-- **React + Vite + TypeScript**, custom CSS, no game engine.
-- **Painted layers, code-driven motion:** generated paintings (garden, foreground leaves, soil beds, desk, book cover, flower growth stages) are composited in separate layers with one composition for landscape and one for portrait screens; growth, parallax and the book opening are animated in code. `node scripts/prepare-assets.mjs` rebuilds the optimized WebP files from the private source art.
-- **Planned:** IndexedDB for memories, drafts and photos (browser-local, no accounts); one Cloudflare Pages Function for optional, consented OpenAI suggestions.
+- **React + Vite + TypeScript** with custom CSS, with no game engine or animation library.
+- **Painted layers, code-driven motion.** Generated paintings (garden, foreground leaves, soil beds, desk, book cover, six flowers in four growth stages each) are composited in layers, with one composition for landscape screens and one for portrait. Growth, parallax, the book opening and closing are animated in code.
+- **Asset pipeline.** `npm run assets` converts the private source art into optimized WebP files, cleans painted checkerboard backgrounds, and aligns every growth stage to one stem base so flowers grow in place.
+- **Intro clip** generated with Google Flow, trimmed to end at the garden gate, then crossfaded into the live garden (wide screens; phones use the animated book opening).
+- **Storage** with `idb` (IndexedDB): memories and a single draft, saved in one transaction before the bloom plays.
+
+A short code guide is in [devpost/app-map.html](devpost/app-map.html).
 
 ## Planning documents
 
-Created through the Devpost *Build With AI: Basics* skills: [scope](devpost/scope.md), [product requirements](devpost/prd.md), [technical spec](devpost/spec.md) and the [build checklist](devpost/checklist.md). Each `.md` has an `.html` companion for review.
+Created through the Devpost *Build With AI: Basics* skills: [scope](devpost/scope.md), [product requirements](devpost/prd.md), [technical spec](devpost/spec.md) and the [build checklist](devpost/checklist.md). Each `.md` has an `.html` companion.
 
-Fonts are self-hosted under the SIL Open Font License 1.1 (Cormorant Garamond, Lora, Caveat). The code licence is chosen before publication.
+## Credits
+
+- Illustrations and the intro clip were generated by the project author with AI image and video tools (including ChatGPT image generation and Google Flow). Prompts and processing notes are in [artwork/provenance](artwork/provenance).
+- Fonts: Cormorant Garamond, Lora and Caveat, self-hosted under the SIL Open Font License 1.1.

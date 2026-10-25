@@ -11,7 +11,7 @@ Build mode: fast — explicitly selected by the learner. Keep concise updates, m
 
 ## Slices
 
-- [ ] **1. Open the storybook and watch a sunflower grow in a living garden**
+- [x] **1. Open the storybook and watch a sunflower grow in a living garden**
   Becomes usable: A locally running storybook. A closed book opens into a layered, animated Secret Glade with separate desktop and portrait compositions. Choosing a soil spot grows a sunflower through seed → sprout → young plant → bud → bloom. The opening is skippable and remembered, and Close My Garden returns to the cover. This is a fictional visual pilot; nothing is saved.
   Why now: The visual kernel and the new art pipeline are the biggest risks after two rejected painted pilots. Proving them first means every later slice builds on accepted visuals.
   PRD ref: `prd.md > Storybook Cover and Opening`, `Garden`, `Look and Feel`, `Open and Close the Storybook`, `Plant and Bloom`.
@@ -21,7 +21,7 @@ Build mode: fast — explicitly selected by the learner. Keep concise updates, m
   Learner check: Open the local URL and press Open My Garden (and Skip on a second try). Plant the sunflower in a couple of spots, watch it grow, try Close My Garden, then try a phone-sized window. Say whether this feels like a magical storybook world and what you would change before the journal is built on it.
   Commit: `Add storybook opening, layered garden and sunflower growth`
 
-- [ ] **2. Write, plant, reopen, edit and delete memories that survive refresh**
+- [x] **2. Write, plant, reopen, edit and delete memories that survive refresh**
   Becomes usable: The complete manual memory journey. Tap a soil spot (or Plant a Memory) to open the botanical journal; write a title, story and date, add a photo, choose a flower; preview the single adaptive page; plant; watch it grow in place; reopen, edit or delete it; refresh and find everything still there. Unfinished writing is autosaved and offered back. The fictional sample page is removed and nothing is prefilled.
   Why now: The journal and persistence are the heart of panels 05–07. Merging the old slices 2 and 3 gets the whole usable journey working in one step, at hackathon pace.
   PRD ref: `prd.md > The Core Journey`, `Write a Memory`, `Protect One Active Draft`, `Plant and Bloom`, `Revisit, Persist, and Delete`, `Journal Page Layouts`.
@@ -31,7 +31,7 @@ Build mode: fast — explicitly selected by the learner. Keep concise updates, m
   Learner check: Write a real-feeling fictional memory with a photo, plant it, reopen and edit it, refresh, then delete another. Say whether writing → bloom → reading feels like one storybook.
   Commit: `Add persistent memory journal with planting, editing and deletion`
 
-- [ ] **3. Grow all six flowers across stable garden pages**
+- [x] **3. Grow all six flowers across stable garden pages**
   Becomes usable: Lavender, rose, daisy, forget-me-not and iris join the sunflower, each growing through its own painted stages; the garden continues on new pages when one fills.
   Why now: Uses the learner's generated growth sheets in the proven sunflower format; the populated garden (panel 07) becomes colourful.
   PRD ref: `prd.md > Flower Collection`, `Planting Spots and Garden Pages`.
@@ -41,7 +41,7 @@ Build mode: fast — explicitly selected by the learner. Keep concise updates, m
   Learner check: Plant several species, including two of the same, and move between pages. Check they belong to one world.
   Commit: `Add six-flower collection and garden pages`
 
-- [ ] **4. Add the Flow opening clip and opt-in music**
+- [x] **4. Add the Flow opening clip and opt-in music**
   Becomes usable: Opening My Garden plays the learner's Flow clip (book → car → gate → garden) that ends exactly on the live garden; optional soft music can be switched on and off and is remembered.
   Why now: Cinematic and atmosphere layers sit on top of a working garden (brief: panels 01–03 and 08 are optional enhancements).
   PRD ref: `prd.md > Storybook Cover and Opening`, `Open and Close the Storybook`, `Atmosphere and Motion`.
@@ -51,7 +51,7 @@ Build mode: fast — explicitly selected by the learner. Keep concise updates, m
   Learner check: Open the book a few times on desktop and phone, toggle music, refresh. Say whether the arrival feels magical and short enough.
   Commit: `Add Flow opening clip and opt-in music`
 
-- [ ] **5. Polish the complete storybook journey**
+- [x] **5. Polish the complete storybook journey**
   Becomes usable: The finished experience, ready for the final hands-on review and demo recording.
   Why now: Refine working behavior; no new features.
   PRD ref: `prd.md > Acceptance Criteria`, `Look and Feel`.
@@ -83,32 +83,40 @@ Build mode: fast — explicitly selected by the learner. Keep concise updates, m
 
 ## Hands-on Checkpoints
 
-- [ ] Early visual pilot explored after slice 1 — storybook opening, layered garden and sunflower growth reviewed on desktop and mobile; feedback resolved before the journal and other five flowers are built on it.
-- [ ] Integrated memory journey explored after slice 2 — writing, photo, layouts, planting, reading, editing, deletion, draft and refresh tried; feedback resolved.
-- [ ] Final kick-the-tires exploration and feedback completed after the working release — no claim of completion until the learner reports back.
+- [x] Early visual pilot explored after slice 1 — storybook opening, layered garden and sunflower growth reviewed on desktop and mobile; feedback resolved before the journal and other five flowers are built on it.
+- [x] Integrated memory journey explored after slice 2 — writing, photo, layouts, planting, reading, editing, deletion, draft and refresh tried; feedback resolved.
+- [x] Final kick-the-tires exploration and feedback completed after the working release — no claim of completion until the learner reports back.
 
 Learn mode also uses each slice's Learner check before its commit. Fast mode retains the planned checkpoints and any useful additional feedback, with concise explanations. External publication/account approval is a separate action gate, not implied by checklist approval.
 
 ## Final Review
 
-- [ ] Final review complete — learner observations clarified; agreed refinements verified, committed and retried; learner confirms ready to ship.
+- [x] Final review complete — learner observations clarified; agreed refinements verified, committed and retried; learner confirms ready to ship.
 
-Record actual findings and any agreed revision tasks here when review occurs. No feedback or readiness is assumed in advance.
+Findings from the learner's hands-on use, all resolved and committed or included in the wrap-up commit:
+- Code-drawn art looked plain → replaced with the learner's generated paintings.
+- Journal offered two layouts → one adaptive page (photo left; words, feeling note and flower tag right; or words left and flower right).
+- More room for flowers → 14 spots per page (3D was considered and declined to keep the painted look).
+- Bottom spots hidden behind the button on very wide screens → spots raised.
+- Flower titles hard to read → cream paper tags above each bloom, kept on screen near edges.
+- Intro and growth did not play on a PC with animations turned off → story animations always play when the user starts them; only ambient decoration respects reduced motion.
+On 2026-10-25 the learner said the project is done and asked to wind it up for deployment and submission.
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — guided route or focused alternative connecting the learner's frontend/animation/integration goals to actual finished code and evidence.
-- [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate.
-- [ ] `devpost/app-map.html` generated from finished code, checked and shown, with a project-grounded practice to reuse.
+- [x] Learning activity complete — guided route or focused alternative connecting the learner's frontend/animation/integration goals to actual finished code and evidence.
+- [x] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate.
+- [x] `devpost/app-map.html` generated from finished code, checked and shown, with a project-grounded practice to reuse.
 
-Activity and evidence: not performed yet; do not claim mastery or completion.
-Route and stops: derive real paths/symbols from the finished implementation; no invented tour.
-Edit outcome: not offered yet.
-Reflection: not offered yet; personal answers belong only in the ignored learner profile.
-Activity mode: not selected; keep the learning activity proportionate and avoid duplicate exercises.
+Activity and evidence: brief evidence-based recap, not a hands-on tour (the learner prioritized shipping). Recap topic: generated art had to be normalized against a measured stem-base anchor; evidence in `scripts/prepare-assets.mjs` (`stemBase`, `checkerSheet`) and the Revisions below.
+Route and stops: reference route in the app map (`App.tsx` startMemory/plantMemory → `Journal.tsx` plant() → `db.ts` store.plant() → `FlowerArt.tsx`); not toured interactively.
+Edit outcome: not applicable; the learner made many directed changes during the build.
+Reflection: the optional transfer question was offered at wrap-up; any answer stays in the ignored learner profile.
+Activity mode: recap plus app map.
 
 ## Revisions
 
+- 2026-10-25, wrap-up: slices 1–5 complete. The opening uses the learner's Flow clip on wide screens (trimmed to end at the gate so new gardens start empty; baked button removed; audio stripped), with the CSS opening on phones and as fallback. Opt-in music was not built (learner skipped it). In-app AI suggestions (slice 7) were not pursued. Learner-generated set 03 flower sheets arrived as JPEGs with painted checkerboards; `checkerSheet` cleans them. Flowers are clickable only where the plant is. Story animations (intro, growth) always play on user action; reduced motion calms ambient decoration only. Slice 6 (Cloudflare Pages) is to be deployed by the learner with guidance; the README documents the settings.
 - 2026-10-24, learner decisions from `context/brief.md`: slices 2 and 3 merge into one memory-journey slice; editing saved memories is now included; the journal uses one adaptive page instead of three layouts (learner refinement after trying two); growth runs in about 2–3 s with no visible stage captions; the opening uses a learner-generated Flow clip that ends on the garden frame; in-app AI becomes an optional final slice. Hackathon pace: one smoke run per slice instead of full assertion passes. Eight slices became seven.
 - 2026-10-24, slice 1 art: the learner found the code-drawn art pass too plain and generated a calmer painted set (garden plates, foreground leaves, desk, soil beds, sunflower growth sheet, book cover and endpaper), supplied with prompts. `scripts/prepare-assets.mjs` exports optimized WebP files and aligns the sunflower stages to one stem base; provenance is copied to `artwork/provenance/`. Comparing with concept A also added growth captions, the memory title written above the bloom, a visiting butterfly, the book tilted on the desk and an "Open My Garden" card. The car-and-character arrival stays P2. `spec.md` was updated in the affected sections.
 - 2026-10-21, storybook revision: the learner rejected the painted A2 pilot direction as still too dense and supplied a new creative brief and concept storyboards (kept privately in git-ignored `context/`). The product now opens from a closed storybook, art becomes a stylized code-native layered SVG world (no image-generation tool is available in this environment), growth gains a bud stage, the journal gains three layouts, and opt-in music is added; video attachments and atmosphere themes are deferred, and the car-and-character arrival is P2. `scope.md`, `prd.md` and `spec.md` (and their HTML companions) were updated in the affected sections only, marked *storybook revision*. The seven slices became eight. Repository cleanup removed the retired painted assets, review documents and pilot scripts, leaving only skill-owned documents in `devpost/`; earlier versions remain in Git history (`24cf09f`). Slice 1 and its checkpoint stay unchecked until the learner accepts the new running pilot.

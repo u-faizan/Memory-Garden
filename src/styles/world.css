@@ -131,8 +131,8 @@
   100% { transform: translate(-320%, -260%) rotate(-20deg); opacity: 0; }
 }
 
+/* Reduced motion calms ambient decoration only; planting and growth still play. */
 @media (prefers-reduced-motion: reduce) {
-  .world *, .world { animation: none !important; transition: none !important; }
-  .birds, .mote, .visitor { opacity: 0; }
-  .flower-button--celebrating .flower-title { opacity: 1; }
+  .wl--front > img, .birds, .bird, .butterfly-path, .wing, .mote, .spot-glow, .flower-sway { animation: none !important; transition: none !important; }
+  .birds, .mote { opacity: 0; }
 }

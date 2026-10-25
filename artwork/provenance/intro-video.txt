@@ -1,0 +1,13 @@
+MemoryGarden intro clip (public/assets/intro/intro-desktop.mp4)
+
+Source: learner-generated with Google Flow (video generation), 1280x720, 30 fps, 18.3 s,
+using the app's closed-book / open-book frames and garden plate as references.
+
+Edits for the app (ffmpeg):
+- Trimmed to 0-14.3 s: ends as the camera steps through the gate, before the
+  source's final pre-planted flower garden (new gardens must start empty).
+- An old "Open My Garden" button baked into the first frames was painted out (delogo).
+- Audio removed; sound in the app is opt-in only.
+- H.264, CRF 24, faststart; about 2 MB.
+
+Used on wide screens only; phones and reduced-motion users get the CSS opening.

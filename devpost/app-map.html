@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MemoryGarden — App Map</title>
+  <style>
+    :root { --paper:#f7efdc; --card:#fffaf0; --ink:#2b3a35; --muted:#5d6b62; --line:#d9cba9; --cloth:#2f4a3d; --gilt:#a8873f; --green:#e8eedb; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.65 Georgia, 'Times New Roman', serif; }
+    main { max-width:980px; margin:auto; padding:40px 24px 56px; }
+    header { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:28px; }
+    .eyebrow { font:600 .74rem/1.4 system-ui, sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--gilt); }
+    h1 { font-size:clamp(2.2rem, 6vw, 3.4rem); font-weight:400; margin:6px 0 4px; letter-spacing:-.02em; }
+    h2 { font-size:1.6rem; font-weight:400; margin:36px 0 12px; }
+    h3 { font-size:1.15rem; margin:0 0 6px; }
+    p { margin:0 0 12px; }
+    code { font:.88em ui-monospace, Consolas, monospace; background:#efe5cc; padding:.1em .35em; border-radius:4px; overflow-wrap:anywhere; }
+    a { color:#2f5a44; }
+    a:focus-visible, summary:focus-visible { outline:3px solid var(--gilt); outline-offset:3px; }
+    .note { font-size:.9rem; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 18px 14px; }
+    .card.green { background:var(--green); }
+    .diagram { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px; overflow-x:auto; }
+    .diagram svg { display:block; width:100%; min-width:720px; height:auto; }
+    .diagram text { font:14px Georgia, serif; fill:var(--ink); }
+    .diagram .small { font:12px ui-monospace, Consolas, monospace; fill:#6b5a3a; }
+    ol.route { list-style:none; counter-reset:stop; padding:0; margin:0; display:grid; gap:12px; }
+    ol.route > li { counter-increment:stop; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px 12px 64px; position:relative; }
+    ol.route > li::before { content:counter(stop); position:absolute; left:18px; top:16px; width:32px; height:32px; border-radius:50%; background:var(--cloth); color:#f7efdc; display:grid; place-items:center; font:600 .95rem system-ui, sans-serif; }
+    table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+    th, td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { font:600 .8rem system-ui, sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:#f3e9d2; }
+    tr:last-child td { border-bottom:0; }
+    details { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:0 16px; margin-top:12px; }
+    summary { cursor:pointer; padding:12px 0; font-weight:600; }
+    pre { margin:0 0 14px; padding:12px; background:#2f3a35; color:#f3ead6; border-radius:10px; overflow-x:auto; font:.86rem/1.5 ui-monospace, Consolas, monospace; }
+    footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font-size:.88rem; color:var(--muted); }
+    @media (max-width:640px) { main { padding:28px 18px 40px; } ol.route > li { padding-left:56px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Take-home guide · App map</div>
+    <h1>MemoryGarden</h1>
+    <p><em>Where Memories Bloom</em> — a storybook that opens into your own garden. You write a memory in a botanical journal, choose a flower, plant it, and watch it grow in place. Tapping the flower later reopens the page. Everything is kept in this browser.</p>
+    <p class="note">A snapshot of the code after commit <code>4e874a2</code> plus the intro-video and wrap-up changes committed with this map. It can drift as the code changes.</p>
+  </header>
+
+  <h2>The main pieces</h2>
+  <div class="grid">
+    <div class="card"><h3>Storybook shell</h3><p><code>src/app/App.tsx</code> runs the phases: closed book → intro (Flow clip on wide screens, CSS opening on phones) → garden → closing.</p></div>
+    <div class="card"><h3>Painted garden</h3><p><code>src/art/GardenWorld.tsx</code> layers the painted plate, soil beds, leaves and small atmosphere. <code>src/components/garden/GardenScene.tsx</code> puts flowers and tap targets on the 14 spots.</p></div>
+    <div class="card"><h3>Journal</h3><p><code>src/journal/Journal.tsx</code> (write, preview, read, edit, delete) and <code>src/journal/PageLayout.tsx</code> (the one adaptive page).</p></div>
+    <div class="card green"><h3>Browser storage</h3><p><code>src/lib/db.ts</code> keeps memories and one draft in IndexedDB. No accounts, servers or cloud copies.</p></div>
+  </div>
+
+  <h2>One action, end to end: planting a memory</h2>
+  <div class="diagram" role="img" aria-label="Planting flow: tap soil or Plant a Memory, the journal opens, Plant this memory saves to IndexedDB, then the flower grows at its spot.">
+    <svg viewBox="0 0 900 190" aria-hidden="true">
+      <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10Z" fill="#a8873f"/></marker></defs>
+      <g stroke="#d9cba9" stroke-width="1.5">
+        <rect x="10" y="40" width="190" height="100" rx="14" fill="#fffaf0"/>
+        <rect x="240" y="40" width="190" height="100" rx="14" fill="#fffaf0"/>
+        <rect x="470" y="40" width="190" height="100" rx="14" fill="#e8eedb"/>
+        <rect x="700" y="40" width="190" height="100" rx="14" fill="#fffaf0"/>
+      </g>
+      <g stroke="#a8873f" stroke-width="2" marker-end="url(#a)"><path d="M200 90H236"/><path d="M430 90H466"/><path d="M660 90H696"/></g>
+      <text x="105" y="78" text-anchor="middle">Tap soil or</text><text x="105" y="98" text-anchor="middle">“Plant a Memory”</text><text class="small" x="105" y="124" text-anchor="middle">App.tsx startMemory()</text>
+      <text x="335" y="78" text-anchor="middle">Write · photo ·</text><text x="335" y="98" text-anchor="middle">flower · preview</text><text class="small" x="335" y="124" text-anchor="middle">Journal.tsx plant()</text>
+      <text x="565" y="78" text-anchor="middle">Saved first</text><text x="565" y="98" text-anchor="middle">(IndexedDB)</text><text class="small" x="565" y="124" text-anchor="middle">db.ts store.plant()</text>
+      <text x="795" y="78" text-anchor="middle">Seed → sprout →</text><text x="795" y="98" text-anchor="middle">bud → bloom</text><text class="small" x="795" y="124" text-anchor="middle">GardenScene · FlowerArt</text>
+      <text class="small" x="450" y="176" text-anchor="middle">The bloom only plays after the save succeeds, so refresh never loses a planted memory.</text>
+    </svg>
+  </div>
+
+  <h2>A reference route through the code</h2>
+  <p class="note">A reference route for exploring later; it was not toured interactively. Search for the anchor text in each file.</p>
+  <ol class="route">
+    <li><h3><code>src/app/App.tsx</code> — <code>startMemory</code> and <code>plantMemory</code></h3>
+      <p><code>startMemory</code> picks the tapped spot (or the first free one, moving to a new garden page when 14 are full) and opens the journal, restoring an unfinished draft if there is one. <code>plantMemory</code> saves the memory, then starts the growth with <code>plant()</code>.</p></li>
+    <li><h3><code>src/journal/Journal.tsx</code> — <code>async function plant()</code></h3>
+      <p>Checks the title and story, blocks double clicks with <code>busy</code>, and keeps the journal open with the writing intact if saving fails. A nearby effect autosaves drafts with <code>store.saveDraft</code>.</p></li>
+    <li><h3><code>src/lib/db.ts</code> → <code>src/art/flowers/FlowerArt.tsx</code></h3>
+      <p><code>store.plant(memory)</code> writes the memory and clears its draft in one transaction. In the garden, <code>GardenScene</code> passes the growing stage to <code>FlowerArt</code>, which marks each painted stage image <code>current</code>, <code>past</code> or <code>future</code> (<code>data-state={state}</code>) so it grows up from the soil.</p></li>
+  </ol>
+
+  <h2>To change this, start here</h2>
+  <table>
+    <thead><tr><th scope="col">You want to…</th><th scope="col">Start in</th></tr></thead>
+    <tbody>
+      <tr><td>Move or add planting spots</td><td><code>src/garden/layouts.ts</code> — <code>spots: place(...)</code> (separate lists for desktop and phone)</td></tr>
+      <tr><td>Add a flower or change its meaning</td><td><code>src/garden/flowers.ts</code> — <code>flowerCatalog</code>; new art via <code>npm run assets</code></td></tr>
+      <tr><td>Process new generated art</td><td><code>scripts/prepare-assets.mjs</code> — <code>stemBase</code> aligns stages; <code>checkerSheet</code> cleans painted checkerboards</td></tr>
+      <tr><td>Speed up or slow down growth</td><td><code>src/garden/useBloomPreview.ts</code> — <code>const duration</code></td></tr>
+      <tr><td>Change the saved page design</td><td><code>src/journal/PageLayout.tsx</code> and <code>src/styles/journal.css</code></td></tr>
+      <tr><td>Change the intro</td><td><code>src/app/App.tsx</code> — <code>openBook</code> / <code>finishFilm</code>; clip in <code>public/assets/intro/</code></td></tr>
+      <tr><td>Colours and fonts</td><td><code>src/styles.css</code> — <code>:root</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>A practice to reuse</h2>
+  <div class="card green">
+    <p><strong>Normalise generated art against a measured anchor instead of trusting it.</strong> The sunflower growth stages came from one generated sheet, yet their stem bases drifted between 448 and 513 px, so the plant would have jumped sideways while growing. Later flower sheets arrived as JPEGs with a painted checkerboard instead of transparency.</p>
+    <p>Evidence: <code>scripts/prepare-assets.mjs</code> measures each stage's stem base (<code>stemBase</code>) and shifts every frame to one soil point, and <code>checkerSheet</code> removes painted checkerboards; the checklist's Revisions record both findings.</p>
+    <p>On another project: whenever AI-generated or third-party assets must line up, decide the alignment rule up front, measure it with a script, and fix the assets in a repeatable step rather than by hand.</p>
+  </div>
+
+  <h2>Run it again</h2>
+  <details open>
+    <summary>Commands</summary>
+    <pre>npm ci
+npm run dev      # http://127.0.0.1:5173/
+npm run build    # production files in dist/
+npm run smoke    # real-browser journey check (keep the dev server running)
+npm run assets   # rebuild public/assets from the private source art</pre>
+    <p class="note">On Windows PowerShell use <code>npm.cmd</code> if script execution is blocked. To see the intro again, choose “Close my garden”, then “Open My Garden”.</p>
+  </details>
+
+  <footer>Generated from the finished code for the Devpost <em>Build With AI: Basics</em> project. Works offline; no scripts or external resources.</footer>
+</main>
+</body>
+</html>
