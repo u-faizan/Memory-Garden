@@ -2,6 +2,10 @@
 
 A magical storybook that holds your own little world. Open the book, step into a painted garden, write a memory in a botanical journal, and watch it grow into a flower you can return to.
 
+**[🌱 Try it live](https://memory-garden-10l.pages.dev/)** · **[▶ Watch the demo video](https://www.youtube.com/watch?v=uMJ-rhU-dtg)** · [MIT License](LICENSE)
+
+[![MemoryGarden demo video](https://img.youtube.com/vi/uMJ-rhU-dtg/hqdefault.jpg)](https://www.youtube.com/watch?v=uMJ-rhU-dtg)
+
 ## What you can do
 
 - **Open the book.** A short intro: the cover opens on a desk, the garden rises from the pages, a little car drives up and a girl walks through the gate. Skippable; returning visitors go straight to the garden.
@@ -57,6 +61,10 @@ A short code guide is in [devpost/app-map.html](devpost/app-map.html).
 ## Planning documents
 
 Created through the Devpost *Build With AI: Basics* skills: [scope](devpost/scope.md), [product requirements](devpost/prd.md), [technical spec](devpost/spec.md) and the [build checklist](devpost/checklist.md). Each `.md` has an `.html` companion.
+
+## License
+
+Released under the [MIT License](LICENSE). The self-hosted fonts keep their own SIL Open Font License 1.1.
 
 ## Credits
 
